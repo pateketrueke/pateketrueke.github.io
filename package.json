@@ -20,9 +20,10 @@
       "!**/lib/**"
     ],
     "rename": [
-      "**/!(index).html:{basedir}/{name}/index.html",
+      "**/pages/!(index).html:{basedir}/{name}/index.html",
       "**/{pages,resources}/**:{fullpath/2}",
-      "**/index.(css|js):{basedir}.{ext}"
+      "**/index.(css|js):{basedir}.{ext}",
+      "**/404.html:{fullpath/1}"
     ],
     "ignoreFiles": [
       ".gitignore"
