@@ -1,0 +1,72 @@
+body {
+  background-color: @chalk-white;
+  font-family: Lato;
+  font-weight: 300;
+  font-size: 120%;
+  color: @salamander;
+}
+
+a {
+  color: @shadow;
+  transition: all .3s;
+
+  &:hover {
+    color: @stormy-monday;
+    text-decoration: none;
+  }
+}
+
+hr {
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .13);
+}
+
+pre { overflow: auto; }
+
+blockquote {
+  margin: @margin;
+  padding: @padding;
+  background-color: @almost-white;
+  box-shadow: -5px 0 0 rgba(0, 0, 0, .13);
+
+  p { margin: 0; }
+  p + p { margin-top: @margin; }
+}
+
+div > code,
+h1 > code,
+h2 > code,
+h3 > code,
+h4 > code,
+h5 > code,
+h6 > code,
+li > code,
+p > code,
+a > code,
+blockquote > code,
+strong > code, b > code,
+em > code, i > code {
+  padding: 2px 4px;
+  background-color: @almost-white;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, .13);
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: Montserrat; }
+
+::selection {
+  color: @chalk-white;
+  background-color: @sea-life;
+  text-shadow: none !important;
+}
+
+// FIXME: less-plugin-autoprefix didn't work on this?
+::-webkit-input-placeholder { color: @sea-life; }
+:-ms-input-placeholder { color: @sea-life; }
+::-moz-placeholder { color: @sea-life; }
+:-moz-placeholder { color: @sea-life; }
+
+*,
+*:after,
+*:before { box-sizing: border-box; }
+
+[tabindex="-1"]:focus { outline: 0; }

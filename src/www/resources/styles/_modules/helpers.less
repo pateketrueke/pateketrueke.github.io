@@ -1,0 +1,13 @@
+.debug * { outline: 1px dotted rgba(255, 0, 255, .75); }
+
+.noselect { user-select: none; }
+
+.auto-format {
+  a[href*="//"]:not([href*="@{remote-hostname}"]):before {
+    background-color: inherit;
+    content: @remote-symbol;
+  }
+
+  > h1 { margin-top: 0; }
+  > img { max-width: 100%; }
+}

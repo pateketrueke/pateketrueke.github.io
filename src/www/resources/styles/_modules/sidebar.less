@@ -1,0 +1,62 @@
+#nav {
+  @media screen and (min-width: @sm-width) {
+    margin-left: @margin;
+    max-width: 200px;
+  }
+
+  @media screen and (min-width: @lg-width) {
+    max-width: 260px;
+  }
+
+  .circle {
+    border-radius: 50%;
+    overflow: hidden;
+    border: @padding solid @almost-white;
+  }
+
+  .floating {
+    position: relative;
+
+    .circle {
+      animation-name: floating;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+    }
+
+    &:before {
+      animation-name: increase;
+      animation-duration: 4s;
+      animation-iteration-count: infinite;
+
+      background-color: rgba(0, 0, 0, .1);
+      position: absolute;
+      content: ' ';
+      left: 0;
+      right: 0;
+      height: 5px;
+      bottom: 10px;
+      width: 33.3%;
+      margin: auto;
+      border-radius: 50%;
+    }
+  }
+
+  nav {
+    li:before {
+      content: @item-symbol;
+      color: @stormy-monday;
+    }
+  }
+
+  @keyframes floating {
+    0% { transform: translateY(0%); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0%); }
+  }
+
+  @keyframes increase {
+    0% { width: 50%; }
+    50% { width: 33.3%; }
+    100% { width: 50%; }
+  }
+}
