@@ -1,4 +1,5 @@
 *.log
+.env
 .tarima
 .DS_Store
 build
