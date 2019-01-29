@@ -1,4 +1,5 @@
 ---
+$render: ../lib/gh_pages.pug
 title: Skills and such
 icon: bug
 ---

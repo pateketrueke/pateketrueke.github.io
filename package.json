@@ -17,12 +17,12 @@
     "from": "src",
     "public": "build",
     "filter": [
-      "!**/include/**"
+      "!**/lib/**"
     ],
     "rename": [
       "**/!(index).html:{basedir}/{name}/index.html",
-      "**/index.(css|js):{basedir}.{ext}",
-      "**:{fullpath/1}"
+      "**/{pages,resources}/**:{fullpath/2}",
+      "**/index.(css|js):{basedir}.{ext}"
     ],
     "ignoreFiles": [
       ".gitignore"

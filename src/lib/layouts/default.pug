@@ -24,9 +24,10 @@ html
     meta(property='og:profile:gender' content='male')
     meta(property='og:description' content=pkg.description)
     meta(property='og:url' content=pkg.author.url)
-    meta(property='og:image' content='https://soypache.co/resources/images/me_and_shiro.jpg')
+    meta(property='og:image' content='https://soypache.co/images/me_and_shiro.jpg')
 
     block styles
+      link(rel='stylesheet' type='text/css' href='styles.css')
 
     block meta
       if title
@@ -51,7 +52,7 @@ html
         })();
 
   body
-    |[![destFile "www/images/sprites.svg"]]
+    |[![destFile "images/sprites.svg"]]
 
     .segment
       .container

@@ -1,4 +1,5 @@
 ---
+$render: ../lib/gh_pages.pug
 title: Markup, dub and tools
 icon: bullhorn
 ---
