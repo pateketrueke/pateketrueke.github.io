@@ -25,7 +25,7 @@ I've been there:
 
 - Docker, AWS, Heroku, Linode and/or DigitalOcean for web services.
 
-  > Required to be online, I can setup things on free SaSS and paid solutions.
+  > Required to be online, I can setup things on free SaaS and paid solutions.
 
 - Bitbucket, Gitlab, GitHub for VCS
 
