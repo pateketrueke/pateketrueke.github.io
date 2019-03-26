@@ -11,30 +11,21 @@ dev: deps ## Lift dev environment for this service
 	@npm run dev
 
 dist: deps ## Build artifact for production
+	@(git worktree remove $(src) --force > /dev/null 2>&1) || true
+	@git worktree add $(src) $(target)
 	@npm run dist
 
-clean: build .tarima ## Remove all from node_modules/*
-	@((rm -r build > /dev/null 2>&1) && echo "Built artifacts were deleted") || echo "Artifacts already deleted"
+clean: ## Remove all from node_modules/*
+	@((rm -r $(src) > /dev/null 2>&1) && echo "Built artifacts were deleted") || echo "Artifacts already deleted"
 	@((unlink .tarima > /dev/null 2>&1) && echo "Cache file was deleted") || echo "Cache file already deleted"
 
-deploy: build
-	@git worktree remove $< --force && git worktree add $< $(target)
-	@cd $<
+deploy: $(src)
+	@cd $(src)
 	@git add --all && git commit -m "$(message)"
 	@git push origin $(target) -f
 	@cd ..
 
-deploy_: build ## Publish to production
-	@(git branch -D $(target) || true) > /dev/null 2>&1
-	@git checkout --orphan $(target)
-	@git rm -r --cached . > /dev/null 2>&1
-	@cat exclude.txt >> .gitignore
-	@cp -r build/* .
-	@git add . && git commit -m "$(message)"
-	@git push origin $(target) -f
-	@git checkout $(from)
-
 # Ensure dependencies are installed before
-.PHONY: help dev dist clean deploy dependencies
+.PHONY: help deps dev dist clean deploy
 deps:
 	@(((ls $(PWD)/node_modules | grep .) > /dev/null 2>&1) || npm i) || true
