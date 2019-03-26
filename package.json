@@ -28,11 +28,11 @@
     "ignoreFiles": [
       ".gitignore"
     ],
-    "devPlugins": [
-      "tarima-lr"
-    ],
     "plugins": [
       "talavera"
+    ],
+    "devPlugins": [
+      "tarima-lr"
     ],
     "bundleOptions": {
       "frontMatter": false,
