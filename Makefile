@@ -4,6 +4,10 @@ from := develop
 target := gh-pages
 message := Release: $(shell date)
 
+define iif
+  @(($(1) > /dev/null 2>&1) && echo "$(2)") || echo "$(3)"
+endef
+
 help: Makefile
 	@awk -F':.*?##' '/^[a-z\\%!:-]+:.*##/{gsub("%","*",$$1);gsub("\\\\",":*",$$1);printf "\033[36m%8s\033[0m %s\n",$$1,$$2}' $<
 
@@ -16,8 +20,8 @@ dist: deps ## Build artifact for production
 	@npm run dist
 
 clean: ## Remove all from node_modules/*
-	@((rm -r $(src) > /dev/null 2>&1) && echo "Built artifacts were deleted") || echo "Artifacts already deleted"
-	@((unlink .tarima > /dev/null 2>&1) && echo "Cache file was deleted") || echo "Cache file already deleted"
+	@$(call iif,rm -r $(src),Built artifacts were deleted,Artifacts already deleted)
+	@$(call iif,unlink .tarima,Cache file was deleted,Cache file already deleted)
 
 deploy: $(src)
 	@cd $(src) && git add --all && git commit -m "$(message)"
