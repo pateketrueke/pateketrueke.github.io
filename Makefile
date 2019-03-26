@@ -20,10 +20,8 @@ clean: ## Remove all from node_modules/*
 	@((unlink .tarima > /dev/null 2>&1) && echo "Cache file was deleted") || echo "Cache file already deleted"
 
 deploy: $(src)
-	@cd $(src)
-	@git add --all && git commit -m "$(message)"
+	@cd $(src) && git add --all && git commit -m "$(message)"
 	@git push origin $(target) -f
-	@cd ..
 
 # Ensure dependencies are installed before
 .PHONY: help deps dev dist clean deploy

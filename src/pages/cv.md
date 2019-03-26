@@ -6,7 +6,8 @@ icon: construction
 
 > ## Alvaro Cabrera Durán
 > (52 1) 55 4907 4219 / pateketrueke@gmail.com <br>
-> SkypeID: pateketrueke / LinkedIn: [linkedin.com/pateketrueke](linkedin.com/pateketrueke)
+> SkypeID: pateketrueke <br>
+> LinkedIn: [linkedin.com/pateketrueke](linkedin.com/pateketrueke)
 
 ### General skills, no-buzzwords
 
