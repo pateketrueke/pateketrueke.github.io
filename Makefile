@@ -13,11 +13,18 @@ dev: deps ## Lift dev environment for this service
 dist: deps ## Build artifact for production
 	@npm run dist
 
-clean: ## Remove all from node_modules/*
+clean: build .tarima ## Remove all from node_modules/*
 	@((rm -r build > /dev/null 2>&1) && echo "Built artifacts were deleted") || echo "Artifacts already deleted"
 	@((unlink .tarima > /dev/null 2>&1) && echo "Cache file was deleted") || echo "Cache file already deleted"
 
-deploy: build ## Publish to production
+deploy: build
+	@git worktree remove $< --force && git worktree add $< $(target)
+	@cd $<
+	@git add --all && git commit -m "$(message)"
+	@git push origin $(target) -f
+	@cd ..
+
+deploy_: build ## Publish to production
 	@(git branch -D $(target) || true) > /dev/null 2>&1
 	@git checkout --orphan $(target)
 	@git rm -r --cached . > /dev/null 2>&1
