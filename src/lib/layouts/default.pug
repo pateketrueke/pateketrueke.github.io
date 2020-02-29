@@ -50,20 +50,20 @@ html
         /* eslint-enable */
 
   body
-    |[![destFile "images/sprites.svg"]]
+    destFile(src='images/sprites.svg')
 
     .segment
       .container
         .md-flex
           #main.flex-auto.p
             if icon
-              |[![svg ["#{icon}", { "class": "icon -x3" }]]]
+              svgIcon.icon.-x3(src=icon)
 
             block body
 
           #nav.p.flex-none
             .floating.noselect.center
-              |[![image ["me_and_shiro.jpg", "fit push circle", { "alt": "Shirosama" }]]]
+              image.fit.push.circle(src='me_and_shiro.jpg' alt='Shirosama')
 
             h2= pkg.author.name
 
@@ -81,6 +81,5 @@ html
                 li: a(href='/cv/') Past jobs
                 li: a(href='/resume/') What I do?
 
-    |[![resources]]
-
+    resources
     block scripts

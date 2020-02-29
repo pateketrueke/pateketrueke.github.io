@@ -19,6 +19,7 @@
     "filter": [
       "!**/lib/**"
     ],
+    "bundle": true,
     "rename": [
       "**/pages/!(index).html:{basedir}/{name}/index.html",
       "**/{pages,resources}/**:{fullpath/2}",
@@ -31,14 +32,15 @@
     "plugins": [
       "talavera"
     ],
-    "devPlugins": [
-      "tarima-lr"
-    ],
     "bundleOptions": {
       "frontMatter": false,
       "extensions": {
         "js": "es6",
         "css": "less"
+      },
+      "modules": true,
+      "rollup": {
+        "format": "es"
       },
       "less": {
         "plugins": [
@@ -55,8 +57,7 @@
     "less-plugin-autoprefix": "^2.0.0",
     "pug": "^2.0.0-beta11",
     "rollup": "^1.1.2",
-    "talavera": "^0.6.2",
-    "tarima": "^4.2.8",
-    "tarima-lr": "^0.4.4"
+    "talavera": "^0.8.0",
+    "tarima": "^4.6.4"
   }
 }
