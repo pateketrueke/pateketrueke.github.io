@@ -1,7 +1,7 @@
 # defaults
 src := build
 from := develop
-target := gh-pages
+target := master
 message := Release: $(shell date)
 
 define iif
@@ -19,15 +19,17 @@ dist: deps ## Build artifact for production
 	@git worktree add $(src) $(target)
 	@npm run dist
 
-clean: ## Remove all from node_modules/*
+clean: ## Remove all generated sources
 	@$(call iif,rm -r $(src),Built artifacts were deleted,Artifacts already deleted)
+
+prune: ## Remove cache file to recompile
 	@$(call iif,unlink .tarima,Cache file was deleted,Cache file already deleted)
 
-deploy: $(src)
+deploy: $(src) ## Push generated files to gh-pages
 	@cd $(src) && git add --all && git commit -m "$(message)"
 	@git push origin $(target) -f
 
 # Ensure dependencies are installed before
-.PHONY: help deps dev dist clean deploy
+.PHONY: help deps dev dist clean prune deploy
 deps:
 	@(((ls $(PWD)/node_modules | grep .) > /dev/null 2>&1) || npm i) || true
