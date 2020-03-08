@@ -63,14 +63,14 @@ I've been there:
   > Loved HAML, Sass and other hot stuff from these years. I was using tooling for first time!
 
 - Freelance web developer <br> Aug. 2009 &mdash; Jan. 2011 (CDMX)
-  
+
   > I used to build scripts for picture-windows on mIRC, learned bit of GameMaker and did some CLI stuff with TurboPascal.
   > After learning bits of web-development for the backend with ASP/PHP I started to search for something.
 
 ### Education &mdash; really
 
 - Self-teach at home <br> 1999-2000 &mdash; Jul. 2009 (CDMX)
-  
+
   > During this period, I dropped the school and also tried several times to grade after years.
   > Fortunately, good people<sup>1</sup> found me useful and hired me without requiring any of it.
 

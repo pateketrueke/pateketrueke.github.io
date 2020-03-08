@@ -10,7 +10,7 @@ I've been learning software development since I was 14 years old!
 
 **Today it's 2020** and I continue learning new stuff everyday.
 
-## What can you find here?
+## What you can find here?
 
 - Detailed information about **my work** and past jobs
 - OpenSource/side **projects** I do/contribute to
