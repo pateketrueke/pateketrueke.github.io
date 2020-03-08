@@ -19,7 +19,6 @@
     "filter": [
       "!**/lib/**"
     ],
-    "bundle": true,
     "rename": [
       "**/pages/!(index).html:{basedir}/{name}/index.html",
       "**/{pages,resources}/**:{fullpath/2}",
@@ -39,6 +38,7 @@
         "css": "less"
       },
       "modules": true,
+      "unpkg": true,
       "rollup": {
         "format": "es"
       },
@@ -56,8 +56,7 @@
     "less": "^3.9.0",
     "less-plugin-autoprefix": "^2.0.0",
     "pug": "^2.0.0-beta11",
-    "rollup": "^1.1.2",
     "talavera": "^0.8.0",
-    "tarima": "^4.6.4"
+    "tarima": "^4.7.1"
   }
 }
