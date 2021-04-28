@@ -1,0 +1,17 @@
+[class^="icon-"], [class*=" icon-"] {
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+i[class^="icon-"], i[class*=" icon-"] {
+  font-size: 0;
+  display: inline-block;
+}
+
+.icon-me_and_shiro {
+  width: 512px; height: 512px;
+  background-image: url(me_and_shiro.jpg);
+}
+
+
+
