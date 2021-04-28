@@ -8,7 +8,7 @@ icon: bullhorn
 
 I've been learning software development since I was 14 years old!
 
-**Today it's 2020** and I continue learning new stuff everyday.
+**Yes it's 2021, still on pandemic times** &mdash; yet trying to learn new stuff everyday.
 
 ## What can you find here?
 
