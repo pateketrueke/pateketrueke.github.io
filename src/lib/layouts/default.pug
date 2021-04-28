@@ -27,7 +27,7 @@ html
     meta(property='og:image' content='https://soypache.co/images/me_and_shiro.jpg')
 
     block styles
-      link(rel='stylesheet' type='text/css' href='styles.css')
+      import(from='styles.css images.css')
 
     block meta
       if title
@@ -37,7 +37,7 @@ html
       if title
         title= title
 
-    if env.NODE_ENV === 'production'
+    if NODE_ENV === 'production'
       script.
         /* eslint-disable */
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -50,14 +50,14 @@ html
         /* eslint-enable */
 
   body
-    destFile(src='images/sprites.svg')
+    import(from='sprites.svg')
 
     .segment
       .container
         .md-flex
           #main.flex-auto.p
             if icon
-              svgIcon.icon.-x3(src=icon)
+              icon.icon.-x3(src=`#${icon}`)
 
             block body
 
@@ -77,9 +77,8 @@ html
             nav
               h3 Navigation
               ul.notype.reset
-                li: a(href='/') Home
-                li: a(href='/cv/') Past jobs
-                li: a(href='/resume/') What I do?
+                li: alink(for='/') Home
+                li: alink(for='/cv') Past jobs
+                li: alink(for='/resume') What I do?
 
-    resources
     block scripts
