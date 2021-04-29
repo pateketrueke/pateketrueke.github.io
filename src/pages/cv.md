@@ -9,18 +9,23 @@ icon: construction
 > SkypeID: pateketrueke <br>
 > LinkedIn: [linkedin.com/pateketrueke](linkedin.com/pateketrueke)
 
-### General skills, no-buzzwords
+### General purpose skills, no-buzzwords
 
 I feel confident about:
 
 - HTML5, CSS3 and ES6 from the ground up.
 
-  > I power up my daily job leveraging modern tooling from NodeJS.
-  > From edgy Javascript bundlers to legacy task runners.
+  > I power up my daily job leveraging modern NodeJS tooling
+  > &mdash; from edgy Javascript bundlers to legacy task runners.
 
 - PHP, Ruby and Groovy without doubt.
 
   > It rhymes, you know. All good songs are enough good if they make you shake your booty!
+
+- CLI oriented, Bash for the hard-work, Fish for productivity.
+
+  > I use the terminal a lot, if I can do anything faster on the terminal I'll do
+  > &mdash; i.e. for managing my SSH connections I just built [SSHi](https://www.npmjs.com/package/sshi).
 
 I've been there:
 
@@ -28,20 +33,41 @@ I've been there:
 
   > Required to be online, I can setup things on free SaaS and paid solutions.
 
+- MongoDB, PostgreSQL and SQLite are my favourite databases.
+
+  > I have managed and built services and platforms using one or many of them at once.
+
 - Bitbucket, Gitlab, GitHub for VCS
 
   > Feel free to delete everything on your side, I'll never do the same. I do the backup!
 
-- TravisCI and Jenkins for CI/CD
+- TravisCI, CircleCI or Jenkins for CI/CD
 
-  > Of course I'm not lazy, I just prefer for CI to finish my job.
+  > Of course I'm not lazy, I just prefer for CI to finish my job. Btw, I use GitHub actions as well.
+
+### What I'm looking for?
+
+- I want to be challenged
+
+  > I really like the challenge I can handle, due i'm not an expert, rockstar, ninja, 10x or whatever
+  > &mdash; but anything well-defined will convince me and anyone else if you ask me.
+
+- I want to be productive
+
+  > I like to craft web stuff carefully, not guided by the trend but constructed through architectural choices
+  > &mdash; also I'll try to not waste our time and money as modern non-sense.
+
+- I want to be efficient
+
+  > I'll never use a backend stack to just render a landing page and few forms, or vice versa,
+  > I would avoid to build a complex application entirely on the frontend &mdash; and I hope you get into the topic...
 
 ### What I've been doing?
 
 - Full-stack developer &hearts; AgaveLab <br> Jan. 2018 (&hellip;)
 
-  > Been here is like the renaissance of my career. Most of the stuff I've been studying on the past suddendly is here.
-  > So I decided to stay as long as I can and encourage others to also build their own careers.
+  > I manage myself as generalist, from bash scripts to E2E features on web applications of any kind.
+  > My actual stack is entirely based on NodeJS but I can switch to whatever is needed.
 
 - Freelance full-stack web developer <br> Feb. 2017 &mdash; Dec. 2017 (GDL)
 
@@ -69,7 +95,7 @@ I've been there:
 
 ### Education &mdash; really
 
-- Self-teach at home <br> 1999-2000 &mdash; Jul. 2009 (CDMX)
+- Self-taught at home <br> 1999-2000 &mdash; Jul. 2009 (CDMX)
   
   > During this period, I dropped the school and also tried several times to grade after years.
   > Fortunately, good people<sup>1</sup> found me useful and hired me without requiring any of it.
