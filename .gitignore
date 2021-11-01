@@ -1,6 +1,7 @@
 *.log
 .env
 .tarima
+cache.json
 .DS_Store
 build
 generated
