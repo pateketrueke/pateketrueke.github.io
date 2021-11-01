@@ -4,6 +4,10 @@ from := develop
 target := master
 message := Release: $(shell date)
 
+GIT_REVISION=$(shell git rev-parse --short=7 HEAD)
+
+export GIT_REVISION
+
 define iif
   @(($(1) > /dev/null 2>&1) && echo "$(2)") || echo "$(3)"
 endef
