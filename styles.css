@@ -13,10 +13,6 @@ a:hover {
   color: #AFACAB;
   text-decoration: none;
 }
-a[aria-current=page] {
-  text-decoration: none;
-  font-weight: bold;
-}
 hr {
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.13);
@@ -412,11 +408,47 @@ h6 {
 }
 .auto-format a[href*="//"]:not([href*="soypache.co"]):before {
   background-color: inherit;
-  content: '⚡ ';
+  content: '⧉';
+}
+.auto-format > .highlight {
+  color: silver;
+  font-size: 120%;
 }
 .auto-format > h1 {
   margin-top: 0;
 }
+.auto-format > h2 {
+  color: silver;
+}
 .auto-format > img {
   max-width: 100%;
+}
+#pdf {
+  display: block;
+  margin-top: 20px;
+}
+@media screen and (min-width: 520px) {
+  #pdf {
+    float: right;
+    margin: 0;
+  }
+}
+@media print {
+  #nav,
+  #pdf {
+    display: none;
+  }
+  .auto-format > h3,
+  .auto-format > h2 {
+    page-break-before: always;
+  }
+  .auto-format > .highlight {
+    display: block;
+  }
+  .auto-format ul + hr {
+    display: none;
+  }
+  .auto-format ul + hr + p {
+    display: none;
+  }
 }
