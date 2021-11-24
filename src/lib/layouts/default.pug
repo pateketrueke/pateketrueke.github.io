@@ -83,4 +83,13 @@ html
                 li: a(href='/resume/') What I do?
 
     resources
+    script.
+      const btn = document.querySelector('#pdf');
+
+      if (btn) {
+        btn.addEventListener('click', () => {
+          window.print();
+        });
+      }
+
     block scripts

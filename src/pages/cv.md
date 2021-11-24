@@ -5,9 +5,8 @@ icon: construction
 ---
 
 > ## Alvaro Cabrera Durán
-> (52 1) 55 4907 4219 / pateketrueke@gmail.com <br>
-> SkypeID: pateketrueke <br>
-> LinkedIn: [linkedin.com/pateketrueke](linkedin.com/pateketrueke)
+> <icon src="#whatsapp" width="16" height="16" /> (52 1) 55 4907 4219 <br><icon src="#twitter" width="16" height="16" /> @pateketrueke <br>
+> E-mail: <a href="mailto:yo@soypache.co">yo@soypache.co</a> <button id="pdf">Download as PDF</button>
 
 ### General skills, no-buzzwords
 
@@ -38,6 +37,13 @@ I've been there:
 
 ### What I've been doing?
 
+<p class="highlight">
+  I started working remotely, doing low-income tasks.
+  Then I joined to a small digital-marketing to learn RoR while doing HTML+CSS+JS right before the ReactJS era.
+</p>
+
+## 2016-2021
+
 - Full-stack developer &hearts; AgaveLab <br> Jan. 2018 (&hellip;)
 
   > Been here is like the renaissance of my career. Most of the stuff I've been studying on the past suddendly is here.
@@ -51,6 +57,8 @@ I've been there:
 
   > I really wanted to build good things and help people, so I moved to GDL in order to start doing that.
   > Here I wrote small abstractions just to help out on the job, or even just for fun.
+
+## 2009-2016
 
 - Full-time / full-stack web developer &hearts; Grupo Expansión <br> Jun. 2013 &mdash; Feb. 2016 (CDMX)
 
@@ -68,6 +76,13 @@ I've been there:
   > After learning bits of web-development for the backend with ASP/PHP I started to search for something.
 
 ### Education &mdash; really
+
+<p class="highlight">
+  I started at home, learning mainly PHP and HTML+CSS+JS stuff right before the jQuery era.
+  Google and Firefox were very young at the time.
+</p>
+
+## 2000-2009
 
 - Self-teach at home <br> 1999-2000 &mdash; Jul. 2009 (CDMX)
 

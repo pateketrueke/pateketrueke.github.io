@@ -1,0 +1,31 @@
+#pdf {
+  display: block;
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 520px) {
+  #pdf {
+    float: right;
+    margin: 0;
+  }
+}
+
+.onprint() {
+  #nav, #pdf { display: none; }
+  .auto-format {
+    > h3,
+    > h2 {
+      page-break-before: always;
+    }
+    > .highlight {
+      display: block;
+    }
+    ul + hr {
+      display: none;
+      + p { display: none; }
+    }
+  }
+}
+@media print {
+  .onprint;
+}
