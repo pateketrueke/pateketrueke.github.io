@@ -5,7 +5,7 @@ icon: construction
 ---
 
 > ## Alvaro Cabrera Durán
-> <icon src="#whatsapp" width="16" height="16" /> (52 1) 55 4907 4219 <br><icon src="#twitter" width="16" height="16" /> @pateketrueke <br>
+> <icon src="#whatsapp" width="16" height="16" /> (+52) 55 4907 4219 <br> <icon src="#phone" width="16" height="16" /> (+52) 33 2796 4799 <br> <icon src="#twitter" width="16" height="16" /> @pateketrueke <br>
 > E-mail: <a href="mailto:yo@soypache.co">yo@soypache.co</a> <button id="pdf">Download as PDF</button>
 
 ### General skills, no-buzzwords
