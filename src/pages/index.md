@@ -8,9 +8,9 @@ icon: bullhorn
 
 I've been learning software development since I was 14 years old!
 
-**Today it's 2020** and I continue learning new stuff everyday.
+**Today it's 2023** and I continue learning new stuff everyday.
 
-## What you can find here?
+## What you'll find here?
 
 - Detailed information about **my work** and past jobs
 - OpenSource/side **projects** I do/contribute to

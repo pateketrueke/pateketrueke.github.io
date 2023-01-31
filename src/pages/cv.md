@@ -42,7 +42,7 @@ I've been there:
   Then I joined to a small digital-marketing to learn RoR while doing HTML+CSS+JS right before the ReactJS era.
 </p>
 
-## 2016-2021
+## 2016-present
 
 - Full-stack developer &hearts; AgaveLab <br> Jan. 2018 (&hellip;)
 
