@@ -26,7 +26,7 @@
       "src/**:{filepath/1}",
       "**/index.(css|js):{basedir}{ext}",
       "**/{pages,resources}/**:{filepath/1}",
-      "**/!(index).html:{basedir}/{name}/index.html"
+      "**/!(index|404).html:{basedir}/{name}/index.html"
     ],
     "options": {
       "kramed": {

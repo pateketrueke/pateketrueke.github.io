@@ -4,7 +4,7 @@ html
     base(href='/')
     meta(lang='en')
     meta(charset='utf-8')
-    meta(name='revision' content=GIT_REVISION)
+    meta(name='revision' content=GIT_REVISION || 'HEAD')
     meta(name='description' content=pkg.description)
     meta(name='author' content=pkg.author.name)
     meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
@@ -38,14 +38,14 @@ html
       if title
         title= title
 
-    if UA_TOKEN && NODE_ENV === 'production'
-      script(async src=`https://www.googletagmanager.com/gtag/js?id=${UA_TOKEN}`)
+    if G4_TOKEN && NODE_ENV === 'production'
+      script(async src=`https://www.googletagmanager.com/gtag/js?id=${G4_TOKEN}`)
       script.
         /* eslint-disable */
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '#{UA_TOKEN}');
+        gtag('config', '#{G4_TOKEN}');
         /* eslint-enable */
 
   body
