@@ -4,9 +4,13 @@ from := develop
 target := gh-pages
 message := Release: $(shell date)
 
+ifneq ($(wildcard .env),)
+	include .env
+endif
+
 GIT_REVISION=$(shell git rev-parse --short=7 HEAD)
 
-export GIT_REVISION
+.EXPORT_ALL_VARIABLES:
 
 define iif
   @(($(1) > /dev/null 2>&1) && echo "$(2)") || echo "$(3)"

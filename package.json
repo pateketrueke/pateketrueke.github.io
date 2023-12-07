@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "npm run build -- -wdp 3001",
     "dist": "npm run build -- -fq",
-    "build": "mortero -I.gitignore"
+    "build": "mortero -I.gitignore --platform browser"
   },
   "mortero": {
     "bundle": [
@@ -44,7 +44,7 @@
     "less": "^3.13.1",
     "less-plugin-autoprefix": "^2.0.0",
     "live-server": "^1.2.2",
-    "mortero": "^0.0.100",
+    "mortero": "^0.0.115",
     "pug": "^2.0.4"
   }
 }
