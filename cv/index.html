@@ -24,6 +24,16 @@
     <link rel="stylesheet" type="text/css" href="styles.css">
     <meta name="og:title" content="Experience et all">
     <title>Experience et all</title>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=#{UA_TOKEN}"></script>
+    <script>
+      /* eslint-disable */
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '');
+      /* eslint-enable */
+      
+    </script>
   <script>(()=>{var c;function u(){if(typeof c=="undefined"){let t=document.createElement("canvas");c=Boolean(t.getContext&&t.getContext("2d"))}return c}function l(t,e,n,o,r){if(!u()){t.src=e,t.style.opacity=1;return}t.dataset.notransition!==!0&&(t.style.opacity=0);let s=new Image;s.onload=()=>{let a=document.createElement("canvas"),i=a.getContext("2d");if(a.width=n,a.height=o,i.drawImage(s,0,0,n,o),t.src=a.toDataURL("image/png"),t.dataset.notransition!==!0){let d=t.dataset.duration||".5s";t.style.transition=`opacity ${d}`,t.style.opacity=1}t.classList.add(r)},s.src=e}function p(){let t="loaded";[].slice.call(document.getElementsByTagName("img")).forEach(e=>{let n=e.dataset.loadedClass||t;if(e.currentSrc.indexOf("data:")===-1){e.dataset.notransition!==!0&&(e.style.opacity=0,(requestAnimationFrame||setTimeout)(()=>{e.style.transition="opacity 1s",e.style.opacity=1})),e.classList.add(n);return}let o=e.getAttribute("srcset");if(!o){e.classList.add(n);return}let r=o.split(/\s*,\s*/).map(s=>{let a=s.split(/\s+/);return{src:a[0],size:parseInt(a[1],10)}});Object.keys(r).some(s=>Math.round(window.devicePixelRatio)===r[s].size?(l(e,r[s].src,e.width,e.height,n),!0):!1)})}(requestAnimationFrame||setTimeout)(p);})();
 </script></head>
   <body>
