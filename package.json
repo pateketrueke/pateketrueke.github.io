@@ -44,7 +44,7 @@
     "less": "^3.13.1",
     "less-plugin-autoprefix": "^2.0.0",
     "live-server": "^1.2.2",
-    "mortero": "^0.0.115",
+    "mortero": "^0.0.116",
     "pug": "^2.0.4"
   }
 }

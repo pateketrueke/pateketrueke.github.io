@@ -25,7 +25,7 @@ html
     meta(property='og:profile:gender' content='male')
     meta(property='og:description' content=pkg.description)
     meta(property='og:url' content=pkg.author.url)
-    meta(property='og:image' content='https://soypache.co/images/me_and_shiro.jpg')
+    meta(property='og:image' content='https://soypache.co/images/ALVADUB_VINYL_v2.svg')
 
     block styles
       link(rel='stylesheet' type='text/css' href='styles.css')
@@ -62,16 +62,29 @@ html
 
           #nav.p.flex-none
             .floating.noselect.center
-              image.fit.push.circle(src='me_and_shiro.jpg' alt='Shirosama')
+              image.fit.push.circle(src='ALVADUB_VINYL_v2' alt='ALVADUB')
 
             h2= pkg.author.name
 
+            p I am a #[del freelance] employed web developer living at #[a(href='https://www.google.com.mx/maps/place/Guadalajara,+Jal./@20.6737883,-103.3704326,13z' rel='noopener noreferrer' target='_blank') GDL]
+
+            p &star; Reggae &amp; DUB maker
+
+            p E-mail: #[a(href='mailto:yo@soypache.co') yo@soypache.co]
+            p X+IG: @pateketrueke
+
+            ul.notype.reset#media
+              li.inline-block: a(href='https://soundcloud.com/alvadub' rel='noopener noreferrer' target='_blank'): image(src='soundcloud_black_white_32' alt='SoundCloud' width=32)
+              li.inline-block: a(href='https://alvadub.bandcamp.com/' rel='noopener noreferrer' target='_blank'): image(src='bandcamp-button-square-black-32' alt='Bandcamp' width=32)
+              li.inline-block: a(href='https://www.youtube.com/@alvadub' rel='noopener noreferrer' target='_blank'): image(src='youtube_social_square_dark' alt='YouTube' width=32)
+              li.inline-block: a(href='https://music.apple.com/us/artist/1724143850' rel='noopener noreferrer' target='_blank'): image(src='applemusic_square_black_64' alt='Apple Music' width=32)
+              li.inline-block: a(href='https://open.spotify.com/artist/1XqTdkcjEEscsdcZCaqRuE' rel='noopener noreferrer' target='_blank'): image(src='spotify_logo_square_64' alt='Spotify' width=32)
+
+            p &star; Open Source enthusiast
+
             ul.notype.reset
               li.inline-block: a(href='https://github.com/pateketrueke' rel='noopener noreferrer' target='_blank') GitHub
-              li.inline-block: a(href='https://twitter.com/pateketrueke' rel='noopener noreferrer' target='_blank') Twitter
-
-            p I am a #[del freelance] employed web developer living at #[a(href='https://www.google.com.mx/maps/place/Guadalajara,+Jal./@20.6737883,-103.3704326,13z' rel='noopener noreferrer' target='_blank') GDL].
-            p DUB maker and Open Source enthusiast.
+              li.inline-block: a(href='https://twitter.com/pateketrueke' rel='noopener noreferrer' target='_blank') Twitter (X)
 
             nav
               h3 Navigation
