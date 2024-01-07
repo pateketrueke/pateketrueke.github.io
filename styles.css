@@ -408,7 +408,7 @@ h6 {
 }
 .auto-format a[href*="//"]:not([href*="soypache.co"]):before {
   background-color: inherit;
-  content: '⧉';
+  content: '⧉' ' ';
 }
 .auto-format > .highlight {
   color: silver;
@@ -451,4 +451,12 @@ h6 {
   .auto-format ul + hr + p {
     display: none;
   }
+}
+#media a {
+  border-radius: 5px;
+  overflow: hidden;
+  display: block;
+}
+#media a img {
+  display: block;
 }

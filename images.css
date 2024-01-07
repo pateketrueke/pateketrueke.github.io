@@ -12,6 +12,26 @@ i[class^="icon-"], i[class*=" icon-"] {
   width: 512px; height: 512px;
   background-image: url(images/me_and_shiro.jpg);
 }
+.icon-bandcamp-button-square-black-32 {
+  width: 32px; height: 32px;
+  background-image: url(images/bandcamp-button-square-black-32.png);
+}
+.icon-soundcloud_black_white_32 {
+  width: 32px; height: 32px;
+  background-image: url(images/soundcloud_black_white_32.png);
+}
+.icon-youtube_social_square_dark {
+  width: 64px; height: 64px;
+  background-image: url(images/youtube_social_square_dark.png);
+}
+.icon-applemusic_square_black_64 {
+  width: 64px; height: 64px;
+  background-image: url(images/applemusic_square_black_64.png);
+}
+.icon-spotify_logo_square_64 {
+  width: 64px; height: 64px;
+  background-image: url(images/spotify_logo_square_64.png);
+}
 
 
 
