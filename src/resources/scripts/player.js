@@ -1,19 +1,20 @@
 const node = document.querySelector('#soundcloud');
 
 const sets = [
-  [1752201033, '35658D', 350],
-  [1752866826, 'F79C41', 350],
-  [1749178398, '32A39D', 350],
-  [1750065801, 'FE09A0', 600],
+  [1, 1712370732, '273134', 120],
+  [0, 1752866826, 'F79C41', 350],
+  [0, 1749178398, '32A39D', 350],
+  [0, 1750065801, 'FE09A0', 600],
 ];
 
 let current = Math.floor(Math.random() * sets.length);
 function refresh() {
   current = current === sets.length - 1 ? 0 : current + 1;
 
-  const [playlist, color, height] = sets[current];
+  const [is_track, playlist, color, height] = sets[current];
 
-  const url = `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/${playlist}&color=%23${color}&auto_play=false&hide_related=true&show_comments=true&show_user=false&show_reposts=false&show_teaser=true`;
+  const kind = is_track ? 'tracks' : 'playlists';
+  const url = `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/${kind}/${playlist}&color=%23${color}&auto_play=false&hide_related=true&show_comments=true&show_user=false&show_reposts=false&show_teaser=true`;
 
   node.innerHTML = `<iframe width="100%" height="${height}" scrolling="no" frameborder="no" allow="autoplay" src="${url}"></iframe>`;
 
