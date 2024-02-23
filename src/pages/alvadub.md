@@ -29,19 +29,19 @@ I have skills and the equipement to provide you the following experiences:
 - Digital Mix without a laptop, instead I'll bring a [digital mixer][r16] (8 channels) with a pair of built-in fx to have fun!
 - Analog Mix, here I can bring my own [multi-track player][pl16] (16 channels), fx-boxes and wires for more detail and pleasure, this requires lots of focus... but trust me, you won't regret.
 
-In all modes I can bring an instrument, usually a Melodica, and depending of the situation I can use my vocals (ain't much but it's honest work!) to fulfill the space.
+In all modes I can bring an instrument (usually a Melodica), and depending of the situation I can use my vocals (ain't much but it's honest work!) to fulfill the space.
 
 I am very new on all of this, but I promise you: I am doing my best and I'll keep trying hard to become better after every session!
 
 ## Where you can find my work?
 
-I use [Soundcloud][sc] to primarly upload my content and explore its audience, the same with [Bandcamp][bc], where you an also buy me (or download!) something directly.
+I use [Soundcloud][sc] to primarly upload my music and explore its audience, the same with [Bandcamp][bc], where you can also buy me (or download!) something directly.
 
-From there, my music gets distributed to all major streaming plaforms: [Deezer][de], [Spotify][sp] and [Apple Music][am] among others.
+From there, my work gets distributed to all major streaming plaforms: [Deezer][de], [Spotify][sp] and [Apple Music][am] among others.
 
 You can find me through the "ALVADUB" artist name, or just click on the links above.
 
-Regardless of this, you can also download my music from here:
+Regardless of this, you can also download some of my music from here:
 
 [atl]: https://www.youtube.com/watch?v=wmUvAeYu0SE
 [nix]: https://www.youtube.com/@dubnix
