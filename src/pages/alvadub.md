@@ -7,16 +7,16 @@ icon: speaker
 ## How I got into this?
 
 I got into music early on my youth years, I started to learn and play reggae, rock, ska and patchanka covers with Eztli Cuica
-and later on with the [ATL Sound System][atl] &mdash; There, I learnt how to create music and became the author of original music to play.
+and later on with the [ATL Sound System][atl]. There, I learnt how to create music and became the author of original music to play.
 
 A couple of years later I started a new music project with [Carlos Wise (DUB&star;NIX)][nix], learning a new genre which captivated both of us: DUB
-&mdash; But I had to move to Jalisco so I paused most of my collaboration to focus entirely on my software engineering career.
+&mdash; Unfortunately, I had to move to Jalisco so I paused most of my collaboration to focus entirely on my software engineering career.
 
 Later on 2022 and early 2023 I came with the idea of starting a new project on my own so I played my music with our friends of [Lion Army Sound System][lass]
 &mdash; It had a good acceptance through the public on the extint "Plantón 420" upfront the Senate Chamber at Mexico City and ["Pulques La Venta][plav] near our hometown
 (among other venues here at Guadalajara with our friends of [Shaka Dance Sound System][sdss]).
 
-I became more confident of my work since then, and now, I've been dedicating more time and money into this new venture!
+Since then, I have become more confident of my work since then, and now, I've been dedicating more time and money into this new venture!
 
 ## What can I do for you?
 
@@ -37,7 +37,7 @@ I am very new on all of this, but I promise you: I am doing my best and I'll kee
 
 I use [Soundcloud][sc] to primarly upload my music and explore its audience, the same with [Bandcamp][bc], where you can also buy me (or download!) something directly.
 
-From there, my work gets distributed to all major streaming plaforms: [Deezer][de], [Spotify][sp] and [Apple Music][am] among others.
+From there, my work gets distributed to all major streaming plaforms: [Deezer][de], [Spotify][sp] and [Amazon Music][am] among others.
 
 You can find me through the "ALVADUB" artist name, or just click on the links above.
 
