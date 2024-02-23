@@ -11,7 +11,15 @@ a { color: #A5B231; }
 h2 { margin-top: 50px; }
 
 .music-links {
-  li { gap: 1em; }
+  li {
+    gap: .5em;
+    display: flex;
+  }
+  li + li {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed gray;
+  }
   span { color: gray; }
   svg { fill: currentColor; }
   a:hover ~ span {
@@ -21,6 +29,7 @@ h2 { margin-top: 50px; }
 }
 
 .document {
+  padding: 20px;
   max-width: 800px;
   margin: 50px auto;
 }
@@ -31,10 +40,6 @@ h2 { margin-top: 50px; }
 
 .logo {
   filter: invert(1);
-}
-
-.gap {
-  gap: 50px;
 }
 
 .me {
