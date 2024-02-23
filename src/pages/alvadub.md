@@ -16,7 +16,7 @@ Later on 2022 and early 2023 I came with the idea of starting a new project on m
 &mdash; It had a good acceptance through the public on the extint "Plantón 420" upfront the Senate Chamber at Mexico City and ["Pulques La Venta"][plav] near our hometown
 (among other venues here at Guadalajara with our friends of [Shaka Dance Sound System][sdss]).
 
-Since then, I have become more confident of my work since then, and now, I've been dedicating more time and money into this new venture!
+Since then, I have become more confident of my work, and now, I've been dedicating more time and money into this new venture!
 
 ## What can I do for you?
 
