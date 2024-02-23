@@ -1,0 +1,42 @@
+@import '../../lib/styles/vars';
+@import '../../lib/styles/layout';
+@import '../../lib/styles/helpers';
+
+body {
+  background-color: black;
+  color: white;
+}
+
+a { color: #A5B231; }
+h2 { margin-top: 50px; }
+
+.music-links {
+  li { gap: 1em; }
+  span { color: gray; }
+  svg { fill: currentColor; }
+  a:hover ~ span {
+    color: white;
+    text-decoration: underline;
+  }
+}
+
+.document {
+  max-width: 800px;
+  margin: 50px auto;
+}
+
+.dimmed {
+  color: gray;
+}
+
+.logo {
+  filter: invert(1);
+}
+
+.gap {
+  gap: 50px;
+}
+
+.me {
+  border-radius: 50%;
+}

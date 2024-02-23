@@ -1,52 +1,7 @@
 doctype html
 html
   head
-    base(href='/')
-    meta(lang='en')
-    meta(charset='utf-8')
-    meta(name='revision' content=GIT_REVISION || 'HEAD')
-    meta(name='description' content=pkg.description)
-    meta(name='author' content=pkg.author.name)
-    meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
-    meta(name='HandheldFriendly' content='true')
-    meta(name='viewport' content='width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no')
-
-    link(rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Lato:300|Montserrat')
-
-    <!--[if lt IE 9]>
-    script(src='//html5shim.googlecode.com/svn/trunk/html5.js')
-    script(src='//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js')
-    <![endif]-->
-
-    meta(property='og:type' content='profile')
-    meta(property='og:profile:first_name' content=pkg.author.name.split(' ')[0])
-    meta(property='og:profile:last_name' content=pkg.author.name.split(' ')[1])
-    meta(property='og:profile:username' content=pkg.author.email.split('@')[0])
-    meta(property='og:profile:gender' content='male')
-    meta(property='og:description' content=pkg.description)
-    meta(property='og:url' content=pkg.author.url)
-    meta(property='og:image' content='https://soypache.co/images/ALVADUB_VINYL_v2.svg')
-
-    block styles
-      link(rel='stylesheet' type='text/css' href='styles.css')
-
-    block meta
-      if title
-        meta(name='og:title' content=title)
-
-    block head
-      if title
-        title= title
-
-    if G4_TOKEN && NODE_ENV === 'production'
-      script(async src=`https://www.googletagmanager.com/gtag/js?id=${G4_TOKEN}`)
-      script.
-        /* eslint-disable */
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '#{G4_TOKEN}');
-        /* eslint-enable */
+    include ../partials/head
 
   body
     import(from='sprites.svg')
