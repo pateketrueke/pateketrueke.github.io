@@ -13,7 +13,7 @@ A couple of years later I started a new music project with [Carlos Wise (DUB&sta
 &mdash; Unfortunately, I had to move to Jalisco so I paused most of my collaboration to focus entirely on my software engineering career.
 
 Later on 2022 and early 2023 I came with the idea of starting a new project on my own so I played my music with our friends of [Lion Army Sound System][lass]
-&mdash; It had a good acceptance through the public on the extint "Plantón 420" upfront the Senate Chamber at Mexico City and ["Pulques La Venta][plav] near our hometown
+&mdash; It had a good acceptance through the public on the extint "Plantón 420" upfront the Senate Chamber at Mexico City and ["Pulques La Venta"][plav] near our hometown
 (among other venues here at Guadalajara with our friends of [Shaka Dance Sound System][sdss]).
 
 Since then, I have become more confident of my work since then, and now, I've been dedicating more time and money into this new venture!
