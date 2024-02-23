@@ -25,7 +25,7 @@ Shall love to play my music for you, in your venue, between friends!
 I have skills and the equipement to provide you the following experiences:
 
 - DJ Set, I can play my music on digital formats; if desired, I can bring CDs or USB sticks, whatever!
-- Live Mix, so I can bring my own computer and controller to perform my music in a more livid way.
+- Live Mix, so I can bring my own computer and controller to [perform my music][bw] in a more livid way.
 - Digital Mix without a laptop, instead I'll bring a [digital mixer][r16] (8 channels) with a pair of built-in fx to have fun!
 - Analog Mix, here I can bring my own [multi-track player][pl16] (16 channels), fx-boxes and wires for more detail and pleasure, this requires lots of focus... but trust me, you won't regret.
 
@@ -41,15 +41,16 @@ From there, my work gets distributed to all major streaming plaforms: [Deezer][d
 
 You can find me through the "ALVADUB" artist name, or just click on the links above.
 
-Regardless of this, you can also download some of my music from here:
+Regardless of this, you can also download some of my music from here.
 
 [atl]: https://www.youtube.com/watch?v=wmUvAeYu0SE
 [nix]: https://www.youtube.com/@dubnix
-[sc]: https://google.com
-[bc]: https://google.com
-[de]: https://google.com
-[sp]: https://google.com
-[am]: https://google.com
+[bw]: https://www.bitwig.com/
+[sc]: https://soundcloud.com/alvadub
+[bc]: https://alvadub.bandcamp.com/
+[de]: https://www.deezer.com/es/artist/133116282
+[sp]: https://open.spotify.com/artist/1XqTdkcjEEscsdcZCaqRuE
+[am]: https://music.apple.com/us/artist/1724143850
 [lass]: https://www.facebook.com/profile.php?id=100076157704803
 [sdss]: https://www.facebook.com/shakadancesoundsystem
 [plav]: https://www.facebook.com/pages/Pulques%20La%20Venta/2117464271650371/
