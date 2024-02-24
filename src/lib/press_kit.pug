@@ -27,9 +27,9 @@ block body
               a(href=track.zip) ZIP #[icon(src='#download' size=16)]
             .flex-gap.flex-auto.flex-inline.flex-between
               span #{track.name} &mdash; !{track.info}
-              if track.mp3
+              if track.track
                 span: button.player(data-track=track)
-                  icon(src='#play' size=24)
+                  icon(src='#speaker' size=24)
 
     p #[b WAV] is high-quality audio file (between -10.0 and -11.0 LUFS), ideal for Sound System playback and vast majority of speakers/headphones with enough BASS support.
     p #[b MP3] is the compressed version of original WAV audio files, with a high bitrate to keep a good quality level (around ~7MB each).
@@ -54,3 +54,6 @@ block body
 
       .text-center
         image.logo(src='ALVADUB_VINYL_v2' alt='ALVADUB' width=260 height=260)
+
+  .bcplayer.flex.flex-justified
+  import(from='music.js')

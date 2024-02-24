@@ -1,7 +1,6 @@
 ---
 $render: ../lib/press_kit.pug
 title: Press-kit & Media
-icon: speaker
 ---
 
 ## How I got into this?
