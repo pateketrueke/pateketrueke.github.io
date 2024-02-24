@@ -19,6 +19,9 @@ endef
 help: Makefile
 	@awk -F':.*?##' '/^[a-z\\%!:-]+:.*##/{gsub("%","*",$$1);gsub("\\\\",":*",$$1);printf "\033[36m%8s\033[0m %s\n",$$1,$$2}' $<
 
+up: clean dist deploy ## Build and sync remotes
+	@git push
+
 dev: deps ## Lift dev environment for this service
 	@npm run dev
 
