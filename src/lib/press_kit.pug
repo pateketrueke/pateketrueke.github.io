@@ -26,7 +26,7 @@ block body
             if track.zip
               a(href=track.zip) ZIP #[icon(src='#download' size=16)]
             .flex-gap.flex-auto.flex-inline.flex-between
-              span #{track.name} &mdash; !{track.info}
+              span #[b= track.name] &mdash; !{track.info}
               if track.track
                 span: button.player(data-track=track)
                   icon(src='#speaker' size=24)
