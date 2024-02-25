@@ -11,9 +11,14 @@ function attach(track) {
   const props = [
     track.album ? `album=${track.album}` : '',
     track.track ? `track=${track.track}` : '',
+    'artwork=none',
+    'size=small',
+    'bgcol=222222',
+    'linkcol=ffffff',
+    'transparent=true',
   ].filter(Boolean).join('/');
 
-  iframe.src = `https://bandcamp.com/EmbeddedPlayer/${props}/size=small/bgcol=222222/linkcol=ffffff/transparent=true/`;
+  iframe.src = `https://bandcamp.com/EmbeddedPlayer/${props}/`;
   track.node.disabled = true;
 }
 
