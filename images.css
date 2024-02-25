@@ -32,6 +32,10 @@ i[class^="icon-"], i[class*=" icon-"] {
   width: 64px; height: 64px;
   background-image: url(images/spotify_logo_square_64.png);
 }
+.icon-sqme {
+  width: 750px; height: 750px;
+  background-image: url(images/sqme.jpg);
+}
 
 
 

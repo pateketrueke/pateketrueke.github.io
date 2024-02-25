@@ -1,0 +1,286 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+.text-center {
+  text-align: center;
+}
+.push {
+  margin-bottom: 20px;
+}
+.segment {
+  position: relative;
+}
+.container {
+  max-width: 960px;
+  position: relative;
+  margin: auto;
+}
+.flex {
+  display: flex;
+}
+.flex-none {
+  flex: none;
+}
+.flex-inline {
+  display: inline-flex;
+}
+.flex-wrapped {
+  flex-wrap: wrap;
+}
+.flex-auto {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+.flex-gap {
+  gap: 50px;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-center {
+  align-items: center;
+}
+.flex-between {
+  justify-content: space-between;
+}
+.flex-justified {
+  justify-content: center;
+}
+.at-last {
+  order: 999;
+}
+.one-half {
+  width: 50%;
+}
+.one-third {
+  width: 33.3%;
+}
+.two-thirds {
+  width: 66.6%;
+}
+.one-fourth {
+  width: 25%;
+}
+.three-fourths {
+  width: 75%;
+}
+.one-fifth {
+  width: 20%;
+}
+.two-fifths {
+  width: 40%;
+}
+.three-fifths {
+  width: 60%;
+}
+.four-fifths {
+  width: 80%;
+}
+@media screen and (min-width: 480px) {
+  .sm-flex {
+    display: flex;
+  }
+  .sm-one-half {
+    width: 50%;
+  }
+  .sm-one-third {
+    width: 33.3%;
+  }
+  .sm-two-thirds {
+    width: 66.6%;
+  }
+  .sm-one-fourth {
+    width: 25%;
+  }
+  .sm-three-fourths {
+    width: 75%;
+  }
+  .sm-one-fifth {
+    width: 20%;
+  }
+  .sm-two-fifths {
+    width: 40%;
+  }
+  .sm-three-fifths {
+    width: 60%;
+  }
+  .sm-four-fifths {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 720px) {
+  .md-flex {
+    display: flex;
+  }
+  .md-gap {
+    gap: 50px;
+  }
+  .md-one-half {
+    width: 50%;
+  }
+  .md-one-third {
+    width: 33.3%;
+  }
+  .md-two-thirds {
+    width: 66.6%;
+  }
+  .md-one-fourth {
+    width: 25%;
+  }
+  .md-three-fourths {
+    width: 75%;
+  }
+  .md-one-fifth {
+    width: 20%;
+  }
+  .md-two-fifths {
+    width: 40%;
+  }
+  .md-three-fifths {
+    width: 60%;
+  }
+  .md-four-fifths {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 960px) {
+  .lg-flex {
+    display: flex;
+  }
+  .lg-one-half {
+    width: 50%;
+  }
+  .lg-one-third {
+    width: 33.3%;
+  }
+  .lg-two-thirds {
+    width: 66.6%;
+  }
+  .lg-one-fourth {
+    width: 25%;
+  }
+  .lg-three-fourths {
+    width: 75%;
+  }
+  .lg-one-fifth {
+    width: 20%;
+  }
+  .lg-two-fifths {
+    width: 40%;
+  }
+  .lg-three-fifths {
+    width: 60%;
+  }
+  .lf-gour-fifths {
+    width: 80%;
+  }
+}
+.debug * {
+  outline: 1px dotted rgba(255, 0, 255, 0.75);
+}
+.noselect {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.auto-format a[href*="//"]:not([href*="soypache.co"]):before {
+  background-color: inherit;
+  content: '⧉' ' ';
+}
+.auto-format > .highlight {
+  color: silver;
+  font-size: 120%;
+}
+.auto-format > h1 {
+  margin-top: 0;
+}
+.auto-format > h2 {
+  color: silver;
+}
+.auto-format > img {
+  max-width: 100%;
+}
+body {
+  background-color: black;
+  color: white;
+  margin: 0;
+}
+a {
+  color: #A5B231;
+}
+h2 {
+  margin-top: 50px;
+}
+svg {
+  fill: currentColor;
+}
+.music-links li {
+  gap: 0.5em;
+  display: flex;
+}
+.music-links li + li {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed gray;
+}
+.music-links span {
+  color: gray;
+}
+.music-links a:hover ~ span {
+  color: white;
+  text-decoration: underline;
+}
+.bcplayer {
+  background-color: #111;
+  position: fixed;
+  bottom: 0;
+  z-index: 2;
+  height: 42px;
+  width: 100%;
+  transition: bottom 0.2s;
+}
+.bcplayer:empty {
+  bottom: -120px;
+}
+.bcplayer > iframe {
+  border: 0;
+  width: 100%;
+  height: 120px;
+}
+@media screen and (min-width: 720px) {
+  .bcplayer > iframe {
+    width: 700px !important;
+  }
+}
+.document {
+  padding: 20px;
+  max-width: 800px;
+  margin: 50px auto;
+}
+.player {
+  border: none;
+  padding: 0;
+  color: silver;
+  cursor: pointer;
+  background-color: transparent;
+}
+.player svg {
+  stroke: currentColor;
+}
+.player[disabled] {
+  opacity: 0.5;
+}
+.dimmed {
+  color: gray;
+}
+.logo {
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
+.me {
+  border-radius: 50%;
+}
