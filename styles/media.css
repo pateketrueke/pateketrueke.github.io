@@ -230,6 +230,9 @@ svg {
 .music-links span {
   color: gray;
 }
+.music-links b {
+  color: silver;
+}
 .music-links a:hover ~ span {
   color: white;
   text-decoration: underline;
