@@ -23,7 +23,7 @@ block body
           li.md-flex.flex-wrapped
             a(href=track.wav) WAV #[icon(src='#download' size=16)]
             a(href=track.mp3) MP3 #[icon(src='#download' size=16)]
-            if track.zip
+            //-if track.zip
               a(href=track.zip) ZIP #[icon(src='#download' size=16)]
             .flex-gap.flex-auto.flex-inline.flex-between
               span #[b= track.name] &mdash; !{track.info}
@@ -31,9 +31,9 @@ block body
                 span: button.player(data-track=track)
                   icon(src='#speaker' size=24)
 
-    p #[b WAV] is high-quality audio file (between -10.0 and -11.0 LUFS), ideal for Sound System playback and vast majority of speakers/headphones with enough BASS support.
+    p #[b WAV] is high-quality audio file in stereo (between -11.0 and -10.0 LUFS), ideal for Sound System playback and vast majority of speakers/headphones with enough BASS support.
     p #[b MP3] is the compressed version of original WAV audio files, with a high bitrate to keep a good quality level (around ~7MB each).
-    p #[b ZIP] contains the WAV audio files of the original track (stems) ready to be remixed in your DAW or multi-track player.
+    //-p #[b ZIP] contains the WAV audio files of the original track (stems) ready to be remixed in your DAW or multi-track player.
 
     .md-gap.md-flex.flex-center
       p
