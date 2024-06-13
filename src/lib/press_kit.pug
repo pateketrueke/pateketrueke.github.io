@@ -21,8 +21,8 @@ block body
       ul.music-links.notype.reset
         each track in set.tracks
           li.md-flex.flex-wrapped
-            a(href=track.wav) WAV #[icon(src='#download' size=16)]
-            a(href=track.mp3) MP3 #[icon(src='#download' size=16)]
+            a(href=track.wav_link) WAV #[icon(src='#download' size=16)]
+            a(href=track.mp3_link) MP3 #[icon(src='#download' size=16)]
             //-if track.zip
               a(href=track.zip) ZIP #[icon(src='#download' size=16)]
             .flex-gap.flex-auto.flex-inline.flex-between
