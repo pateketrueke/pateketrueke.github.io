@@ -15,8 +15,8 @@ async function submitLink(trackInfo, kind) {
     workspace_id: process.env.LINKLY_WORKSPACE,
     domain: process.env.LINKLY_DOMAIN,
     slug: `${kind}/${slugify(trackInfo.name, { lower: true })}`,
+    name: `${trackInfo.name} (${kind.toUpperCase()})`,
     url: trackInfo[kind],
-    name: trackInfo.name,
   };
 
   if (trackInfo[`${kind}_id`]) {
