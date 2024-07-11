@@ -1,3 +1,43 @@
+- label: LIFE IS A REVERB
+  latest: true
+  tracks:
+  - wav: 'https://www.dropbox.com/scl/fi/dhycawkt9y8e2johvqg4m/RIVER-10.6.wav?rlkey=sbndzald4y66jx7omowo9mqeg&st=2w1wukl3&dl=1'
+    mp3: 'https://www.dropbox.com/scl/fi/5f4af0bd28si8ma2068kz/RIVER-10.6.mp3?rlkey=g6zikeju3isxgc66m7hz6nag9&st=2lgxqmik&dl=1'
+    name: RIVER
+    info: '133 BPM / D F#dim'
+    track: 3171703945
+    album: 5521055
+  - wav: ''
+    mp3: ''
+    name: COAST
+    info: '133 BPM / F Adim'
+    track: -1
+    album: 5521055
+  - wav: ''
+    mp3: ''
+    name: SWAMP
+    info: '117 BPM / Am Gm Am %'
+    track: -1
+    album: 5521055
+  - wav: ''
+    mp3: ''
+    name: SLUDGE
+    info: '138 BPM / Em Ebdim'
+    track: -1
+    album: 5521055
+  - wav: ''
+    mp3: ''
+    name: SLIPPERY
+    info: '133 BPM / Em Ebdim C B'
+    track: -1
+    album: 5521055
+  - wav: ''
+    mp3: ''
+    name: DROWNING
+    info: '112 BPM / Bb Abm'
+    track: -1
+    album: 5521055
+
 - label: Reggae & DUB
   tracks:
   - wav: 'https://www.dropbox.com/scl/fi/015fmvkoahlbt58z1n8g4/THOUGHTS-10.5.wav?rlkey=cz4mohssfj7q5t6fkgjfhy5qq&dl=1'

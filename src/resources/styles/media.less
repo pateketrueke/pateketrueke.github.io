@@ -73,6 +73,23 @@ svg { fill: currentColor; }
   filter: invert(1);
 }
 
+.new {
+  background-color: #FED974;
+  border-radius: 5px;
+  font-size: .8rem;
+  padding: 0 5px;
+  color: black;
+  gap: 5px;
+  transform: rotate(5deg);
+  animation: zoom-in-zoom-out 2s ease infinite;
+}
+
 .me {
   border-radius: 50%;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% { transform: rotate(5deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.5); }
+  100% { transform: rotate(5deg) scale(1); }
 }
