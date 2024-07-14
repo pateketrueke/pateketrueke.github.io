@@ -4,40 +4,63 @@
   - wav: 'https://www.dropbox.com/scl/fi/dhycawkt9y8e2johvqg4m/RIVER-10.6.wav?rlkey=sbndzald4y66jx7omowo9mqeg&st=2w1wukl3&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/5f4af0bd28si8ma2068kz/RIVER-10.6.mp3?rlkey=g6zikeju3isxgc66m7hz6nag9&st=2lgxqmik&dl=1'
     name: RIVER
-    info: '133 BPM / D F#dim'
+    info: 133 BPM / D F#dim
     track: 3171703945
     album: 5521055
+    wav_id: 29268865
+    wav_link: 'https://link.soypache.co/wav/river'
+    mp3_id: 29268866
+    mp3_link: 'https://link.soypache.co/mp3/river'
   - wav: 'https://www.dropbox.com/scl/fi/9m7zvb74i65gt245n9neq/COAST-10.5.wav?rlkey=ethbn724oz7q9sx6ktoxjqldw&st=l5vln0br&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/oomghyzk702s8mo8ko3id/COAST-10.5.mp3?rlkey=xhigdvkp39cyh1i9qrs29oitu&st=beqhjebr&dl=1'
     name: COAST
-    info: '133 BPM / F Adim'
+    info: 133 BPM / F Adim
     track: 3697143688
     album: 5521055
+    wav_id: 29268867
+    wav_link: 'https://link.soypache.co/wav/coast'
+    mp3_id: 29268868
+    mp3_link: 'https://link.soypache.co/mp3/coast'
   - wav: 'https://www.dropbox.com/scl/fi/cmiv4dd0g2bdal0x74209/SWAMP-10.6.wav?rlkey=y0h7agg2b7rhkiw1ab8y0yaaq&st=0nbcoih1&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/ipczjfftjmb9m0l7r8bup/SWAMP-10.6.mp3?rlkey=f1p4wixa786nhwmur938o18he&st=uwecr729&dl=1'
     name: SWAMP
-    info: '117 BPM / Am Gm Am %'
+    info: 117 BPM / Am Gm Am %
     track: 3974388852
     album: 5521055
+    wav_id: 29268869
+    wav_link: 'https://link.soypache.co/wav/swamp'
+    mp3_id: 29268870
+    mp3_link: 'https://link.soypache.co/mp3/swamp'
   - wav: 'https://www.dropbox.com/scl/fi/r1yp8jaoxh225poll0xfy/SLUDGE-10.6.wav?rlkey=lzpfx0aavj13vmpbzp48qk7tw&st=abflekz8&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/txuiitgnvfdtozkclprnu/SLUDGE-10.6.mp3?rlkey=e0pn8rsuvd255urhz0k8gharh&st=rha3epw4&dl=1'
     name: SLUDGE
-    info: '138 BPM / Em Ebdim'
+    info: 138 BPM / Em Ebdim
     track: 2705687388
     album: 5521055
+    wav_id: 29268871
+    wav_link: 'https://link.soypache.co/wav/sludge'
+    mp3_id: 29268872
+    mp3_link: 'https://link.soypache.co/mp3/sludge'
   - wav: 'https://www.dropbox.com/scl/fi/d0czbon4qjvfxtbfhs7y3/SLIPPERY-10.4.wav?rlkey=i3yydp27pu8mw23dlxvjfnpyf&st=8g1b1xqs&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/eu2xc1qm9qhj084gk9mi6/SLIPPERY-10.4.mp3?rlkey=n0iw93ojepyennyhfz0x4ac74&st=3gcivh4k&dl=1'
     name: SLIPPERY
-    info: '133 BPM / Em Ebdim C B'
+    info: 133 BPM / Em Ebdim C B
     track: 809785405
     album: 5521055
+    wav_id: 29268873
+    wav_link: 'https://link.soypache.co/wav/slippery'
+    mp3_id: 29268874
+    mp3_link: 'https://link.soypache.co/mp3/slippery'
   - wav: 'https://www.dropbox.com/scl/fi/50a5dnkhnnb5gezekolff/DROWNING-10.4.wav?rlkey=smb09oha66rw6e03d8rrwehkv&st=94jqcll7&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/lhw1gbycga9kym12kv9bc/DROWNING-10.4.mp3?rlkey=rds0a6z8t4l4df6dy7vlac370&st=gtv25buw&dl=1'
     name: DROWNING
-    info: '112 BPM / Bb Abm'
+    info: 112 BPM / Bb Abm
     track: 4014762400
     album: 5521055
-
+    wav_id: 29268875
+    wav_link: 'https://link.soypache.co/wav/drowning'
+    mp3_id: 29268876
+    mp3_link: 'https://link.soypache.co/mp3/drowning'
 - label: Reggae & DUB
   tracks:
   - wav: 'https://www.dropbox.com/scl/fi/015fmvkoahlbt58z1n8g4/THOUGHTS-10.5.wav?rlkey=cz4mohssfj7q5t6fkgjfhy5qq&dl=1'
