@@ -284,6 +284,46 @@ svg {
   -webkit-filter: invert(1);
           filter: invert(1);
 }
+.new {
+  background-color: #FED974;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 0 5px;
+  color: black;
+  gap: 5px;
+  -webkit-transform: rotate(5deg);
+          transform: rotate(5deg);
+  -webkit-animation: zoom-in-zoom-out 2s ease infinite;
+          animation: zoom-in-zoom-out 2s ease infinite;
+}
 .me {
   border-radius: 50%;
+}
+@-webkit-keyframes zoom-in-zoom-out {
+  0% {
+    -webkit-transform: rotate(5deg) scale(1);
+            transform: rotate(5deg) scale(1);
+  }
+  50% {
+    -webkit-transform: rotate(5deg) scale(1.5);
+            transform: rotate(5deg) scale(1.5);
+  }
+  100% {
+    -webkit-transform: rotate(5deg) scale(1);
+            transform: rotate(5deg) scale(1);
+  }
+}
+@keyframes zoom-in-zoom-out {
+  0% {
+    -webkit-transform: rotate(5deg) scale(1);
+            transform: rotate(5deg) scale(1);
+  }
+  50% {
+    -webkit-transform: rotate(5deg) scale(1.5);
+            transform: rotate(5deg) scale(1.5);
+  }
+  100% {
+    -webkit-transform: rotate(5deg) scale(1);
+            transform: rotate(5deg) scale(1);
+  }
 }
