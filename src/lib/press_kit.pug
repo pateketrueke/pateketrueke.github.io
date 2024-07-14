@@ -1,5 +1,6 @@
 //-
   ---
+  $import: helpers.mjs
   sets: !include alv_music.yml
   ---
 
@@ -17,6 +18,7 @@ block body
     != yield
 
     each set in sets
+      a(name=slug(set.label))
       h3.flex.flex-center.flex-between
         span= set.label
         if set.latest
