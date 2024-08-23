@@ -11,43 +11,48 @@ block body
     .md-gap.md-flex.flex-center.flex-between
       .text-center
         image.me(src='sqme' alt="Alvaro Cabrera" width=260 height=260)
-      div
+      .bio
         p Hi, I'am #[b ALVADUB] (self-taught musician and software developer, beep-boop-bop!), and I want to share with you the music I made with &lt;3
         p I am living at Guadalajara Jalisco, but my hometown is #[a(href='https://es.wikipedia.org/wiki/San_Lorenzo_Acopilco') San Lorenzo Acopilco], a small place on the south-west mountains of Mexico City.
-        p: small.dimmed BTW, my fullname is #[b Alvaro Cabrera Durán] and I am 36 yo!
+        p: small.dimmed BTW, my fullname is #[b Alvaro Cabrera Durán] and I am !{new Date().getFullYear() - 1987} yo!
+        button(class='noprint' onclick='window.print()') Download as PDF
     != yield
 
-    each set in sets
-      a(name=slug(set.label))
-      h3.flex.flex-center.flex-between
-        span= set.label
-        if set.latest
-          span.new.flex.flex-center
-            span Latest release!
-            icon(src='#flash' size=22)
-      ul.music-links.notype.reset
-        each track in set.tracks
-          li.md-flex.flex-wrapped
-            if NODE_ENV === 'production'
-              a(href=track.wav_link) WAV #[icon(src='#download' size=16)]
-              a(href=track.mp3_link) MP3 #[icon(src='#download' size=16)]
-            else
-              a(href=track.wav) WAV #[icon(src='#download' size=16)]
-              a(href=track.mp3) MP3 #[icon(src='#download' size=16)]
-            //-if track.zip
-              a(href=track.zip) ZIP #[icon(src='#download' size=16)]
-            .flex-gap.flex-auto.flex-inline.flex-between
-              span #[b= track.name] &mdash; !{track.info}
-              if track.track
-                span: button.player(data-track=track)
-                  icon(src='#speaker' size=24)
+    .noprint
+      each set in sets
+        a(name=slug(set.label))
+        h3.flex.flex-center.flex-between
+          span= set.label
+          if set.latest
+            span.new.flex.flex-center
+              span Latest release!
+              icon(src='#flash' size=22)
+        ul.music-links.notype.reset
+          each track in set.tracks
+            li.md-flex.flex-wrapped
+              if NODE_ENV === 'production'
+                a(href=track.wav_link) WAV #[icon(src='#download' size=16)]
+                a(href=track.mp3_link) MP3 #[icon(src='#download' size=16)]
+              else
+                a(href=track.wav) WAV #[icon(src='#download' size=16)]
+                a(href=track.mp3) MP3 #[icon(src='#download' size=16)]
+              //-if track.zip
+                a(href=track.zip) ZIP #[icon(src='#download' size=16)]
+              .flex-gap.flex-auto.flex-inline.flex-between
+                span #[b= track.name] &mdash; !{track.info}
+                if track.track
+                  span: button.player(data-track=track)
+                    icon(src='#speaker' size=24)
 
-    p #[b WAV] is high-quality audio file in stereo (between -11.0 and -10.0 LUFS), ideal for Sound System playback and vast majority of speakers/headphones with enough BASS support.
-    p #[b MP3] is the compressed version of original WAV audio files, with a high bitrate to keep a good quality level (around ~7MB each).
-    //-p #[b ZIP] contains the WAV audio files of the original track (stems) ready to be remixed in your DAW or multi-track player.
+      p #[b WAV] is high-quality audio file in stereo (between -11.0 and -10.0 LUFS), ideal for Sound System playback and vast majority of speakers/headphones with enough BASS support.
+      p #[b MP3] is the compressed version of original WAV audio files, with a high bitrate to keep a good quality level (around ~7MB each).
+      //-p #[b ZIP] contains the WAV audio files of the original track (stems) ready to be remixed in your DAW or multi-track player.
+
+    hr.break
 
     .md-gap.md-flex.flex-center
       p
+        image.float-left.onprint(src='SOYPACHECO_QR' alt='QR' width=150 height=150)
         small.dimmed For now, I am using 12 channels or less and most tracks' length is ~3 min.
         br
         br
@@ -58,13 +63,14 @@ block body
         br
         small.dimmed.
           If you're looking for some pictures and logos for media usage just download the
-          following file: #[a(href='https://www.dropbox.com/scl/fo/l332yt76k5xbmv5mvmoq7/AGVmX8Z6umdW9muRGNTHhsM?rlkey=21z34293ao2zklj5ysysv4siw&st=zzhk3vhd&dl=1') _MEDIA_KIT.zip #[icon(src='#download' size=16)]]
+          following link: #[a.linky(href='https://www.dropbox.com/scl/fo/l332yt76k5xbmv5mvmoq7/AGVmX8Z6umdW9muRGNTHhsM?rlkey=21z34293ao2zklj5ysysv4siw&st=zzhk3vhd&dl=1') _MEDIA_KIT.zip #[icon(src='#download' size=16)]]
         br
         br
         | Thank you!
 
-      .text-center
+      .text-center.noprint
         image.logo(src='ALVADUB_VINYL_v2' alt='ALVADUB' width=260 height=260)
 
-  .bcplayer.flex.flex-justified
-  import(from='music.js')
+  .noprint
+    .bcplayer.flex.flex-justified
+    import(from='music.js')

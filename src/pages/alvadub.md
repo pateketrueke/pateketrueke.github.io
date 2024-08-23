@@ -1,6 +1,6 @@
 ---
 $render: ../lib/press_kit.pug
-title: Press-kit & Media
+title: "ALVADUB's Press-kit & Media"
 ---
 
 ## How I got into this?
@@ -16,6 +16,8 @@ Later on 2022 and early 2023 I came with the idea of starting a new project on m
 (among other venues here at Guadalajara with our friends of [Shaka Dance Sound System][sdss]).
 
 Since then, I have become more confident of my work, and now, I've been dedicating more time and money into this new venture!
+
+<div class="break"></div>
 
 ## What can I do for you?
 
@@ -38,9 +40,19 @@ I use [Soundcloud][sc] to primarly upload my music and explore its audience, the
 
 From there, my work gets distributed to all major streaming plaforms: [Deezer][de], [Spotify][sp] and [Amazon Music][am] among others.
 
+<div class="onprint">
+<ul>
+<li><a href="https://youtube.com/@alvadub">https://youtube.com/@alvadub</a></li>
+<li><a href="https://alvadub.bandcamp.com/">https://alvadub.bandcamp.com</a></li>
+<li><a href="https://soundcloud.com/alvadub">https://soundcloud.com/alvadub</a></li>
+<li><a href="https://open.spotify.com/artist/1XqTdkcjEEscsdcZCaqRuE">https://open.spotify.com/artist/1XqTdkcjEEscsdcZCaqRuE</a></li>
+<li><a href="https://www.amazon.com.mx/music/player/artists/B09527QRMC/alvadub">https://www.amazon.com.mx/music/player/artists/B09527QRMC/alvadub</a></li>
+</ul>
+</div>
+
 You can find me through the "ALVADUB" artist name, or just click on the links above.
 
-Regardless of this, you can also download some of my music from here.
+<p class="noprint">Regardless of this, you can also download some of my music from here.</p>
 
 [atl]: https://www.youtube.com/watch?v=wmUvAeYu0SE
 [nix]: https://www.youtube.com/@dubnix
@@ -49,7 +61,7 @@ Regardless of this, you can also download some of my music from here.
 [bc]: https://alvadub.bandcamp.com/
 [de]: https://www.deezer.com/es/artist/133116282
 [sp]: https://open.spotify.com/artist/1XqTdkcjEEscsdcZCaqRuE
-[am]: https://music.apple.com/us/artist/1724143850
+[am]: https://www.amazon.com.mx/music/player/artists/B09527QRMC/alvadub
 [lass]: https://www.facebook.com/profile.php?id=100076157704803
 [sdss]: https://www.facebook.com/shakadancesoundsystem
 [plav]: https://www.facebook.com/pages/Pulques%20La%20Venta/2117464271650371/

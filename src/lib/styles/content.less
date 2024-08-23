@@ -27,6 +27,8 @@
 .block { display: block; }
 .inline { display: inline; }
 .inline-block { display: inline-block; }
+.float-right { float: right; }
+.float-left { float: left; }
 
 .reset {
   padding: 0;
@@ -45,5 +47,40 @@
   &.-x3 {
     width: 90px;
     height: 90px;
+  }
+}
+
+.document {
+  .bio {
+    button {
+      padding: 5px 10px;
+      cursor: pointer;
+      color: inherit;
+      border: 1px solid gray;
+      background-color: inherit;
+      &:hover { background-color: gray; }
+    }
+  }
+  p > .float-left { margin-right: 1rem; }
+}
+
+@media print {
+  .document {
+    background-color: white !important;
+    color: black !important;
+    .linky {
+      position: relative;
+      font-size: 0;
+      svg { display: none; }
+      &::after {
+        font-size: 1rem;
+        content: attr(href);
+      }
+    }
+    a {
+      font-weight: bold;
+      text-decoration: none;
+      border-bottom: 1px dashed gray;
+    }
   }
 }

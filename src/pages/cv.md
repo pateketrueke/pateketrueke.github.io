@@ -6,7 +6,9 @@ icon: construction
 
 > ## Alvaro Cabrera Durán
 > <icon src="#whatsapp" width="16" height="16" /> (+52) 55 4907 4219 <br> <icon src="#phone" width="16" height="16" /> (+52) 33 2796 4799 <br> <icon src="#twitter" width="16" height="16" /> @pateketrueke <br>
-> E-mail: <a href="mailto:yo@soypache.co">yo@soypache.co</a> <button id="pdf" onclick="window.print()">Download as PDF</button>
+> E-mail: <a href="mailto:yo@soypache.co">yo@soypache.co</a> <button class="noprint inline-printing" onclick="window.print()">Download as PDF</button>
+
+<div class="break"></div>
 
 ### General skills, no-buzzwords
 
@@ -35,6 +37,8 @@ I've been there:
 
   > Of course I'm not lazy, I just prefer for CI to finish my job.
 
+<div class="break"></div>
+
 ### What I've been doing?
 
 <p class="highlight">
@@ -58,6 +62,8 @@ I've been there:
   > I really wanted to build good things and help people, so I moved to GDL in order to start doing that.
   > Here I wrote small abstractions just to help out on the job, or even just for fun.
 
+<div class="break"></div>
+
 ## 2009-2016
 
 - Full-time / full-stack web developer &hearts; Grupo Expansión <br> Jun. 2013 &mdash; Feb. 2016 (CDMX)
@@ -74,6 +80,8 @@ I've been there:
 
   > I used to build scripts for picture-windows on mIRC, learned bit of GameMaker and did some CLI stuff with TurboPascal.
   > After learning bits of web-development for the backend with ASP/PHP I started to search for something.
+
+<div class="break"></div>
 
 ### Education &mdash; really
 

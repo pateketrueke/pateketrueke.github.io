@@ -1,22 +1,28 @@
-#pdf {
+.inline-printing {
+  float: none;
   display: block;
   margin-top: 20px;
 }
 
 @media screen and (min-width: 520px) {
-  #pdf {
+  .inline-printing {
     float: right;
     margin: 0;
   }
 }
 
-.onprint() {
-  #nav, #pdf { display: none; }
+.onprint { display: none; }
+
+@media print {
+  @page { margin: 0; }
+  body { margin: 1.6cm; }
+  .noprint { display: none; }
+  .onprint { display: unset; }
+  .break {
+    margin-top: 2cm;
+    page-break-before: always;
+  }
   .auto-format {
-    > h3,
-    > h2 {
-      page-break-before: always;
-    }
     > .highlight {
       display: block;
     }
@@ -25,7 +31,4 @@
       + p { display: none; }
     }
   }
-}
-@media print {
-  .onprint;
 }
