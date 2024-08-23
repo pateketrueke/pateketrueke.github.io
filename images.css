@@ -36,6 +36,10 @@ i[class^="icon-"], i[class*=" icon-"] {
   width: 64px; height: 64px;
   background-image: url(images/youtube_social_square_dark.png);
 }
+.icon-SOYPACHECO_QR {
+  width: 354px; height: 354px;
+  background-image: url(images/SOYPACHECO_QR.png);
+}
 
 
 

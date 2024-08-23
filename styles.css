@@ -402,6 +402,12 @@ h6 {
 .inline-block {
   display: inline-block;
 }
+.float-right {
+  float: right;
+}
+.float-left {
+  float: left;
+}
 .reset {
   padding: 0;
   margin: 0;
@@ -417,6 +423,41 @@ h6 {
 .icon.-x3 {
   width: 90px;
   height: 90px;
+}
+.document .bio button {
+  padding: 5px 10px;
+  cursor: pointer;
+  color: inherit;
+  border: 1px solid gray;
+  background-color: inherit;
+}
+.document .bio button:hover {
+  background-color: gray;
+}
+.document p > .float-left {
+  margin-right: 1rem;
+}
+@media print {
+  .document {
+    background-color: white !important;
+    color: black !important;
+  }
+  .document .linky {
+    position: relative;
+    font-size: 0;
+  }
+  .document .linky svg {
+    display: none;
+  }
+  .document .linky::after {
+    font-size: 1rem;
+    content: attr(href);
+  }
+  .document a {
+    font-weight: bold;
+    text-decoration: none;
+    border-bottom: 1px dashed gray;
+  }
 }
 .debug * {
   outline: 1px dotted rgba(255, 0, 255, 0.75);
@@ -444,23 +485,35 @@ h6 {
 .auto-format > img {
   max-width: 100%;
 }
-#pdf {
+.inline-printing {
+  float: none;
   display: block;
   margin-top: 20px;
 }
 @media screen and (min-width: 520px) {
-  #pdf {
+  .inline-printing {
     float: right;
     margin: 0;
   }
 }
+.onprint {
+  display: none;
+}
 @media print {
-  #nav,
-  #pdf {
+  @page {
+    margin: 0;
+  }
+  body {
+    margin: 1.6cm;
+  }
+  .noprint {
     display: none;
   }
-  .auto-format > h3,
-  .auto-format > h2 {
+  .onprint {
+    display: unset;
+  }
+  .break {
+    margin-top: 2cm;
     page-break-before: always;
   }
   .auto-format > .highlight {
