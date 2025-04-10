@@ -17,9 +17,6 @@ I've been learning music and software development since I was young!
 - Random stuff &amp; **links** that I've collected
 - Reggae &amp; DUB music for your ears
 
-## Checkout my latest music!
+## Checkout my electronic press-kit!
 
-<div id="soundcloud">
-  <import from="player.js" />
-  &mdash; Loading music...
-</div>
+[Open ALVADUB's Music & Media](/alvadub)
