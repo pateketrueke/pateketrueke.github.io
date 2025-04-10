@@ -1,5 +1,71 @@
-- label: LIFE IS A REVERB
+- label: DUB IS FREEDOM
   latest: true
+  tracks:
+    - name: BARDO
+      info: 104 BPM / Cm Db
+      track: 250791698
+      album: 1804019208
+    - name: JUGLAR
+      info: 132 BPM / Cm Bbm
+      track: 2450930766
+      album: 1804019208
+    - name: STUCK
+      info: 118 BPM / Em C
+      track: 2216308536
+      album: 1804019208
+    - name: MOONROCK
+      info: 124 BPM / Ebm D
+      track: 2324745837
+      album: 1804019208
+    - name: SHARKNADO
+      info: 133 BPM / Ebm F
+      track: 612087537
+      album: 1804019208
+    - name: CONCRETE
+      info: 119 BPM / Em B Ebdim
+      track: 798020244
+      album: 1804019208
+
+- label: LUMINARIES
+  tracks:
+    - name: MIRROR
+      track: 3750956110
+      album: 904516645
+    - name: GROOVE-Y
+      track: 568698524
+      album: 904516645
+    - name: REFLECTION
+      track: 3858760823
+      album: 904516645
+    - name: ENLIGHTENMENT
+      track: 2133038311
+      album: 904516645
+
+- label: OTHER SINGLES
+  tracks:
+    - name: OCTUBRE
+      track: 3415406162
+    - name: NEVERMIND
+      info: 116 BPM / Cm Bdim G
+      track: 3199322937
+
+- label: HUMBLE DUB PLATES I
+  tracks:
+    - name: SIGUE
+      track: 1063264664
+      album: 3298784631
+    - name: ESTIGMA
+      info: 119 BPM / Am Em
+      track: 818902085
+      album: 3298784631
+    - name: TEMAZCAL
+      track: 1572017621
+      album: 3298784631
+    - name: HOMELESS
+      track: 3871441152
+      album: 3298784631
+
+- label: LIFE IS A REVERB
   tracks:
   - wav: 'https://www.dropbox.com/scl/fi/dhycawkt9y8e2johvqg4m/RIVER-10.6.wav?rlkey=sbndzald4y66jx7omowo9mqeg&st=2w1wukl3&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/5f4af0bd28si8ma2068kz/RIVER-10.6.mp3?rlkey=g6zikeju3isxgc66m7hz6nag9&st=2lgxqmik&dl=1'
@@ -7,61 +73,38 @@
     info: 133 BPM / D F#dim
     track: 3171703945
     album: 5521055
-    wav_id: 29268865
-    wav_link: 'https://link.soypache.co/wav/river'
-    mp3_id: 29268866
-    mp3_link: 'https://link.soypache.co/mp3/river'
   - wav: 'https://www.dropbox.com/scl/fi/9m7zvb74i65gt245n9neq/COAST-10.5.wav?rlkey=ethbn724oz7q9sx6ktoxjqldw&st=l5vln0br&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/oomghyzk702s8mo8ko3id/COAST-10.5.mp3?rlkey=xhigdvkp39cyh1i9qrs29oitu&st=beqhjebr&dl=1'
     name: COAST
     info: 133 BPM / F Adim
     track: 3697143688
     album: 5521055
-    wav_id: 29268867
-    wav_link: 'https://link.soypache.co/wav/coast'
-    mp3_id: 29268868
-    mp3_link: 'https://link.soypache.co/mp3/coast'
   - wav: 'https://www.dropbox.com/scl/fi/cmiv4dd0g2bdal0x74209/SWAMP-10.6.wav?rlkey=y0h7agg2b7rhkiw1ab8y0yaaq&st=0nbcoih1&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/ipczjfftjmb9m0l7r8bup/SWAMP-10.6.mp3?rlkey=f1p4wixa786nhwmur938o18he&st=uwecr729&dl=1'
     name: SWAMP
     info: 117 BPM / Am Gm Am %
     track: 3974388852
     album: 5521055
-    wav_id: 29268869
-    wav_link: 'https://link.soypache.co/wav/swamp'
-    mp3_id: 29268870
-    mp3_link: 'https://link.soypache.co/mp3/swamp'
   - wav: 'https://www.dropbox.com/scl/fi/r1yp8jaoxh225poll0xfy/SLUDGE-10.6.wav?rlkey=lzpfx0aavj13vmpbzp48qk7tw&st=abflekz8&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/txuiitgnvfdtozkclprnu/SLUDGE-10.6.mp3?rlkey=e0pn8rsuvd255urhz0k8gharh&st=rha3epw4&dl=1'
     name: SLUDGE
     info: 138 BPM / Em Ebdim
     track: 2705687388
     album: 5521055
-    wav_id: 29268871
-    wav_link: 'https://link.soypache.co/wav/sludge'
-    mp3_id: 29268872
-    mp3_link: 'https://link.soypache.co/mp3/sludge'
   - wav: 'https://www.dropbox.com/scl/fi/d0czbon4qjvfxtbfhs7y3/SLIPPERY-10.4.wav?rlkey=i3yydp27pu8mw23dlxvjfnpyf&st=8g1b1xqs&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/eu2xc1qm9qhj084gk9mi6/SLIPPERY-10.4.mp3?rlkey=n0iw93ojepyennyhfz0x4ac74&st=3gcivh4k&dl=1'
     name: SLIPPERY
     info: 133 BPM / Em Ebdim C B
     track: 809785405
     album: 5521055
-    wav_id: 29268873
-    wav_link: 'https://link.soypache.co/wav/slippery'
-    mp3_id: 29268874
-    mp3_link: 'https://link.soypache.co/mp3/slippery'
   - wav: 'https://www.dropbox.com/scl/fi/50a5dnkhnnb5gezekolff/DROWNING-10.4.wav?rlkey=smb09oha66rw6e03d8rrwehkv&st=94jqcll7&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/lhw1gbycga9kym12kv9bc/DROWNING-10.4.mp3?rlkey=rds0a6z8t4l4df6dy7vlac370&st=gtv25buw&dl=1'
     name: DROWNING
     info: 112 BPM / Bb Abm
     track: 4014762400
     album: 5521055
-    wav_id: 29268875
-    wav_link: 'https://link.soypache.co/wav/drowning'
-    mp3_id: 29268876
-    mp3_link: 'https://link.soypache.co/mp3/drowning'
-- label: Reggae & DUB
+
+- label: 2003 & DUALITIES (SINGLES)
   tracks:
   - wav: 'https://www.dropbox.com/scl/fi/015fmvkoahlbt58z1n8g4/THOUGHTS-10.5.wav?rlkey=cz4mohssfj7q5t6fkgjfhy5qq&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/lkrcq4kj645eggjpx7mgt/THOUGHTS-10.5.mp3?rlkey=b7632j0kp4ox2046rb3u7g340&dl=1'
@@ -70,10 +113,6 @@
     info: '128 BPM / Bm % % A6 (vocals by <a href="https://open.spotify.com/track/66xH0ZJHR3GzjXdTWfpuCP?si=dbe3a818f1764081">Julia Kleijn</a>)'
     track: 2650887698
     album: 3446882242
-    wav_id: 29190478
-    wav_link: 'https://link.soypache.co/wav/thoughts'
-    mp3_id: 29190479
-    mp3_link: 'https://link.soypache.co/mp3/thoughts'
   - wav: 'https://www.dropbox.com/scl/fi/ayh8xvg3820z8ehafmvye/PRAISES-10.5.wav?rlkey=mz1eiy96w2xe9l4molw4bkdne&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/6d9grz0b1ja96ibcj6jlw/PRAISES-10.5.mp3?rlkey=aziat3jsjds0lawsz9zg0lb2v&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/6tojb37k68vuv4df6ue1n/h?rlkey=dy7m0lszwx01cqa27pvhn1e8i&dl=1'
@@ -81,10 +120,6 @@
     info: 128 BPM / Cm Bdim
     track: 3828898695
     album: 3446882242
-    wav_id: 29190480
-    wav_link: 'https://link.soypache.co/wav/praises'
-    mp3_id: 29190481
-    mp3_link: 'https://link.soypache.co/mp3/praises'
   - wav: 'https://www.dropbox.com/scl/fi/av3s4uqyi0t0v3j2n0t7c/DANCING-10.5.wav?rlkey=kto7x87qs4vysx3epa9ep0h53&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/v0heqo4qbya5tqhi8o5y7/DANCING-10.5.mp3?rlkey=8i8vvypjum0likw4xjlx0ey35&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/4ktxgsb65isp5xg39p0gw/h?rlkey=8x54mu2xlypzibpwl8ngosi03&dl=1'
@@ -92,10 +127,6 @@
     info: 132 BPM / Fm7 Ebm7
     track: 4193772597
     album: 3909516016
-    wav_id: 29190482
-    wav_link: 'https://link.soypache.co/wav/dancing'
-    mp3_id: 29190483
-    mp3_link: 'https://link.soypache.co/mp3/dancing'
   - wav: 'https://www.dropbox.com/scl/fi/30cd31z7cgbw1sin7r8zx/YEARS-10.5.wav?rlkey=f4kbee0ae73zgpp8si83evf78&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/2dksevm4cuedi6tx3qg00/YEARS-10.5.mp3?rlkey=zbxf4niifh8fuqb475ls38291&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/54kwhm6yiobh78rhb86xo/h?rlkey=fxshmgetclc5d5u1u2ztgwtud&dl=1'
@@ -103,10 +134,6 @@
     info: 120 BPM / Cm Dm
     track: 2786216003
     album: 3909516016
-    wav_id: 29190484
-    wav_link: 'https://link.soypache.co/wav/years'
-    mp3_id: 29190485
-    mp3_link: 'https://link.soypache.co/mp3/years'
   - wav: 'https://www.dropbox.com/scl/fi/ujms3sdhj2ds2vd8dwsgm/MIND-10.4.wav?rlkey=awqsq33t9bzjkqwpme9ylcal0&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/3rv247cltlrjtzjotyxf2/MIND-10.4.mp3?rlkey=4ev39kics6i91ml49rd0aof1p&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/11bwiqqckssq2q4zp0vol/h?rlkey=vj4tg3cxt1m5tiavlf50c52ea&dl=1'
@@ -114,10 +141,6 @@
     info: 110 BPM / G % % Eb
     track: 3663938863
     album: 507791708
-    wav_id: 29190486
-    wav_link: 'https://link.soypache.co/wav/mind'
-    mp3_id: 29190487
-    mp3_link: 'https://link.soypache.co/mp3/mind'
   - wav: 'https://www.dropbox.com/scl/fi/txk8xkmvswqactqko7oi9/BODY-10.4.wav?rlkey=sthyy9uus6jfr508yiz5i64fy&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/gt6lmbw4ivwlskcp0rvte/BODY-10.4.mp3?rlkey=tk9ber5d1lr97k7j8sjf720sk&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/fnonoxqt4n2j15cphw9kx/h?rlkey=sbjf1on416ugg0avep6myxp7c&dl=1'
@@ -125,10 +148,6 @@
     info: 110 BPM / Gm % % Adim
     track: 870143882
     album: 507791708
-    wav_id: 29190488
-    wav_link: 'https://link.soypache.co/wav/body'
-    mp3_id: 29190489
-    mp3_link: 'https://link.soypache.co/mp3/body'
   - wav: 'https://www.dropbox.com/scl/fi/7mxki4cu2i2o4vrrxwz7c/LIKES_V-10.5.wav?rlkey=m2ky0xhts243ktlladswsgrn1&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/ccsnrya3r2l9um34zk724/LIKES_V-10.5.mp3?rlkey=32p9cy7kmxbut4sp05jzptmb5&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/hj3tv7bf1aw1btukzpoh5/h?rlkey=6f5ryhar48zh8fypddveotpqr&dl=1'
@@ -136,10 +155,6 @@
     info: 156 BPM / Dm % Bbdim %
     track: 2277076373
     album: 3909516016
-    wav_id: 29190490
-    wav_link: 'https://link.soypache.co/wav/likes'
-    mp3_id: 29190491
-    mp3_link: 'https://link.soypache.co/mp3/likes'
   - wav: 'https://www.dropbox.com/scl/fi/yuv36si2f9o5sle0f0ps5/DISLIKES-10.5.wav?rlkey=ti3n9qky6bmiynix24otbow43&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/b74qj7aqnnl6ckdsovvii/DISLIKES-10.5.mp3?rlkey=w991t6zu1l9k1g0e2dgrdqq3m&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/vndh4xtvtoehto3e745vi/h?rlkey=lkkq2et5d0dn44iqm6kk2lg4d&dl=1'
@@ -147,10 +162,6 @@
     info: 156 BPM / D % Bdim %
     track: 2288549231
     album: 507791708
-    wav_id: 29190492
-    wav_link: 'https://link.soypache.co/wav/dislikes'
-    mp3_id: 29190493
-    mp3_link: 'https://link.soypache.co/mp3/dislikes'
   - wav: 'https://www.dropbox.com/scl/fi/ak5d5lnzaqr03i1as18gw/UPPER-10.5.wav?rlkey=gk8necxjlsj1srnxzfx75ccvj&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/y8k47q131svrgkrcat979/UPPER-10.5.mp3?rlkey=i6nkf4kiw0e5gdhvj70362z1a&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/i9g6dmjcymsijl9gp4rof/h?rlkey=9lukb739ed6itmyw6ohlw17sx&dl=1'
@@ -158,10 +169,6 @@
     info: 133 BPM / C % Gm F
     track: 1835585606
     album: 507791708
-    wav_id: 29190494
-    wav_link: 'https://link.soypache.co/wav/upper'
-    mp3_id: 29190495
-    mp3_link: 'https://link.soypache.co/mp3/upper'
   - wav: 'https://www.dropbox.com/scl/fi/qg4s13ophcqz4zb2enfmr/LOWER-10.5.wav?rlkey=7rnwnluofyj9u6pel7n21m88o&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/1cre0k4z2mge59q8htna0/LOWER-10.5.mp3?rlkey=rr3msml950fmunpj76y2kwjcu&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/r0k0fj8e9z6y9v285hej8/h?rlkey=l5fd36wovdm99e5n937e010w3&dl=1'
@@ -169,20 +176,12 @@
     info: 133 BPM / Cm % Eb Fm
     track: 679720357
     album: 507791708
-    wav_id: 29190496
-    wav_link: 'https://link.soypache.co/wav/lower'
-    mp3_id: 29190497
-    mp3_link: 'https://link.soypache.co/mp3/lower'
   - wav: 'https://www.dropbox.com/scl/fi/3avgc30l5y3293edbnh30/BREATHING_B-10.7.wav?rlkey=g6zkpp1b6vep6rzctkvl7x7ma&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/f331nnh6lsqpwcwd6l2jg/BREATHING_B-10.7.mp3?rlkey=uhlhwxuk19fagrt0udrvo9b53&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/c7ybtoxfah0wkzpokl7vc/h?rlkey=a1hwomzgt43blolhb2a3pfehb&dl=1'
     name: BREATHING
     info: 120 BPM / Em Bm F %
     track: 2807864510
-    wav_id: 29190498
-    wav_link: 'https://link.soypache.co/wav/breathing'
-    mp3_id: 29190499
-    mp3_link: 'https://link.soypache.co/mp3/breathing'
   - wav: 'https://www.dropbox.com/scl/fi/80ejb4ctjodijpctkzko1/TOMORROW-10.6.wav?rlkey=qb3ixv80spbmf7xlrkyk3swfh&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/wd05x5ytmboqc0ru0sq67/TOMORROW-10.6.mp3?rlkey=wv4v65w5f2bk2ofzc0gng61h3&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/gk5gj7tdmh41mjj8jwhgd/h?rlkey=vxu9jvfms58bwauor03ma9qbh&dl=1'
@@ -190,10 +189,6 @@
     info: 152 BPM / Fm % % Gm
     track: 1838150548
     album: 2684595450
-    wav_id: 29190500
-    wav_link: 'https://link.soypache.co/wav/tomorrow'
-    mp3_id: 29190501
-    mp3_link: 'https://link.soypache.co/mp3/tomorrow'
   - wav: 'https://www.dropbox.com/scl/fi/l6voz3uc1kxt42jrctsdm/WARRIOR_TIME-10.6.wav?rlkey=ew4bv74acpar091qde3vrwehn&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/ewsc5upld80eybacyydpy/WARRIOR_TIME-10.6.mp3?rlkey=nm31ro59x0hwewaxq9ekj0up5&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/ilphs0lxped419cp2mp5q/h?rlkey=a4ebjxiue5oy11xmbjc78sptd&dl=1'
@@ -201,10 +196,6 @@
     info: 142 BPM / Fm Bb
     track: 3242725489
     album: 2684595450
-    wav_id: 29190502
-    wav_link: 'https://link.soypache.co/wav/warrior-time'
-    mp3_id: 29190503
-    mp3_link: 'https://link.soypache.co/mp3/warrior-time'
   - wav: 'https://www.dropbox.com/scl/fi/qfvv1fwb2a2o11rmc0aci/DISTANT_TRONE-10.4.wav?rlkey=xkad8vgjnqx4y0149zsp8vtim&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/1dqwl2pgmzr9ydxvaswpy/DISTANT_TRONE-10.4.mp3?rlkey=gorlx80pk24gsf8f5180g7oub&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/5abjkek2vgtpz9izyz8jn/h?rlkey=htifp1l1kexz8tszugtun3wa7&dl=1'
@@ -212,10 +203,6 @@
     info: 125 BPM / Bb % % Fm
     track: 1550476589
     album: 3909516016
-    wav_id: 29190504
-    wav_link: 'https://link.soypache.co/wav/distant-trone'
-    mp3_id: 29190505
-    mp3_link: 'https://link.soypache.co/mp3/distant-trone'
   - wav: 'https://www.dropbox.com/scl/fi/6b04matgs243l6bvg7sgv/MELODIC_KILLER-10.7.wav?rlkey=ezkcg8wksrnk515ksj1guoccc&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/a1edcj5jz1yetteaftgzg/MELODIC_KILLER-10.7.mp3?rlkey=xttw6tvxu4mr0vkgcdphx0of8&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/ctraetnrtl3z23446srh6/h?rlkey=kqbgihq93ybanh3ers13zqq44&dl=1'
@@ -223,10 +210,6 @@
     info: 148 BPM / Am Abdim
     track: 3861850862
     album: 2684595450
-    wav_id: 29190506
-    wav_link: 'https://link.soypache.co/wav/melodic-killer'
-    mp3_id: 29190507
-    mp3_link: 'https://link.soypache.co/mp3/melodic-killer'
   - wav: 'https://www.dropbox.com/scl/fi/h548vu02hz1jrxljshjyc/REGGAE_AGAIN-10.7.wav?rlkey=g3qfukskh4m60mjbtz8wv9y2e&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/g0jbot0o35fzq9o5gr586/REGGAE_AGAIN-10.7.mp3?rlkey=s1uzt97qvoc5svep9eobrhw1f&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/0gc7yqjilep2cwpi4m86x/h?rlkey=182ao1ef2lw6ui20c1aior7ru&dl=1'
@@ -234,10 +217,6 @@
     info: 110 BPM / Bbm Edim
     track: 2637849539
     album: 2684595450
-    wav_id: 29190508
-    wav_link: 'https://link.soypache.co/wav/reggae-again'
-    mp3_id: 29190509
-    mp3_link: 'https://link.soypache.co/mp3/reggae-again'
   - wav: 'https://www.dropbox.com/scl/fi/cwj0164q7yilcqpa3j4q9/MY_SINS-10.7.wav?rlkey=skyp7jfvm4l1r2v6dphm7lqvp&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/zgilvjs422qzl8fn1041a/MY_SINS-10.7.mp3?rlkey=5w4tcdyxidan0dg3qlxv0238q&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/jmfz3k9m5tqz8fentzuf3/h?rlkey=1pyderglxrw7b5ji9tvjzalbp&dl=1'
@@ -245,10 +224,6 @@
     info: 120 BPM / Ebm Bb
     track: 359110715
     album: 2684595450
-    wav_id: 29190510
-    wav_link: 'https://link.soypache.co/wav/my-syns'
-    mp3_id: 29190511
-    mp3_link: 'https://link.soypache.co/mp3/my-syns'
   - wav: 'https://www.dropbox.com/scl/fi/hrlmux5suyajkv5cr7wlo/ELECTRIC-10.7.wav?rlkey=5utgyfgohntjqie93pm2o5wp8&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/u770nlt5syca7z22lrzyd/ELECTRIC-10.7.mp3?rlkey=zivsykrocepzf4avdh74eax9w&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/in14b4aq09rhamvwh4i7f/h?rlkey=9f6c8ln5xbxrgwichnrbd5k7c&dl=1'
@@ -256,10 +231,6 @@
     info: 131 BPM / Gm Eb
     track: 2949419468
     album: 2684595450
-    wav_id: 29190512
-    wav_link: 'https://link.soypache.co/wav/electric'
-    mp3_id: 29190513
-    mp3_link: 'https://link.soypache.co/mp3/electric'
   - wav: 'https://www.dropbox.com/scl/fi/rgzc7p17g6373w3aj3xlj/GANJAMAN-10.7.wav?rlkey=tqwdq59if4m3aq77z69f6gwe9&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/o3h4kj8dxp4i2xz2r4e4v/GANJAMAN-10.7.mp3?rlkey=1a3gt9bv5o7hbavkrn52iouqx&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/zxavt7hgmjkffyr2j7qt2/h?rlkey=llz2z9zm9fwx534y1n905sm4m&dl=1'
@@ -267,10 +238,6 @@
     info: 132 BPM / Bm % % Bbdim
     track: 1083674484
     album: 2684595450
-    wav_id: 29190514
-    wav_link: 'https://link.soypache.co/wav/ganjaman'
-    mp3_id: 29190515
-    mp3_link: 'https://link.soypache.co/mp3/ganjaman'
   - wav: 'https://www.dropbox.com/scl/fi/bayzu1pcpg9obwmv6u4b7/HIGHTECH-10.7.wav?rlkey=z8g2j9tpwppp6iv0gpou06pur&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/j0d718rpnnfdbygws2x8p/HIGHTECH-10.7.mp3?rlkey=xaqt5omhbewikossnaeckzwhf&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/5tmp71cusvaabthit81f0/h?rlkey=0ew03x74ie2vxnbp6wfne5nnn&dl=1'
@@ -278,10 +245,6 @@
     info: 126 BPM / Gm Gbdim
     track: 1805833615
     album: 2684595450
-    wav_id: 29190516
-    wav_link: 'https://link.soypache.co/wav/hightech'
-    mp3_id: 29190517
-    mp3_link: 'https://link.soypache.co/mp3/hightech'
   - wav: 'https://www.dropbox.com/scl/fi/e1mar6laevamnf95zbh9g/SUNRIDER-10.7.wav?rlkey=m53uiddwyodx8d62j5thxq44a&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/gay4z0ttv68xjnam2c8g1/SUNRIDER-10.7.mp3?rlkey=xez43qjwrnj2p6793phlhdcu0&dl=1'
     zip: 'https://www.dropbox.com/scl/fo/n7tx782iia65njf8j1qe8/h?rlkey=w067zj9nrli7fx4youbx1i0hu&dl=1'
@@ -289,10 +252,7 @@
     info: 130 BPM / Bbm F
     track: 2743936549
     album: 2684595450
-    wav_id: 29190518
-    wav_link: 'https://link.soypache.co/wav/sunrider'
-    mp3_id: 29190519
-    mp3_link: 'https://link.soypache.co/mp3/sunrider'
+
 - label: Other genres
   tracks:
   - wav: 'https://www.dropbox.com/scl/fi/6fz70vq7hivw3pcrzmcen/TONES-10.4.wav?rlkey=yxx4px8geem4s6mizfjzp2b2w&dl=1'
@@ -301,77 +261,45 @@
     info: 99 BPM / Cmaj7 D Em Bm / Am D Em %
     track: 1518652458
     album: 507791708
-    wav_id: 29190520
-    wav_link: 'https://link.soypache.co/wav/tones'
-    mp3_id: 29190521
-    mp3_link: 'https://link.soypache.co/mp3/tones'
   - wav: 'https://www.dropbox.com/scl/fi/fps4fp9oq9m0shpv7340u/COLORS-10.5.wav?rlkey=ao5veyrevqavr403rt0kfathr&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/5awtwq07rn89i1svucend/COLORS-10.5.mp3?rlkey=0fa22ryphjv5qsviqf9sty28o&dl=1'
     name: COLORS
     info: 99 BPM / Cm Bdim
     track: 3217720901
     album: 507791708
-    wav_id: 29190522
-    wav_link: 'https://link.soypache.co/wav/colors'
-    mp3_id: 29190523
-    mp3_link: 'https://link.soypache.co/mp3/colors'
   - wav: 'https://www.dropbox.com/scl/fi/rnl8wgge3seqaa055u5yb/TEARS-10.4.wav?rlkey=vl2rxsh4dybd1kvs6q0be2j50&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/6akkm8ffu0fmfrxefnddd/TEARS-10.4.mp3?rlkey=oy0l7t41zl01sn890ambcv4wn&dl=1'
     name: TEARS
     info: 110 BPM / C Em / Am Em
     track: 2536074514
     album: 3909516016
-    wav_id: 29190524
-    wav_link: 'https://link.soypache.co/wav/tears'
-    mp3_id: 29190525
-    mp3_link: 'https://link.soypache.co/mp3/tears'
   - wav: 'https://www.dropbox.com/scl/fi/o2urf3qbhiy50hdxoegzl/LIARS-10.7.wav?rlkey=v2g9in8cscv2jwujxdnxx7547&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/z9ra24f0fc9m0s6jzoxls/LIARS-10.7.mp3?rlkey=xubw79zna0r8l0t6qvdf8mgxj&dl=1'
     name: LIARS
     info: 145 BPM / Em Bm Am % / C G Am %
     track: 4281683086
     album: 3909516016
-    wav_id: 29190526
-    wav_link: 'https://link.soypache.co/wav/liars'
-    mp3_id: 29190527
-    mp3_link: 'https://link.soypache.co/mp3/liars'
   - wav: 'https://www.dropbox.com/scl/fi/hvz81alo3anp2qmlqmg7a/LIRICO-10.7.wav?rlkey=tpeaaqsnvavl6i6bblkipgrvx&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/87qrajebapyh7714ptpbo/LIRICO-10.7.mp3?rlkey=gshi59vc7mdtwuasp2vxnjsiu&dl=1'
     name: LÍRICO
     info: 185 BPM / A7 D7
     track: 1735694394
     album: 3909516016
-    wav_id: 29190528
-    wav_link: 'https://link.soypache.co/wav/lirico'
-    mp3_id: 29190529
-    mp3_link: 'https://link.soypache.co/mp3/lirico'
   - wav: 'https://www.dropbox.com/scl/fi/ngt3ywn7h6rpe7ak3ys1s/SUCEDE_V-10.5.wav?rlkey=sdpda4x2ga9c9t5osh5hraqyb&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/gajt7njz9zh5t503b51ik/SUCEDE_V-10.5.mp3?rlkey=bxlk098h638adfepu2oxrw5bj&dl=1'
     name: SUCEDE
     info: 140 BPM / Am Em
     track: 3814714766
     album: 3909516016
-    wav_id: 29190530
-    wav_link: 'https://link.soypache.co/wav/sucede'
-    mp3_id: 29190531
-    mp3_link: 'https://link.soypache.co/mp3/sucede'
   - wav: 'https://www.dropbox.com/scl/fi/795ppr5omo58ojwc7aakd/TORCIDO-10.5.wav?rlkey=x8daqqf7exxvcb0ol09asi5yf&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/mrxxoonznrx780l1ocdag/TORCIDO-10.5.mp3?rlkey=kl7zxkumdvlduljfpzbyg3kau&dl=1'
     name: TORCIDO
     info: 120 BPM / Cm Bdim
     track: 2686384267
     album: 3909516016
-    wav_id: 29190532
-    wav_link: 'https://link.soypache.co/wav/torcido'
-    mp3_id: 29190533
-    mp3_link: 'https://link.soypache.co/mp3/torcido'
   - wav: 'https://www.dropbox.com/scl/fi/n4gkw9llmzais3tgo5tsu/JUSTO-10.5.wav?rlkey=8mrai7w1ewtofqhro8rxppto3&dl=1'
     mp3: 'https://www.dropbox.com/scl/fi/27b98h5g4mwm2nhi4ztcb/JUSTO-10.5.mp3?rlkey=llf00tq612dl7leqk9rmizb4x&dl=1'
     name: JUSTO
     info: 178 BPM / Fm Bbm Cm Fm / Bbm Cm Bbm Eb
     track: 1147351985
     album: 3909516016
-    wav_id: 29190534
-    wav_link: 'https://link.soypache.co/wav/justo'
-    mp3_id: 29190535
-    mp3_link: 'https://link.soypache.co/mp3/justo'
