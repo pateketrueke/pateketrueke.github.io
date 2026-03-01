@@ -1,7 +1,7 @@
 #nav {
   @media screen and (min-width: @sm-width) {
     margin-left: @margin;
-    max-width: 200px;
+    max-width: 66dvw;
   }
 
   @media screen and (min-width: @lg-width) {
@@ -11,16 +11,17 @@
   .circle {
     border-radius: 50%;
     overflow: hidden;
-    border: @padding solid @almost-white;
   }
 
   .floating {
     position: relative;
+    max-width: 260px;
 
     .circle {
       animation-name: floating;
       animation-duration: 4s;
       animation-iteration-count: infinite;
+      box-shadow: var(--shadow-lg), 0 0 40px var(--color-accent);
     }
 
     &:before {
@@ -28,12 +29,12 @@
       animation-duration: 4s;
       animation-iteration-count: infinite;
 
-      background-color: rgba(0, 0, 0, .1);
+      background-color: rgba(0, 255, 136, 0.2);
       position: absolute;
       content: ' ';
       left: 0;
       right: 0;
-      height: 5px;
+      height: 4px;
       bottom: 10px;
       width: 33.3%;
       margin: auto;
@@ -42,9 +43,25 @@
   }
 
   nav {
-    li:before {
-      content: @item-symbol;
-      color: @stormy-monday;
+    li {
+      margin-bottom: var(--spacing-xs);
+
+      a {
+        display: inline-block;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-radius: var(--radius-sm);
+        transition: all var(--transition);
+
+        &:hover {
+          background-color: var(--color-bg-alt);
+          color: var(--color-accent-hover);
+        }
+      }
+
+      &:before {
+        content: @item-symbol;
+        color: var(--color-accent);
+      }
     }
   }
 

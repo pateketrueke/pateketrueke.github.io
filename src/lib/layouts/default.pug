@@ -11,35 +11,31 @@ html
         .md-flex
           #main.flex-auto.p
             if icon
-              icon.icon.-x3(src=`#${icon}`)
+              a(href='/'): icon.icon.-x3(src=`#${icon}`)
 
             block body
 
           #nav.p.flex-none.noprint
-            .floating.noselect.center
+            .floating.noselect.center.logo
               image.fit.push.circle(src='ALVADUB_VINYL_v2' alt='ALVADUB')
 
             h2= pkg.author.name
 
             p I am a #[del freelance] employed web developer living at #[a(href='https://www.google.com.mx/maps/place/Guadalajara,+Jal./@20.6737883,-103.3704326,13z' rel='noopener noreferrer' target='_blank') GDL]
 
-            p &star; Reggae &amp; DUB maker
+            p.star Open Source enthusiast
+
+            p.star Reggae &amp; DUB maker
 
             p E-mail: #[a(href='mailto:yo@soypache.co') yo@soypache.co]
-            p X+IG: @pateketrueke
+            p X/IG/GH: @pateketrueke
 
             ul.notype.reset#media
               li.inline-block: a(href='https://soundcloud.com/alvadub' rel='noopener noreferrer' target='_blank'): image(src='soundcloud_black_white_32' alt='SoundCloud' width=32)
               li.inline-block: a(href='https://alvadub.bandcamp.com/' rel='noopener noreferrer' target='_blank'): image(src='bandcamp-button-square-black-32' alt='Bandcamp' width=32)
               li.inline-block: a(href='https://www.youtube.com/@alvadub' rel='noopener noreferrer' target='_blank'): image(src='youtube_social_square_dark' alt='YouTube' width=32)
-              li.inline-block: a(href='https://music.apple.com/us/artist/1724143850' rel='noopener noreferrer' target='_blank'): image(src='applemusic_square_black_64' alt='Apple Music' width=32)
-              li.inline-block: a(href='https://open.spotify.com/artist/1XqTdkcjEEscsdcZCaqRuE' rel='noopener noreferrer' target='_blank'): image(src='spotify_logo_square_64' alt='Spotify' width=32)
-
-            p &star; Open Source enthusiast
-
-            ul.notype.reset
-              li.inline-block: a(href='https://github.com/pateketrueke' rel='noopener noreferrer' target='_blank') GitHub
-              li.inline-block: a(href='https://twitter.com/pateketrueke' rel='noopener noreferrer' target='_blank') Twitter (X)
+              li.inline-block: a(href='https://music.apple.com/us/artist/1724143850' rel='noopener noreferrer' target='_blank'): image.invert(src='applemusic_square_black_64' alt='Apple Music' width=32)
+              li.inline-block: a(href='https://open.spotify.com/artist/1XqTdkcjEEscsdcZCaqRuE' rel='noopener noreferrer' target='_blank'): image.invert(src='spotify_logo_square_64' alt='Spotify' width=32)
 
             nav
               h3 Navigation
@@ -47,7 +43,7 @@ html
                 li: a(href='/') Home
                 li: a(href='/cv/') Past jobs
                 li: a(href='/resume/') What I do?
-                li: a(href='/alvadub/') Press-kit &amp; Media
+                li: a(href='/alvadub/' target='_blank') Press-kit &amp; Media
 
     resources
 

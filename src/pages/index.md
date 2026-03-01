@@ -1,22 +1,27 @@
 ---
 $render: ../lib/gh_pages.pug
-title: Markup, dub and tools
+title: Developer & DUB maker
 icon: bullhorn
 ---
 
-# WE'RE BACK!
+# Hey, I'm Alvaro (PATE)
 
-I've been learning music and software development since I was young!
+Full-stack developer from Guadalajara, Mexico. I build web apps by day and make DUB music by night.
 
-**Today it's 2024** and I continue learning new stuff everyday...
+## What I do
 
-## What you'll find here?
+- **Software Engineering** &mdash; Building products with modern tools
+- **Open Source** &mdash; Contributing to projects I care about
+- **Music Production** &mdash; Reggae, Dub, and electronic sounds
 
-- Detailed information about **my work** and past jobs
-- OpenSource/side **projects** I do/contribute to
-- Random stuff &amp; **links** that I've collected
-- Reggae &amp; DUB music for your ears
+## Stuff here
 
-## Checkout my electronic press-kit!
+- My [CV](/cv/) &mdash; Work history and experience
+- What I'm [good at](/resume/) &mdash; Skills and tech
+- <a href="/alvadub/" target="_blank">ALVADUB</a> &mdash; Music, press-kit & downloads
 
-[Open ALVADUB's Music & Media](/alvadub)
+## Get in touch
+
+Drop me a line at [yo@soypache.co](mailto:yo@soypache.co) or find me on socials.
+
+Let's build something cool together.

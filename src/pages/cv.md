@@ -19,6 +19,14 @@ I feel confident about:
   > I power up my daily job leveraging modern tooling from NodeJS.
   > From edgy Javascript bundlers to legacy task runners.
 
+- Svelte, SvelteKit and vanilla JS for frontend.
+
+  > My goto for building fast PWAs with minimal overhead.
+
+- Node.js, npm, JSON Schema and CLI tools.
+
+  > I maintain several OSS packages, including json-schema-faker.
+
 - PHP, Ruby and Groovy without doubt.
 
   > It rhymes, you know. All good songs are enough good if they make you shake your booty!
@@ -33,7 +41,7 @@ I've been there:
 
   > Feel free to delete everything on your side, I'll never do the same. I do the backup!
 
-- TravisCI and Jenkins for CI/CD
+- GitHub Actions, TravisCI and Jenkins for CI/CD
 
   > Of course I'm not lazy, I just prefer for CI to finish my job.
 
@@ -48,7 +56,7 @@ I've been there:
 
 ## 2016-present
 
-- Full-stack developer &hearts; AgaveLab <br> Jan. 2018 (&hellip;)
+- Full-stack developer &hearts; <del>AgaveLab</del> V.TWO <br> Jan. 2018 (&hellip;)
 
   > Been here is like the renaissance of my career. Most of the stuff I've been studying on the past suddendly is here.
   > So I decided to stay as long as I can and encourage others to also build their own careers.

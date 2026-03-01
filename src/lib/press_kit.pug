@@ -21,28 +21,31 @@ block body
     .noprint
       each set in sets
         a(name=slug(set.label))
-        h3.flex.flex-center.flex-between
-          span= set.label
-          if set.latest
-            span.new.flex.flex-center
-              span Latest release!
-              icon(src='#flash' size=22)
-        ul.music-links.notype.reset
-          each track in set.tracks
-            li.md-flex.flex-wrapped
-              //- if NODE_ENV === 'production'
-              //-   a(href=track.wav_link) WAV #[icon(src='#download' size=16)]
-              //-   a(href=track.mp3_link) MP3 #[icon(src='#download' size=16)]
-              //- else
-              //-   a(href=track.wav) WAV #[icon(src='#download' size=16)]
-              //-   a(href=track.mp3) MP3 #[icon(src='#download' size=16)]
-              //-if track.zip
-                a(href=track.zip) ZIP #[icon(src='#download' size=16)]
-              .flex-gap.flex-auto.flex-inline.flex-between
-                span #[b= track.name] &mdash; !{track.info}
-                if track.track
-                  span: button.player(data-track=track)
-                    icon(src='#speaker' size=24)
+        details
+          summary.flex.flex-center.flex-between
+            span.flex.flex-center(style='gap:.5rem')
+              icon(src='#down' size=22)
+              = set.label
+            if set.latest
+              span.new.flex.flex-center
+                span Latest release!
+                icon(src='#flash' size=22)
+          ul.music-links.notype.reset
+            each track in set.tracks
+              li.md-flex.flex-wrapped-
+                //- if NODE_ENV === 'production'
+                //-   a(href=track.wav_link) WAV #[icon(src='#download' size=16)]
+                //-   a(href=track.mp3_link) MP3 #[icon(src='#download' size=16)]
+                //- else
+                //-   a(href=track.wav) WAV #[icon(src='#download' size=16)]
+                //-   a(href=track.mp3) MP3 #[icon(src='#download' size=16)]
+                //-if track.zip
+                //  a(href=track.zip) ZIP #[icon(src='#download' size=16)]
+                .flex-gap.flex-auto.flex-inline.flex-between.flex-center
+                  span #[b= track.name] &mdash; !{track.info}
+                  if track.track
+                    button.flex.player(data-track=track)
+                      icon(src='#speaker' size=24)
 
       //- p #[b WAV] is high-quality audio file in stereo (between -11.0 and -10.0 LUFS), ideal for Sound System playback and vast majority of speakers/headphones with enough BASS support.
       //- p #[b MP3] is the compressed version of original WAV audio files, with a high bitrate to keep a good quality level (around ~7MB each).
@@ -68,8 +71,8 @@ block body
         br
         | Thank you!
 
-      .text-center.noprint
-        image.logo(src='ALVADUB_VINYL_v2' alt='ALVADUB' width=260 height=260)
+      .text-center.noprint.logo
+        image(src='ALVADUB_VINYL_v2' alt='ALVADUB' width=260 height=260)
 
   .noprint
     .bcplayer.flex.flex-justified
