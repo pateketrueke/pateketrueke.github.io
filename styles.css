@@ -545,6 +545,10 @@ li {
   color: var(--color-accent);
   content: '☆';
 }
+.invert {
+  -webkit-filter: invert(1);
+          filter: invert(1);
+}
 .document .bio button {
   padding: var(--spacing-xs) var(--spacing-sm);
   cursor: pointer;
