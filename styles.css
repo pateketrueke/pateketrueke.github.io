@@ -146,13 +146,6 @@ details summary > span:first-child {
   position: relative;
   padding: 0.5rem;
 }
-details summary > span:first-child::after {
-  position: absolute;
-  content: '▾';
-  font-size: 32px;
-  right: -1rem;
-  top: -5px;
-}
 strong {
   font-weight: 600;
 }
