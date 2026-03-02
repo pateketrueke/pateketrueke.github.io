@@ -387,7 +387,7 @@ li {
           animation-duration: 4s;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
-  box-shadow: var(--shadow-lg), 0 0 40px #FF0077;
+  box-shadow: var(--shadow-lg), 0 0 40px var(--color-accent);
 }
 #nav .floating:before {
   -webkit-animation-name: increase;
@@ -676,8 +676,4 @@ li {
 }
 #media a img {
   display: block;
-}
-.invert {
-  -webkit-filter: invert(1);
-          filter: invert(1);
 }
