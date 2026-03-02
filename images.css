@@ -8,33 +8,33 @@ i[class^="icon-"], i[class*=" icon-"] {
   display: inline-block;
 }
 
-.icon-applemusic_square_black_64 {
+.icon-youtube_social_square_dark {
   width: 64px; height: 64px;
-  background-image: url(images/applemusic_square_black_64.png);
-}
-.icon-bandcamp-button-square-black-32 {
-  width: 32px; height: 32px;
-  background-image: url(images/bandcamp-button-square-black-32.png);
-}
-.icon-me_and_shiro {
-  width: 512px; height: 512px;
-  background-image: url(images/me_and_shiro.jpg);
-}
-.icon-soundcloud_black_white_32 {
-  width: 32px; height: 32px;
-  background-image: url(images/soundcloud_black_white_32.png);
-}
-.icon-spotify_logo_square_64 {
-  width: 64px; height: 64px;
-  background-image: url(images/spotify_logo_square_64.png);
+  background-image: url(images/youtube_social_square_dark.png);
 }
 .icon-sqme {
   width: 750px; height: 750px;
   background-image: url(images/sqme.jpg);
 }
-.icon-youtube_social_square_dark {
+.icon-spotify_logo_square_64 {
   width: 64px; height: 64px;
-  background-image: url(images/youtube_social_square_dark.png);
+  background-image: url(images/spotify_logo_square_64.png);
+}
+.icon-soundcloud_black_white_32 {
+  width: 32px; height: 32px;
+  background-image: url(images/soundcloud_black_white_32.png);
+}
+.icon-me_and_shiro {
+  width: 512px; height: 512px;
+  background-image: url(images/me_and_shiro.jpg);
+}
+.icon-bandcamp-button-square-black-32 {
+  width: 32px; height: 32px;
+  background-image: url(images/bandcamp-button-square-black-32.png);
+}
+.icon-applemusic_square_black_64 {
+  width: 64px; height: 64px;
+  background-image: url(images/applemusic_square_black_64.png);
 }
 .icon-SOYPACHECO_QR {
   width: 354px; height: 354px;
