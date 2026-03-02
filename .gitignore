@@ -4,5 +4,6 @@
 cache.json
 .DS_Store
 build
+.journal
 generated
 node_modules

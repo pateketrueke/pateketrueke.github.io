@@ -12,7 +12,9 @@
   "scripts": {
     "dev": "npm run build -- -wdp 3001",
     "dist": "npm run build -- -fq",
-    "build": "mortero -I.gitignore --platform browser"
+    "build": "mortero -I.gitignore --platform browser",
+    "music:list": "node scripts/update-music-metadata.js list",
+    "music:add": "node scripts/update-music-metadata.js add"
   },
   "mortero": {
     "bundle": [
@@ -42,6 +44,7 @@
   "devDependencies": {
     "@notionhq/client": "^2.2.15",
     "dotenv": "^16.4.5",
+    "js-yaml": "^4.1.1",
     "kramed": "^0.5.6",
     "less": "^3.13.1",
     "less-plugin-autoprefix": "^2.0.0",
