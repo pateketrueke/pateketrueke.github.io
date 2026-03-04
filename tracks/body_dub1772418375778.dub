@@ -1,0 +1,16 @@
+@tempo: 110
+
+# guitar
+@instrument: 1
+notes: c4|d#4|g4 % c4|d#4|f#4
+pattern: [-x-][-x-][-x-][-x-] *16
+
+# bass
+@instrument: 33
+notes: g2|adi2
+pattern: xxxxxxxxxxxxxxxx
+
+# drums
+@channel: 9
+notes: c2|d2|f#2
+pattern: xxxxxxxxxxxxxxxx

@@ -22,6 +22,9 @@ help: Makefile
 up: clean dist deploy ## Build and sync remotes
 	@git push
 
+dub\:%:
+	@npm run dub -- --track $*
+
 dev: deps ## Lift dev environment for this service
 	@npm run dev
 

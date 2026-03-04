@@ -14,7 +14,8 @@
     "dist": "npm run build -- -fq",
     "build": "mortero -I.gitignore --platform browser",
     "music:list": "node scripts/update-music-metadata.js list",
-    "music:add": "node scripts/update-music-metadata.js add"
+    "music:add": "node scripts/update-music-metadata.js add",
+    "dub": "node scripts/dub-generator.js"
   },
   "mortero": {
     "bundle": [
@@ -44,6 +45,7 @@
   "devDependencies": {
     "@notionhq/client": "^2.2.15",
     "dotenv": "^16.4.5",
+    "highlight.js": "^11.11.1",
     "js-yaml": "^4.1.1",
     "kramed": "^0.5.6",
     "less": "^3.13.1",
