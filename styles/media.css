@@ -1,14 +1,14 @@
 :root {
-  --color-bg: #0D0D0D;
-  --color-bg-alt: #1A1A1A;
-  --color-bg-elevated: #242424;
-  --color-text: #E8E8E8;
-  --color-text-muted: #8A8A8A;
-  --color-text-light: #5A5A5A;
-  --color-link: #00FF88;
-  --color-accent: #00FF88;
-  --color-accent-hover: #66FFaa;
-  --color-border: #333333;
+  --color-bg: #111614;
+  --color-bg-alt: #1C201E;
+  --color-bg-elevated: #262B28;
+  --color-text: #8EA494;
+  --color-text-muted: #E4EDE7;
+  --color-text-light: #637A6D;
+  --color-link: #22D878;
+  --color-accent: #22D878;
+  --color-accent-hover: #4EE898;
+  --color-border: #2E3832;
   --spacing-xs: 4px;
   --spacing-sm: 10px;
   --spacing-md: 20px;
