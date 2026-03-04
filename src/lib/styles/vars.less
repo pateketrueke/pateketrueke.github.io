@@ -1,14 +1,49 @@
+// ─── Theme seeds ─────────────────────────────────────────────────────────────
+// Edit these to retheme — LESS compiles them into every derived value below.
+@theme-accent:       #22D878;
+@theme-accent-hover: #4EE898;
+
+// ─── Callout / blockquote semantic colors ────────────────────────────────────
+@callout-default-tint: #1f2a24;
+
+@callout-note:       #66b3ff;
+@callout-note-tint:  #102238;
+
+@callout-tip:        @theme-accent;
+@callout-tip-tint:   #0e2d21;
+
+@callout-warning:    #ffcc66;
+@callout-warning-tint: #3a2a12;
+
+@callout-caution:    #ff9966;
+@callout-caution-tint: #3a1f12;
+
+@callout-important:  #ff6b9a;
+@callout-important-tint: #351423;
+
+// ─── Syntax highlight theme (Tomorrow Night Eighties) ────────────────────────
+@hljs-bg:        #2d2d2d;
+@hljs-text:      #cccccc;
+@hljs-comment:   #999999;
+@hljs-deletion:  #f2777a;
+@hljs-number:    #f99157;
+@hljs-attribute: #ffcc66;
+@hljs-string:    #99cc99;
+@hljs-title:     #6699cc;
+@hljs-keyword:   #cc99cc;
+
+// ─── CSS custom properties ───────────────────────────────────────────────────
 :root {
-  --color-bg: #0D0D0D;
-  --color-bg-alt: #1A1A1A;
-  --color-bg-elevated: #242424;
-  --color-text: #E8E8E8;
-  --color-text-muted: #8A8A8A;
-  --color-text-light: #5A5A5A;
-  --color-link: #00FF88;
-  --color-accent: #00FF88;
-  --color-accent-hover: #66FFaa;
-  --color-border: #333333;
+  --color-bg: #111614;
+  --color-bg-alt: #1C201E;
+  --color-bg-elevated: #262B28;
+  --color-text: #E4EDE7;
+  --color-text-muted: #8EA494;
+  --color-text-light: #637A6D;
+  --color-link: @theme-accent;
+  --color-accent: @theme-accent;
+  --color-accent-hover: @theme-accent-hover;
+  --color-border: #2E3832;
 
   --spacing-xs: 4px;
   --spacing-sm: 10px;

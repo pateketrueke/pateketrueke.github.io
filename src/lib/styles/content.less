@@ -78,7 +78,7 @@
 
       &:hover {
         background-color: var(--color-text-muted);
-        color: white;
+        color: var(--color-bg);
       }
     }
   }
@@ -89,7 +89,7 @@
   h1:first-child {
     font-size: 3rem;
     margin-top: 0;
-    background: linear-gradient(135deg, #00FF88, #66FFaa, #00FF88);
+    background: linear-gradient(135deg, @theme-accent, @theme-accent-hover, @theme-accent);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -107,7 +107,7 @@
     text-underline-offset: 3px;
 
     &:hover {
-      color: #66FFaa;
+      color: var(--color-accent-hover);
     }
   }
 }

@@ -10,7 +10,7 @@ html {
 body {
   background-color: var(--color-bg);
   font-family: var(--font-sans);
-  font-weight: 400;
+  font-weight: 500;
   font-size: 1.125rem;
   line-height: 1.6;
   color: var(--color-text);
@@ -73,14 +73,108 @@ code {
 blockquote {
   margin: var(--spacing-md) 0;
   padding: var(--spacing-md);
-  padding-left: var(--spacing-lg);
-  background-color: var(--color-bg-alt);
+  padding-left: calc(var(--spacing-lg) + 4px);
+  background-color: color-mix(in srgb, var(--color-bg-alt) 82%, @callout-default-tint);
   border-left: 4px solid var(--color-accent);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  position: relative;
+
+  &::before {
+    content: '✦';
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    opacity: 0.95;
+  }
 
   p { margin: 0; }
   p + p { margin-top: var(--spacing-sm); }
+
+  &.is-note,
+  &.is-tip,
+  &.is-warning,
+  &.is-caution,
+  &.is-important {
+    border-left-width: 6px;
+  }
+
+  &.is-note {
+    border-left-color: @callout-note;
+    background-color: color-mix(in srgb, var(--color-bg-alt) 80%, @callout-note-tint);
+    &::before { content: 'ℹ'; color: @callout-note; }
+  }
+
+  &.is-tip {
+    border-left-color: @callout-tip;
+    background-color: color-mix(in srgb, var(--color-bg-alt) 80%, @callout-tip-tint);
+    &::before { content: '✓'; color: @callout-tip; }
+  }
+
+  &.is-warning {
+    border-left-color: @callout-warning;
+    background-color: color-mix(in srgb, var(--color-bg-alt) 80%, @callout-warning-tint);
+    &::before { content: '⚠'; color: @callout-warning; }
+  }
+
+  &.is-caution {
+    border-left-color: @callout-caution;
+    background-color: color-mix(in srgb, var(--color-bg-alt) 80%, @callout-caution-tint);
+    &::before { content: '!'; color: @callout-caution; }
+  }
+
+  &.is-important {
+    border-left-color: @callout-important;
+    background-color: color-mix(in srgb, var(--color-bg-alt) 80%, @callout-important-tint);
+    &::before { content: '★'; color: @callout-important; }
+  }
 }
+
+/* Highlight.js theme inspired by Tomorrow Night Eighties */
+pre code.hljs,
+.hljs {
+  display: block;
+  overflow-x: auto;
+  background: @hljs-bg;
+  color: @hljs-text;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.hljs-comment,
+.hljs-quote { color: @hljs-comment; }
+
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion { color: @hljs-deletion; }
+
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link { color: @hljs-number; }
+
+.hljs-attribute { color: @hljs-attribute; }
+
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition { color: @hljs-string; }
+
+.hljs-title,
+.hljs-section { color: @hljs-title; }
+
+.hljs-keyword,
+.hljs-selector-tag { color: @hljs-keyword; }
 
 details {
     + a + details {
@@ -119,7 +213,7 @@ li {
 }
 
 ::selection {
-  color: white;
+  color: var(--color-bg);
   background-color: var(--color-accent);
 }
 
