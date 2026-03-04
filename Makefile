@@ -39,6 +39,7 @@ clean: ## Remove all generated sources
 prune: ## Remove cache file to recompile
 	@$(call iif,unlink .tarima,Cache file was deleted,Cache file already deleted)
 
+blog: clean dist
 deploy: $(src) ## Push generated files to gh-pages
 	@cd $(src) && git add --all && git commit -m "$(message)"
 	@git push origin $(target) -f
