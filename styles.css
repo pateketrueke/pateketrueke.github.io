@@ -474,15 +474,13 @@ li {
     width: 80%;
   }
 }
-@media screen and (min-width: 480px) {
-  #nav {
-    margin-left: 20px;
-    max-width: 66dvw;
-  }
+#nav {
+  max-width: 260px;
 }
-@media screen and (min-width: 960px) {
+@media screen and (max-width: 720px) {
   #nav {
-    max-width: 260px;
+    margin: auto;
+    margin-top: 5rem;
   }
 }
 #nav .circle {
@@ -744,6 +742,9 @@ li {
 }
 .auto-format > img {
   max-width: 100%;
+}
+.auto-format p:last-child {
+  text-align: center;
 }
 .inline-printing {
   float: none;
