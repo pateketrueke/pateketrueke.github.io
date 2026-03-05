@@ -12,13 +12,19 @@ icon: bullhorn
 
 ## The Setup
 
-10x is a custom language that lives in `.md` files. Programs are markdown documents. The language has its own scanner, parser, and eval — a toy interpreter written in JavaScript. Until yesterday, that's mostly what it was: a toy.
+10x is a custom language that lives in `.md` files. Programs are markdown documents. The language has its own scanner, parser, and eval — a toy interpreter written in JavaScript.
+
+It started as an exercise from [Crafting Interpreters](https://craftinginterpreters.com/) — Robert Nystrom's web-book on building languages from scratch. I wanted to understand how interpreters actually work, so I built one. The format — markdown as source code — came from years of using CoffeeScript and eventually discovering that `.coffee.md` was a thing. I was working at Grupo Expansión when I first encountered literate programming. I didn't know it had a name. I just thought it was interesting that you could write prose and code in the same file, and that the prose wasn't just comments — it was part of the program.
+
+Until yesterday, 10x was mostly what it started as: a toy.
 
 The goal for this session was to close the gap between "it runs in the browser demo" and "it works as a real toolchain." That meant a compiler, proper module support, CSS, and everything a modern frontend project expects.
 
 We shipped all of it. Here's how.
 
 ---
+
+> *There's a gap between understanding how something works and building something real with it. Most side projects live in that gap indefinitely. The compiler was about finally crossing it.*
 
 ## Part 1: The Compiler
 
@@ -137,6 +143,12 @@ One session, roughly midnight to 11am. Here's the list of things that exist now 
 None of this was designed upfront. The session started with "close a few TASKS.md items" and ended with a compiler, a CSS system, and a full toolchain.
 
 That's the nature of building infrastructure: each piece unlocks the next one.
+
+---
+
+> *None of this happens in a straight line. I take notes in spare moments, sit down after work to plan with Claude, then hand the implementation to Codex. Claude has good taste — it knows what a product should feel like. Codex is a teammate who executes. Between the two, things get done.*
+>
+> *This is what happens when inspiration, tools, and spare time meet.*
 
 ---
 
