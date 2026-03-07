@@ -258,6 +258,20 @@
   font-size: .84rem;
   color: var(--color-text-muted);
   letter-spacing: .01em;
+  list-style: none;
+  display: flex;
+  padding: 0;
+  gap: 1rem;
 
-  > span { color: var(--color-text-light); };
+  li {
+      color: var(--color-text-light);
+      position: relative;
+      margin: 0;
+  }
+  li + li::before {
+      left: -.5rem;
+      content: '·';
+      position: absolute;
+      color: var(--color-text-muted);
+  }
 }
