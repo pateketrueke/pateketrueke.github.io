@@ -43,6 +43,7 @@ pages: clean dist
 deploy: $(src) ## Push generated files to gh-pages
 	@cd $(src) && git add --all && git commit -m "$(message)"
 	@git push origin $(target) -f
+	@touch src/pages/blog/index.md
 
 # Ensure dependencies are installed before
 .PHONY: help deps dev dist clean prune pages deploy
