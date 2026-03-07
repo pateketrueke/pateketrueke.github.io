@@ -13,12 +13,10 @@ icon: bullhorn
 
 ### Published
 - [2026-02-21 | Eleven Years of json-schema-faker — and I Just Shipped v0.6.0](/blog/2026-02-21_json-schema-faker-still-alive/)
+- [2026-02-19 | From Toy to Toolchain: What We Shipped in One 10x Session](/blog/2026-02-19_from-toy-to-toolchain/)
 
 
 # IF_NOT BLOG_PUBLISH
-
-### Editing
-- [2026-02-19 | From Toy to Toolchain: What We Shipped in One 10x Session](/blog/2026-02-19_from-toy-to-toolchain/)
 
 ### Pending to approve
 - [2026-03-04 | Turning a MIDI Toy into a DUB Machine: The Mixer](/blog/2026-03-04_midi-on-scoops-mixer/)

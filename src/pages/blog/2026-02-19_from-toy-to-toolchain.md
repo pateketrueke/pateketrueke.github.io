@@ -4,9 +4,11 @@ title: "From Toy to Toolchain: What We Shipped in One 10x Session"
 description: "One overnight session. One custom language. A compiler, a CSS system, a Vite plugin, an LSP server, a Tree-sitter grammar, a Zed extension, and a new landing page. Here's what a..."
 date: 2026-02-19
 icon: bullhorn
+tags: "10x, compiler, javascript, toolchain, language-design, css"
+author: "Alvaro Cabrera"
+author_email: "pateketrueke@gmail.com"
+author_url: "https://github.com/pateketrueke"
 ---
-
-# From Toy to Toolchain: What We Shipped in One 10x Session
 
 > One overnight session. One custom language. A compiler, a CSS system, a Vite plugin, an LSP server, a Tree-sitter grammar, a Zed extension, and a new landing page. Here's what actually happened.
 
