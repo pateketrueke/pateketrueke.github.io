@@ -823,9 +823,21 @@ li {
   font-size: 0.84rem;
   color: var(--color-text-muted);
   letter-spacing: 0.01em;
+  list-style: none;
+  display: flex;
+  padding: 0;
+  gap: 1rem;
 }
-.blog-index-tags > span {
+.blog-index-tags li {
   color: var(--color-text-light);
+  position: relative;
+  margin: 0;
+}
+.blog-index-tags li + li::before {
+  left: -0.5rem;
+  content: '·';
+  position: absolute;
+  color: var(--color-text-muted);
 }
 .debug * {
   outline: 1px dotted rgba(255, 0, 255, 0.75);
