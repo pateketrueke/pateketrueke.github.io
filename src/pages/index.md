@@ -16,8 +16,8 @@ Full-stack developer from Guadalajara, Mexico. I build web apps by day and make 
 
 ## Stuff here
 
-- My [CV](/cv/) &mdash; Work history and experience
 - What I'm [good at](/resume/) &mdash; Skills and tech
+- My [CV](/cv/) &mdash; Work history and experience
 - <a href="/alvadub/" target="_blank">ALVADUB</a> &mdash; Music, press-kit & downloads
 - Read my [BLOG](/blog/) &mdash; I share my progress with you!
 
