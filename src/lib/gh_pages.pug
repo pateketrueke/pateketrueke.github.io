@@ -1,4 +1,40 @@
 extend layouts/default
 
 block body
+  - const postTags = String(tags || '').split(',').map((x) => x.trim()).filter(Boolean)
+
+  if date && title
+    header.blog-post-header
+      nav.blog-breadcrumb(aria-label='Breadcrumb')
+        ol.reset.notype
+          li.inline-block
+            a(href='/') Home
+          li.inline-block.blog-breadcrumb-sep /
+          li.inline-block
+            a(href='/blog/') Blog
+          li.inline-block.blog-breadcrumb-sep /
+          li.inline-block
+            span.blog-breadcrumb-current= title
+
+      h1.blog-post-title= title
+      .blog-post-meta
+        if author_url && author
+          a.blog-post-author(href=author_url rel='noopener noreferrer' target='_blank')= author
+        else if author
+          span.blog-post-author= author
+
+        if author_email
+          span.blog-post-sep ·
+          a.blog-post-email(href=`mailto:${author_email}`)= author_email
+
+        if date
+          span.blog-post-sep ·
+          time.blog-post-date(datetime=date)= date
+
+      if postTags.length
+        ul.blog-post-tags.notype.reset
+          each tagName in postTags
+            li.inline-block
+              span.blog-post-tag= `#${tagName}`
+
   .auto-format!= yield
