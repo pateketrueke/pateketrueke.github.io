@@ -247,7 +247,7 @@
 .auto-format > img {
   max-width: 100%;
 }
-.auto-format p:last-child {
+.auto-format > p:last-child {
   text-align: center;
 }
 body {
