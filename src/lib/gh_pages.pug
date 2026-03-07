@@ -32,10 +32,10 @@ block body
           time.blog-post-date(datetime=date)= date
 
       if postTags.length
-        ul.blog-post-tags.notype.reset
+        ul.blog-post-tags.notype.reset.notranslate
           each tagName in postTags
             li.inline-block
-              span.blog-post-tag= `#${tagName}`
+              span.blog-post-tag.notranslate= `#${tagName}`
 
   .auto-format!= yield
 
