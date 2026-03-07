@@ -1,6 +1,9 @@
 *.log
 .env
 .tarima
+.claude
+AGENTS.md
+*TASKS.md
 cache.json
 .DS_Store
 build
