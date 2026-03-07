@@ -839,6 +839,28 @@ li {
   position: absolute;
   color: var(--color-text-muted);
 }
+.blog-index-title,
+.blog-index-link {
+  transition: opacity 140ms ease;
+}
+.blog-index-entry.is-dimmed .blog-index-title,
+.blog-index-entry.is-dimmed .blog-index-link {
+  opacity: 0.32;
+}
+.blog-index-tag-link {
+  color: inherit;
+  text-decoration: none;
+}
+.blog-index-tag-link:hover {
+  color: var(--color-accent-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.blog-index-tag-link.is-active {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .debug * {
   outline: 1px dotted rgba(255, 0, 255, 0.75);
 }
