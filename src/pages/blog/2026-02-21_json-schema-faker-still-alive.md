@@ -4,9 +4,11 @@ title: "Eleven Years of json-schema-faker — and I Just Shipped v0.6.0"
 description: "json-schema-faker was the first open-source library I ever maintained. Eleven years, one sponsor, and a lot of accumulated debt — here's what it took to bring it current."
 date: 2026-02-21
 icon: bullhorn
+tags: "json-schema-faker, json-schema, open-source, testing, javascript, maintenance"
+author: "Alvaro Cabrera"
+author_email: "pateketrueke@gmail.com"
+author_url: "https://github.com/pateketrueke"
 ---
-
-# Eleven Years of json-schema-faker — and I Just Shipped v0.6.0
 
 > I first committed this library in April 2015. Eleven years, one sponsor, and a 41-issue backlog later — here's what v0.6.0 actually took.
 
