@@ -4,7 +4,7 @@
     <base href="/">
     <meta lang="en">
     <meta charset="utf-8">
-    <meta name="revision" content="9f8d138">
+    <meta name="revision" content="9302ca3">
     <meta name="description" content="Latest website sources, notes and such.">
     <meta name="author" content="Alvaro Cabrera">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -34,8 +34,30 @@
         <div class="md-flex flex-gap">
           <div class="flex-auto p" id="main"><a href="/">
               <svg class="icon -x3"><use xlink:href="#icon-bullhorn"></use></svg></a>
-            <div class="auto-format"><h1 id="five-years-six-runtimes-building-jamrock">Five Years, Six Runtimes: Building Jamrock</h1>
-<blockquote><p>I&#39;ve been building a JavaScript SSR framework across five squashed revisions, nine runtimes, and one very stubborn GTK4 async bug. This is the beginning of a series on what I&#39;ve been learning.</p>
+            <header class="blog-post-header">
+              <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+                <ol class="reset notype">
+                  <li class="inline-block"><a href="/">Home</a></li>
+                  <li class="inline-block blog-breadcrumb-sep">/</li>
+                  <li class="inline-block"><a href="/blog/">Blog</a></li>
+                  <li class="inline-block blog-breadcrumb-sep">/</li>
+                  <li class="inline-block"><span class="blog-breadcrumb-current">Five Years, Six Runtimes: Building Jamrock</span></li>
+                </ol>
+              </nav>
+              <h1 class="blog-post-title">Five Years, Six Runtimes: Building Jamrock</h1>
+              <div class="blog-post-meta"><a class="blog-post-author" href="https://github.com/pateketrueke" rel="noopener noreferrer" target="_blank">Alvaro Cabrera</a><span class="blog-post-sep">·</span><a class="blog-post-email" href="mailto:pateketrueke@gmail.com">pateketrueke@gmail.com</a><span class="blog-post-sep">·</span>
+                <time class="blog-post-date" datetime="2026-02-18">2026-02-18</time>
+              </div>
+              <ul class="blog-post-tags notype reset">
+                <li class="inline-block"><span class="blog-post-tag">#jamrock</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#ssr</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#runtimes</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#javascript</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#web-framework</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#gtk4</span></li>
+              </ul>
+            </header>
+            <div class="auto-format"><blockquote><p>I&#39;ve been building a JavaScript SSR framework across five squashed revisions, nine runtimes, and one very stubborn GTK4 async bug. This is the beginning of a series on what I&#39;ve been learning.</p>
 </blockquote><h2 id="a-bit-of-context">A Bit of Context</h2>
 <p>I&#39;m a &quot;learn by building&quot; kind of person. I built <a href="https://github.com/pateketrueke/somedom">somedom</a> because I wanted to understand how virtual DOMs actually work. I built <a href="https://github.com/pateketrueke/nohooks">nohooks</a> because I wanted to understand reactive state without magic. Before Svelte I was using Ractive — same author, same instinct toward templates that don&#39;t fight you. Then htmx came along and the hypermedia ideas clicked. Then SolidJS. Then Svelte 5.</p>
 <p>What I kept wanting was a framework where the server and the component file are the same thing. Single-file components with server logic inline. No separate API routes. Forms that work without JavaScript, with JavaScript layered on top. SvelteKit does this well. The problem is SvelteKit is tied to a runtime. I wanted to run the same app on Node, Deno, Bun, and whatever else came along — without rewriting anything.</p>

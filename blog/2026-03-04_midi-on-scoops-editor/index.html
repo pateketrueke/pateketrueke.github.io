@@ -4,7 +4,7 @@
     <base href="/">
     <meta lang="en">
     <meta charset="utf-8">
-    <meta name="revision" content="9f8d138">
+    <meta name="revision" content="9302ca3">
     <meta name="description" content="Latest website sources, notes and such.">
     <meta name="author" content="Alvaro Cabrera">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -34,8 +34,30 @@
         <div class="md-flex flex-gap">
           <div class="flex-auto p" id="main"><a href="/">
               <svg class="icon -x3"><use xlink:href="#icon-bullhorn"></use></svg></a>
-            <div class="auto-format"><h1 id="building-a-live-coding-editor-for-a-text-based-music-language">Building a Live-Coding Editor for a Text-Based Music Language</h1>
-<blockquote><p>How a plain textarea became a full syntax-highlighted, tooltip-rich, scrub-to-edit live-coding environment — without CodeMirror, without a framework, and without breaking undo.</p>
+            <header class="blog-post-header">
+              <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+                <ol class="reset notype">
+                  <li class="inline-block"><a href="/">Home</a></li>
+                  <li class="inline-block blog-breadcrumb-sep">/</li>
+                  <li class="inline-block"><a href="/blog/">Blog</a></li>
+                  <li class="inline-block blog-breadcrumb-sep">/</li>
+                  <li class="inline-block"><span class="blog-breadcrumb-current">Building a Live-Coding Editor for a Text-Based Music Language</span></li>
+                </ol>
+              </nav>
+              <h1 class="blog-post-title">Building a Live-Coding Editor for a Text-Based Music Language</h1>
+              <div class="blog-post-meta"><a class="blog-post-author" href="https://github.com/pateketrueke" rel="noopener noreferrer" target="_blank">Alvaro Cabrera</a><span class="blog-post-sep">·</span><a class="blog-post-email" href="mailto:pateketrueke@gmail.com">pateketrueke@gmail.com</a><span class="blog-post-sep">·</span>
+                <time class="blog-post-date" datetime="2026-03-04">2026-03-04</time>
+              </div>
+              <ul class="blog-post-tags notype reset">
+                <li class="inline-block"><span class="blog-post-tag">#midi</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#live-coding</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#music</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#editor</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#javascript</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#tooling</span></li>
+              </ul>
+            </header>
+            <div class="auto-format"><blockquote><p>How a plain textarea became a full syntax-highlighted, tooltip-rich, scrub-to-edit live-coding environment — without CodeMirror, without a framework, and without breaking undo.</p>
 </blockquote><h2 id="where-this-comes-from">Where This Comes From</h2>
 <p>I&#39;ve been investing in tools for live music performance for a while. If you look at <a href="https://github.com/alvadub">alvadub on GitHub</a> — that&#39;s me too. A collection of experiments: MIDI utilities, beat tools, notation drafts. Things I built because I needed them, or because I was trying to understand something.</p>
 <p>I got deep into <a href="https://strudel.cc">Strudel</a> — the browser-based live-coding environment built on Tidal Cycles patterns. I spent time with its API, got familiar with how it handles pattern evaluation, its block-eval shortcuts, how it treats the editor as part of the performance rather than just a text input. It&#39;s excellent work.</p>

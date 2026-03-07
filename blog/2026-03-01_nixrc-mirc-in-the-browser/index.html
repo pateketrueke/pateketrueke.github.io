@@ -4,7 +4,7 @@
     <base href="/">
     <meta lang="en">
     <meta charset="utf-8">
-    <meta name="revision" content="9f8d138">
+    <meta name="revision" content="9302ca3">
     <meta name="description" content="Latest website sources, notes and such.">
     <meta name="author" content="Alvaro Cabrera">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -34,8 +34,30 @@
         <div class="md-flex flex-gap">
           <div class="flex-auto p" id="main"><a href="/">
               <svg class="icon -x3"><use xlink:href="#icon-bullhorn"></use></svg></a>
-            <div class="auto-format"><h1 id="nixrc-bringing-mirc-scripts-back-to-life-in-the-browser">nixrc: Bringing mIRC Scripts Back to Life in the Browser</h1>
-<blockquote><p>I spent two sessions building a full mIRC script runtime, transpiler, and live playground — from scratch. Here&#39;s what it took and why it was worth it.</p>
+            <header class="blog-post-header">
+              <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+                <ol class="reset notype">
+                  <li class="inline-block"><a href="/">Home</a></li>
+                  <li class="inline-block blog-breadcrumb-sep">/</li>
+                  <li class="inline-block"><a href="/blog/">Blog</a></li>
+                  <li class="inline-block blog-breadcrumb-sep">/</li>
+                  <li class="inline-block"><span class="blog-breadcrumb-current">nixrc: Bringing mIRC Scripts Back to Life in the Browser</span></li>
+                </ol>
+              </nav>
+              <h1 class="blog-post-title">nixrc: Bringing mIRC Scripts Back to Life in the Browser</h1>
+              <div class="blog-post-meta"><a class="blog-post-author" href="https://github.com/pateketrueke" rel="noopener noreferrer" target="_blank">Alvaro Cabrera</a><span class="blog-post-sep">·</span><a class="blog-post-email" href="mailto:pateketrueke@gmail.com">pateketrueke@gmail.com</a><span class="blog-post-sep">·</span>
+                <time class="blog-post-date" datetime="2026-03-01">2026-03-01</time>
+              </div>
+              <ul class="blog-post-tags notype reset">
+                <li class="inline-block"><span class="blog-post-tag">#mirc</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#nixrc</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#transpiler</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#runtime</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#playground</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#browser</span></li>
+              </ul>
+            </header>
+            <div class="auto-format"><blockquote><p>I spent two sessions building a full mIRC script runtime, transpiler, and live playground — from scratch. Here&#39;s what it took and why it was worth it.</p>
 </blockquote><h2 id="where-it-started-a-coffee-shop-in-m%C3%A9xico">Where It Started: A Coffee Shop in México</h2>
 <p>My first exposure to mIRC was at a coffee shop. A friend showed me a script called <strong>ToTeX</strong> — a Chilean-made mIRC package from around 2000 — and taught me how to connect to local IRC servers in México. That was it. I was immediately curious: what <em>is</em> this thing, and what else can you do with it? The rest is history.</p>
 <p>mIRC scripting became one of my first real programming languages. Not in the academic sense — no books, no courses. Just the documentation, the IRC help channels, and a lot of trial and error. The things I learned there shaped how I think about programming: event-driven models, variable scoping, the difference between a command and an identifier, what it means to build something that reacts to user input.</p>

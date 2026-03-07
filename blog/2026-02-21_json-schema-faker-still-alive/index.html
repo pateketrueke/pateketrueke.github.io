@@ -4,7 +4,7 @@
     <base href="/">
     <meta lang="en">
     <meta charset="utf-8">
-    <meta name="revision" content="9f8d138">
+    <meta name="revision" content="9302ca3">
     <meta name="description" content="Latest website sources, notes and such.">
     <meta name="author" content="Alvaro Cabrera">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -34,8 +34,30 @@
         <div class="md-flex flex-gap">
           <div class="flex-auto p" id="main"><a href="/">
               <svg class="icon -x3"><use xlink:href="#icon-bullhorn"></use></svg></a>
-            <div class="auto-format"><h1 id="eleven-years-of-json-schema-faker-%E2%80%94-and-i-just-shipped-v0-6-0">Eleven Years of json-schema-faker — and I Just Shipped v0.6.0</h1>
-<blockquote><p>I first committed this library in April 2015. Eleven years, one sponsor, and a 41-issue backlog later — here&#39;s what v0.6.0 actually took.</p>
+            <header class="blog-post-header">
+              <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+                <ol class="reset notype">
+                  <li class="inline-block"><a href="/">Home</a></li>
+                  <li class="inline-block blog-breadcrumb-sep">/</li>
+                  <li class="inline-block"><a href="/blog/">Blog</a></li>
+                  <li class="inline-block blog-breadcrumb-sep">/</li>
+                  <li class="inline-block"><span class="blog-breadcrumb-current">Eleven Years of json-schema-faker — and I Just Shipped v0.6.0</span></li>
+                </ol>
+              </nav>
+              <h1 class="blog-post-title">Eleven Years of json-schema-faker — and I Just Shipped v0.6.0</h1>
+              <div class="blog-post-meta"><a class="blog-post-author" href="https://github.com/pateketrueke" rel="noopener noreferrer" target="_blank">Alvaro Cabrera</a><span class="blog-post-sep">·</span><a class="blog-post-email" href="mailto:pateketrueke@gmail.com">pateketrueke@gmail.com</a><span class="blog-post-sep">·</span>
+                <time class="blog-post-date" datetime="2026-02-21">2026-02-21</time>
+              </div>
+              <ul class="blog-post-tags notype reset">
+                <li class="inline-block"><span class="blog-post-tag">#json-schema-faker</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#json-schema</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#open-source</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#testing</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#javascript</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#maintenance</span></li>
+              </ul>
+            </header>
+            <div class="auto-format"><blockquote><p>I first committed this library in April 2015. Eleven years, one sponsor, and a 41-issue backlog later — here&#39;s what v0.6.0 actually took.</p>
 </blockquote><h2 id="how-it-started">How It Started</h2>
 <p>I needed to generate realistic fake data from a JSON Schema. This was April 2015 — before the tooling ecosystem around JSON Schema matured, before Draft 2019-09, before 2020-12, back when <code>definitions</code> was the only way to reference schemas and everyone had their own idea of what <code>allOf</code> meant.</p>
 <p>There was nothing that did what I needed. So I built it. The first commit landed on April 7, 2015. By July we had faker.js and chance.js integration and the first real releases (v0.1.x).</p>

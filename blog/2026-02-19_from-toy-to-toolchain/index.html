@@ -4,7 +4,7 @@
     <base href="/">
     <meta lang="en">
     <meta charset="utf-8">
-    <meta name="revision" content="9f8d138">
+    <meta name="revision" content="9302ca3">
     <meta name="description" content="Latest website sources, notes and such.">
     <meta name="author" content="Alvaro Cabrera">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -34,8 +34,30 @@
         <div class="md-flex flex-gap">
           <div class="flex-auto p" id="main"><a href="/">
               <svg class="icon -x3"><use xlink:href="#icon-bullhorn"></use></svg></a>
-            <div class="auto-format"><h1 id="from-toy-to-toolchain-what-we-shipped-in-one-10x-session">From Toy to Toolchain: What We Shipped in One 10x Session</h1>
-<blockquote><p>One overnight session. One custom language. A compiler, a CSS system, a Vite plugin, an LSP server, a Tree-sitter grammar, a Zed extension, and a new landing page. Here&#39;s what actually happened.</p>
+            <header class="blog-post-header">
+              <nav class="blog-breadcrumb" aria-label="Breadcrumb">
+                <ol class="reset notype">
+                  <li class="inline-block"><a href="/">Home</a></li>
+                  <li class="inline-block blog-breadcrumb-sep">/</li>
+                  <li class="inline-block"><a href="/blog/">Blog</a></li>
+                  <li class="inline-block blog-breadcrumb-sep">/</li>
+                  <li class="inline-block"><span class="blog-breadcrumb-current">From Toy to Toolchain: What We Shipped in One 10x Session</span></li>
+                </ol>
+              </nav>
+              <h1 class="blog-post-title">From Toy to Toolchain: What We Shipped in One 10x Session</h1>
+              <div class="blog-post-meta"><a class="blog-post-author" href="https://github.com/pateketrueke" rel="noopener noreferrer" target="_blank">Alvaro Cabrera</a><span class="blog-post-sep">·</span><a class="blog-post-email" href="mailto:pateketrueke@gmail.com">pateketrueke@gmail.com</a><span class="blog-post-sep">·</span>
+                <time class="blog-post-date" datetime="2026-02-19">2026-02-19</time>
+              </div>
+              <ul class="blog-post-tags notype reset">
+                <li class="inline-block"><span class="blog-post-tag">#10x</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#compiler</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#javascript</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#toolchain</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#language-design</span></li>
+                <li class="inline-block"><span class="blog-post-tag">#css</span></li>
+              </ul>
+            </header>
+            <div class="auto-format"><blockquote><p>One overnight session. One custom language. A compiler, a CSS system, a Vite plugin, an LSP server, a Tree-sitter grammar, a Zed extension, and a new landing page. Here&#39;s what actually happened.</p>
 </blockquote><h2 id="the-setup">The Setup</h2>
 <p>10x is a custom language that lives in <code>.md</code> files. Programs are markdown documents. The language has its own scanner, parser, and eval — a toy interpreter written in JavaScript.</p>
 <p>It started as an exercise from <a href="https://craftinginterpreters.com/">Crafting Interpreters</a> — Robert Nystrom&#39;s web-book on building languages from scratch. I wanted to understand how interpreters actually work, so I built one. The format — markdown as source code — came from years of using CoffeeScript and eventually discovering that <code>.coffee.md</code> was a thing. I was working at Grupo Expansión when I first encountered literate programming. I didn&#39;t know it had a name. I just thought it was interesting that you could write prose and code in the same file, and that the prose wasn&#39;t just comments — it was part of the program.</p>
