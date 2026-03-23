@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>¿Quieres ser mi amiga?</title>
+  <style>
+    :root {
+      --bg: #0b0b0c;
+      --panel: #111214;
+      --text: #ece8e1;
+      --muted: #a7a19a;
+      --rule: #26282c;
+      --accent: #d8c3a5;
+      --max: 760px;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: Iowan Old Style, Palatino Linotype, Book Antiqua, Georgia, serif;
+      line-height: 1.8;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .wrap {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+      padding: 56px 0 80px;
+    }
+    .hero {
+      min-height: 40vh;
+      display: flex;
+      align-items: end;
+      padding: 24px 0 48px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 40px;
+    }
+    .badge {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent);
+      border: 1px solid var(--rule);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,.02);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      font-weight: 600;
+      max-width: 10ch;
+    }
+    .lede {
+      color: var(--muted);
+      margin-top: 18px;
+      font-size: 1rem;
+      max-width: 42ch;
+    }
+    article {
+      background: linear-gradient(to bottom, rgba(255,255,255,.02), rgba(255,255,255,0));
+      border: 1px solid var(--rule);
+      border-radius: 20px;
+      padding: 28px 22px;
+      box-shadow: 0 8px 40px rgba(0,0,0,.28);
+    }
+    p { margin: 0 0 1.1em; }
+    .sep {
+      border: 0;
+      border-top: 1px solid var(--rule);
+      margin: 28px 0;
+    }
+    h2 {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--accent);
+      margin: 0 0 16px;
+      font-weight: 600;
+    }
+    .poem {
+      margin: 26px auto;
+      padding: 24px 20px;
+      max-width: 34em;
+      text-align: center;
+      white-space: pre-wrap;
+      border-top: 1px solid rgba(216,195,165,.28);
+      border-bottom: 1px solid rgba(216,195,165,.28);
+      color: #f2eee8;
+      font-style: italic;
+    }
+    .memory {
+      margin: 60px 0;
+    }
+    .memory img {
+      opacity: 0.85;
+    }
+    .memory img:hover {
+      opacity: 1;
+    }
+    .memory {
+      margin: 40px 0;
+      text-align: center;
+    }
+
+    .memory img {
+      max-width: 100%;
+      border-radius: 12px;
+      filter: grayscale(100%) contrast(90%);
+      transition: all 0.4s ease;
+    }
+
+    .memory img:hover {
+      filter: grayscale(0%) contrast(100%);
+    }
+
+    .caption {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: #888;
+      font-style: italic;
+    }
+    .footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: .95rem;
+      text-align: center;
+    }
+    @media (max-width: 640px) {
+      article { padding: 22px 16px; border-radius: 16px; }
+      .wrap { width: min(calc(100% - 20px), var(--max)); padding-top: 28px; }
+      .hero { padding-bottom: 28px; margin-bottom: 24px; }
+      .poem { padding: 18px 10px; }
+    }
+    @media print {
+      @page {
+        size: A5;
+        margin: 2cm 2cm 2.5cm 2.5cm;
+      }
+
+      body {
+        background: white;
+        color: black;
+      }
+
+      .wrap {
+        width: 100%;
+        padding: 0;
+      }
+
+      article {
+        border: none;
+        box-shadow: none;
+        background: none;
+      }
+
+      hr, .hero {
+        page-break-after: always;
+      }
+
+      .sep {
+        page-break-before: avoid;
+      }
+
+      .poem {
+        page-break-inside: avoid;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <div class="badge no-print">Morita</div>
+        <h1>¿Quieres ser mi amiga?</h1>
+        <p class="lede">27 de Abril de 2026.</p>
+      </div>
+    </section>
+    <article>
+      <p>Esto te lo escribo después de haber reflexionado mucho.</p><p>No te voy a negar que lloraré de nuevo; no tanto, pero sí un par de veces más. No creo que sea por dolor, sino más bien por nostalgia. Ya sabes: recordar e imaginar lo que pudo ser.</p><p>Se me hizo un hueco en el estómago cuando dejé de leer tus mensajes aquella primera vez que dejamos de platicar en Facebook. Sentí que te había perdido para siempre.</p><p>Luego de un tiempo me volviste a contactar (grr!), y desde entonces comencé a ser muy feliz.</p><hr class="sep" /><p>Haber dado contigo fue increíble para mis canciones. Siempre me he preguntado si algunas de ellas han llegado a ti. Como esta que escribí estando contigo:</p><iframe width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2289161771&color=%239028e9&inverse=true&auto_play=false&show_user=true"></iframe><div class="poem">“Quiero comenzar a cambiar.
+
+Quiero comenzar a pensar a tu modo.
+
+Quiero sentir igual, quiero conocerlo todo.
+
+Desde el día en que me conociste podría haberte yo dicho que era un muchacho triste.
+
+Pero el chiste no se cuenta solo, por eso estoy yo aquí, por eso te lo canto todo.
+
+“You only live once”, ya ni modo, pero cuando avanzas a veces te manchas de lodo.
+
+No hay por que si quiera molestarse un poco, el sordo hoy no oye y mañana lo hará tampoco.”</div>
+      <p>Se me rompía el corazón al imaginar que te ibas para comenzar de nuevo. Sabes que jamás te juzgué; me aterraba la idea de que tuvieras que desempeñar aquel papel una vez más.</p><p>Yo nunca quise forzarte a aprender algo que no te gustara. Estaba seguro de que encontrarías algo que te llenara de emoción y me lo contarías enseguida. Tampoco quise que sintieras que dependías de mí, y de verdad celebro que no sea así.</p><p>Solo quise que estuvieras lista para cuando llegara el día, a tu modo.</p><hr class="sep" /><p>Cuando te conocí pensé en apoyarte. Eso fue lo que mi sentir me llevó a imaginar cuando comencé a entender tu realidad. Me hace feliz que hoy hayas salido adelante a tu manera. En ti sigue latiendo todo ese talento que pude ver desde aquella cerveza en la Condesa.</p><p>Eres una persona genuinamente inteligente, y la gente lista suele cargar con muchas cosas. Yo tampoco supe apoyarte en ese sentido.</p><p>Más tarde entendí mis propios conflictos: lo que te hice estuvo mal y no hay forma de olvidarlo.</p><p>Mi hiperactividad me hace buscar recuerdos, canciones o argumentos para conservar tu amistad intacta, pero no los encuentro.</p><p>“No me hallo”, dice El Personal.</p><p>No mientras la herida que te hice siga abierta.</p><p>Tú lo dijiste con claridad: te violenté, hice mella en lo nuestro.</p><p>Sé que me has dicho que aún guardas rencor. Ojalá puedas sanar eso con el tiempo, de veras.</p><p>Yo, por ahora, solo puedo alejarme.</p><hr class="sep" /><p>Si tú dices que también me hiciste daño, no lo recuerdo. Mi forma de ser me permite aceptar cosas que otros no aceptarían.</p><p>No sé si eso sea bueno o malo. Pero sí sé esto: tú no me hiciste daño.</p><p>Yo solo era un niñote que quería compañía mientras hacía lo que amaba.</p><p>Amé cada segundo llorando contigo viendo One Piece.</p><p>Disfruté vivir contigo en Iztapalapa.</p><p>Guardo con cariño cuando jugábamos Pokémon Go y encontramos a Rin.</p><p>Y amo recordarte jugando algo que amabas cuando te conocí: Pump It Up.</p><div class="memory">
+        <img src="490009559_2666217183570821_5302009694104881970_n.jpg" alt="Pump It Up" />
+        <p class="caption">grr!</p>
+      </div><p>Pero sobre todo, te amo.</p><p>Porque aunque todo ya es pasado, tú sigues siendo presente y futuro.</p><p>Te amo incondicionalmente. Y aunque no volvamos a encontrarnos, eso no cambia.</p><p>Escribiré tantas canciones como recuerdos y sueños conserve intactos.</p><p>Debí poner mucho más de mí. No estuve a la altura contigo.</p><hr class="sep" /><p>Está bien olvidarme.</p><p>Si de pronto decides perdonar y de verdad quieres cultivar una relación de amistad conmigo, me gustaría escucharte.</p><p>Si no es así, y entiendo que así sea, solo quiero que sepas que no te olvidaré y nunca hablaré mal de lo nuestro; si alguien me pregunta sobre ti, les diré que te quedaste a ser feliz en Guadalajara.</p><p>(’:</p><hr class="sep" /><h2>Epílogo</h2><p>Ahora, déjame compartirte mi plan para que podamos cada quien comenzar de nuevo:</p><p>1. La casa: ya sabes que me gustaría regresarme a Acopilco. No sé cuánto me tome, pero eventualmente pasará. Aunque también me gustaría seguir explorando Guadalajara u otros estados, sin duda.</p><p>Durante el tiempo en que eso se desarrolle, puedes seguir viviendo en el departamento, porque, como ya había sugerido, económicamente te invito a ahorrarte lo de la renta que me das para buscar o preparar un espacio cómodo para ti.</p><p>Cuando estés lista para mudarte, querrás contactarme.</p><p>2. Los gatos: son como nuestros hijos. Si tú estás dispuesta a hacerte cargo de ellos, de mi cuenta te puedo hacer llegar una mensualidad que cubra sus gastos.</p><p>Si llegaran a necesitar algo más —y eventualmente así será—, no dudes en acercarte a mí.</p><p>Sé que me dirás que yo también puedo verlos, pero tú continúa leyendo.</p><p>3. Las cosas: son de ambos, y todas tuyas; te lo dejo a tu discreción.</p><p>Lo que hay en tu habitación es tuyo; lo que quieras conservar de afuera es tuyo. Lo que sea que necesites puedes conservarlo sin problema: tecnología, muebles, juguetes, libros, trastes, utensilios, electrodomésticos, etc.</p><p>No está en mi naturaleza despojarte, a ti ni a nadie que aprecie, de algo que pueda servirles y esté en mis manos.</p><p>Yo siempre te apoyaré.</p><hr class="sep" /><h2>PDTA</h2><p>Recientemente te he escrito varias canciones ya; sin embargo, la que más me gusta de ellas es la siguiente. Le puse Hazy Gyal, pues porque cheves y chavas:</p><iframe width="100%" height="20" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%253Atracks%253A2164411086&color=%23af8817&inverse=true&auto_play=false&show_user=true"></iframe><div class="poem">“Piensas en tener la facultad de sonreír.
+
+Piensas en tener la claridad de lo que es vivir.
+
+Amor es lo que tienes que encontrar, para sentir, para olvidar.
+
+Amor es lo que tienes por delante, fundamental, igual de importante.
+
+Amor es lo que debo cultivar, para no herir, para no odiar.
+
+Amor es lo que tengo para darte, vamos gyal, todavía no es tarde…”</div><p>Una vez me seudoentrevistaron y me preguntaron —creo que te dije— por qué me gustaba explicar mis canciones o el proceso, mentalidad o contexto detrás de ellas. Supongo que me gusta escribir cosas ambiguas que puedan ser interpretadas desde varios ángulos.</p><p>En particular, esta canción es producto de la catarsis de haber aceptado el fin de la relación.</p><p>Quiero desearte cosas lindas, todas buenas, pero también deseo lo mismo para mí.</p><p>Esto es algo que puedes cantar a alguien o a ti mismo; así me doy ánimos.</p><p>Después de todo, siempre termino llorando con mis canciones…</p>
+    </article>
+    <p class="footer no-print">“que ya merito me voy a casa, y que amerito fumar un algo; porque mérito sería mirarte, ya merito...”</p>
+  </main>
+</body>
+</html>
