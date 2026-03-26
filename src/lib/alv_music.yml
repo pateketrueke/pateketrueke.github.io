@@ -72,6 +72,7 @@
 - label: LIFE IS A REVERB
   tracks:
     - name: RIVER
+      featured: true
       info: 133 BPM / D F#dim
       track: 3171703945
       album: 5521055
@@ -80,6 +81,7 @@
       track: 3697143688
       album: 5521055
     - name: SWAMP
+      featured: true
       info: 117 BPM / Am Gm Am
       track: 3974388852
       album: 5521055
@@ -88,6 +90,7 @@
       track: 2705687388
       album: 5521055
     - name: SLIPPERY
+      featured: true
       info: 133 BPM / Em Ebdim C B
       track: 809785405
       album: 5521055
@@ -134,6 +137,7 @@
       track: 1835585606
       album: 507791708
     - name: LOWER
+      featured: true
       info: 133 BPM / Cm Eb Fm
       track: 679720357
       album: 507791708
@@ -165,6 +169,7 @@
       track: 359110715
       album: 2684595450
     - name: ELECTRIC
+      featured: true
       info: 131 BPM / Gm Eb
       track: 2949419468
       album: 2684595450

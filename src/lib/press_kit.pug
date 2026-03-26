@@ -20,6 +20,25 @@ block body
     != yield
 
     .noprint
+      - const featured = [].concat(...Object.values(sets).map(s => s.tracks || [])).filter(t => t.featured)
+      if featured.length
+        details(open)
+          summary.flex.flex-center.flex-between
+            span.flex.flex-center(style='gap:.5rem')
+              icon(src='#down' size=22)
+              | Start here
+            span.new.flex.flex-center
+              span On Spotify
+              icon(src='#flash' size=22)
+          ul.music-links.notype.reset
+            each track in featured
+              li.md-flex.flex-wrapped-
+                .flex-gap.flex-auto.flex-inline.flex-between.flex-center
+                  span #[b= track.name] &mdash; !{track.info}
+                  if track.track
+                    button.flex.player(data-track=track)
+                      icon(src='#speaker' size=24)
+
       each set in sets
         a(name=slug(set.label))
         details
