@@ -57,6 +57,18 @@ block body
 
   section.section#trabajo
     p.sec-label 03 — DISCOGRAFÍA
+    p.section-intro Por dónde empezar
+    .featured-tracks
+      each album in sets
+        each track in album.tracks
+          if track.featured
+            .featured-track
+              button.player(data-track=JSON.stringify({ track: track.track, album: track.album }))
+                svg(width='10' height='10' viewBox='0 0 10 10')
+                  polygon(points='2,1 9,5 2,9')
+              span.featured-name= track.name
+              span.featured-meta= track.info
+              span.featured-album= album.label
     .albums
       each album in sets
         .album
@@ -120,27 +132,24 @@ block body
             span.kit-ext= asset.ext
     .kit-footer
       span.kit-note #{media.length} archivos · SVG · PNG · JPG
-      //a.btn.fill(href=zip) ↓ DESCARGAR TODO
 
   section.section#contacto
     p.sec-label 06 — CONTACTO
     .contact-box
-      //div(style='width:96px;border:1px solid red'): include ../resources/images/ALVADUB_VINYL_V2.svg
-      //include ../resources/images/ALVADUB_LOGO.svg
-      //include ../resources/images/ALVADUB_VINYL_V2.svg
-      //image(src='../images/ALVADUB_VINYL_V2' alt='ALVADUB' width=260 height=260)
-      //image(src='ALVADUB_LOGO' alt='ALVADUB' width=260 height=260)
       p
-        //| 12 canales o menos. Tracks ~3 min.
         br
         | Versiones personalizadas requieren tiempo y presupuesto.
+        br
+        br
+        | ¿Quieres contar algo y no sabes cómo expresarlo?
+        br
+        br
+        | WhatsApp: #[b +52 55 4907 4219]
         br
         br
         strong yo@soypache.co
 
   footer.site-footer
-    .f-firma
-      span(style='display:block;width:28px;height:28px;border-radius:50%;border:1px solid rgba(0,255,136,0.3);')
     span.f-copy SAN LORENZO ACOPILCO · GDL · 2025
 
   .bcplayer#bcplayer
