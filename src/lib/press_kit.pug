@@ -9,8 +9,8 @@ extend layouts/blank
 block body
   .document
     .md-gap.md-flex.flex-center.flex-between
-      .text-center
-        image.me(src='sqme' alt="Alvaro Cabrera" width=260 height=260)
+      .text-center.logo
+        image(src='ALVADUB_VINYL_v2' alt='ALVADUB' width=260 height=260)
       .bio
         p Hi, I'm #[b ALVADUB] — self-taught musician, producer and live act based in Guadalajara, from San Lorenzo Acopilco, Mexico City.
         p Dub as a system — Hip-Hop, Ambient, whatever the state calls for. Minimalism you feel before you understand it.
@@ -91,8 +91,8 @@ block body
         br
         | Thank you!
 
-      .text-center.noprint.logo
-        image(src='ALVADUB_VINYL_v2' alt='ALVADUB' width=260 height=260)
+      .text-center.noprint
+        image.me(src='sqme' alt="Alvaro Cabrera" width=260 height=260)
 
   .noprint
     .bcplayer.flex.flex-justified
