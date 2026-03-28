@@ -1,0 +1,15 @@
+- name: LOGO ALVADUB
+  ext: SVG
+  src: /images/ALVADUB_LOGO.svg
+
+- name: VINYL ARTWORK
+  ext: SVG
+  src: /images/ALVADUB_VINYL_v2.svg
+
+- name: QR SOYPACHE
+  ext: PNG
+  src: /images/SOYPACHECO_QR.png
+
+- name: FOTO PRENSA
+  ext: JPG
+  src: /images/sqme.jpg

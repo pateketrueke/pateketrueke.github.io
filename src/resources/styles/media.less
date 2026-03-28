@@ -1,45 +1,324 @@
 @import '../../lib/styles/vars';
-@import '../../lib/styles/layout';
-@import '../../lib/styles/helpers';
 
+// ── VARIABLES ──────────────────────────────────────────────
+@green: #00FF88;
+@bg:    #070709;
+@bg2:   #0d0d12;
+@bg3:   #16161f;
+@text:  #ece8df;
+@muted: rgba(255, 255, 255, 0.32);
+@dim:   rgba(0, 255, 136, 0.07);
+@bc:    rgba(0, 255, 136, 0.10);
+
+// ── BASE ───────────────────────────────────────────────────
 body {
-  background-color: black;
-  color: white;
+  background-color: @bg;
+  color: @text;
+  margin: 0;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+a {
+  color: @green;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.25);
+  transition: border-color 0.2s;
+  &:hover { border-color: @green; }
+}
+
+// ── HERO ───────────────────────────────────────────────────
+.hero {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+
+  canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 255, 136, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 136, 0.018) 1px, transparent 1px);
+    background-size: 44px 44px;
+    pointer-events: none;
+  }
+
+  .scan {
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.35), transparent);
+    animation: scan-move 9s linear infinite;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 5;
+    padding: 0 6% 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+@keyframes scan-move {
+  from { top: -1px; }
+  to   { top: 100%; }
+}
+
+// ── FIRMA ──────────────────────────────────────────────────
+.firma {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: @green;
+
+  svg { width: 88px; height: auto; opacity: 0.45; }
+
+  &-dot {
+    display: block;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 255, 136, 0.3);
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: @green;
+      opacity: 0.5;
+    }
+  }
+
+  &-sep {
+    display: block;
+    width: 1px; height: 16px;
+    background: rgba(0, 255, 136, 0.2);
+  }
+
+  &-text {
+    letter-spacing: 4px;
+    color: rgba(0, 255, 136, 0.45);
+  }
+}
+
+// ── HERO TYPOGRAPHY ────────────────────────────────────────
+.hero-title {
+  font-size: clamp(52px, 10vw, 110px);
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 0.92;
+  color: @text;
   margin: 0;
 }
 
-a { color: #A5B231; }
-h2 { margin-top: 50px; }
-svg { fill: currentColor; }
+.hero-sub {
+  letter-spacing: 2px;
+  color: @muted;
+  max-width: 400px;
+  line-height: 1.8;
+  margin: 0;
+}
 
-.music-links {
-  li {
-    padding: 0 .5rem;
-    margin: 0;
-    gap: .5em;
-    display: flex;
-    margin-top: .5rem;
-    &:hover {
-        background-color: var(--color-bg-alt);
-        border-radius: 5px;
-    }
+.hero-ctas {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+// ── BUTTONS ────────────────────────────────────────────────
+.btn {
+  letter-spacing: 3px;
+  padding: 9px 18px;
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  color: @green !important;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none !important;
+  display: inline-block;
+
+  &:hover {
+    background: @dim;
+    border-color: rgba(0, 255, 136, 0.5);
   }
-  span { color: gray; }
-  b { color: silver; }
-  a:hover ~ span {
-    color: white;
-    text-decoration: underline;
+
+  &.fill {
+    background: @green;
+    color: @bg !important;
+    border-color: @green;
+    &:hover { opacity: 0.88; }
   }
 }
 
+// ── SECTIONS ───────────────────────────────────────────────
+.section {
+  padding: 64px 6%;
+  border-top: 1px solid @bc;
+}
+
+.sec-label {
+  letter-spacing: 5px;
+  color: @green;
+  opacity: 0.45;
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0, 255, 136, 0.08);
+    max-width: 160px;
+  }
+}
+
+.prose {
+  line-height: 1.95;
+  color: @muted;
+  max-width: 580px;
+
+  strong { color: @text; }
+  p { margin-bottom: 14px; }
+}
+
+.accent {
+  color: @green;
+  letter-spacing: 1px;
+}
+
+// ── SERVICES ───────────────────────────────────────────────
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1px;
+  background: rgba(0, 255, 136, 0.06);
+  margin-top: 32px;
+  border: 1px solid @bc;
+}
+
+.srv {
+  background: @bg2;
+  padding: 22px 18px;
+  transition: background 0.2s;
+  &:hover { background: @bg3; }
+
+  &-n    { letter-spacing: 3px; color: rgba(0, 255, 136, 0.3); margin-bottom: 8px; }
+  &-name { font-weight: 700; letter-spacing: 2px; color: @text; margin-bottom: 6px; }
+  &-desc { line-height: 1.7; color: @muted; }
+}
+
+// ── DISCOGRAFÍA ────────────────────────────────────────────
+.albums {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.album {
+  border-left: 1px solid rgba(0, 255, 136, 0.15);
+  padding-left: 14px;
+  max-height:  14em;
+  overflow: auto;
+
+  &-name {
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: @green;
+    margin-bottom: 10px;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: sticky;
+    top: 0;
+    background: rgba(0, 0, 0, .6);
+  }
+}
+
+.track {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 4px 0;
+  border-bottom: 1px solid rgba(0, 255, 136, 0.04);
+  gap: 8px;
+  list-style: none;
+  margin: 0;
+}
+
+.track-name {
+  color: @text;
+  letter-spacing: 0.5px;
+  flex: 1;
+}
+
+.track-meta {
+  color: rgba(255, 255, 255, 0.18);
+  font-size: .87rem;
+  flex-shrink: 0;
+}
+
+.new {
+  letter-spacing: 1px;
+  background: @green;
+  color: @bg;
+  padding: 2px 6px;
+  border-radius: 2px;
+  animation: pulse 2.5s ease infinite;
+  transform: none !important;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+// ── PLAYER ─────────────────────────────────────────────────
+.player {
+  border: none !important;
+  padding: 0 !important;
+  color: rgba(0, 255, 136, 0.3) !important;
+  cursor: pointer;
+  background-color: transparent !important;
+  flex-shrink: 0;
+  transition: color 0.15s;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0 !important;
+
+  svg { stroke: currentColor; fill: currentColor; }
+  &[disabled] { opacity: 0.5; }
+  &:hover { color: @green !important; }
+}
+
 .bcplayer {
-  background-color: #111;
+  background-color: #0a0a0a;
   position: fixed;
   bottom: 0;
-  z-index: 2;
+  z-index: 99;
   height: 42px;
   width: 100%;
-  transition: bottom .2s;
+  transition: bottom 0.2s;
+  border-top: 1px solid @bc;
 
   &:empty { bottom: -120px; }
 
@@ -47,47 +326,238 @@ svg { fill: currentColor; }
     border: 0;
     width: 100%;
     height: 120px;
-    @media screen and (min-width: @md-width) { width: 700px !important; }
+    @media screen and (min-width: 768px) { width: 700px !important; }
   }
 }
 
-.document {
-  padding: 20px;
-  max-width: 800px;
-  margin: 50px auto;
+// ── PLATFORMS ──────────────────────────────────────────────
+.platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
 }
 
-.player {
-  border: none;
-  padding: 0;
-  color: silver;
+.plat {
+  letter-spacing: 3px;
+  padding: 9px 14px;
+  border: 1px solid @bc;
+  color: @muted !important;
+  background: transparent;
+  transition: all 0.2s;
+  text-decoration: none !important;
+  display: inline-block;
+
+  &:hover {
+    color: @green !important;
+    border-color: rgba(0, 255, 136, 0.3);
+    background: @dim;
+  }
+}
+
+// ── MEDIA KIT ──────────────────────────────────────────────
+.kit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1px;
+  background: rgba(0, 255, 136, 0.07);
+  border: 1px solid @bc;
+  margin: 32px 0 24px;
+}
+
+.kit-item {
+  background: @bg2;
   cursor: pointer;
-  background-color: transparent;
-  svg { stroke: currentColor; }
-  &[disabled] { opacity: .5; }
+  transition: background 0.15s;
+  position: relative;
+
+  &:hover {
+    background: @bg3;
+    .kit-overlay { opacity: 1; }
+  }
 }
 
-.dimmed {
-  color: gray;
+.kit-preview {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a10;
+  overflow: hidden;
+  position: relative;
+
+  img { width: 100%; height: 100%; object-fit: cover; }
 }
 
-.new {
-  background-color: #FED974;
-  border-radius: 5px;
-  font-size: .8rem;
-  padding: 0 5px;
-  color: black;
-  gap: 5px;
-  transform: rotate(5deg);
-  animation: zoom-in-zoom-out 2s ease infinite;
+.kit-placeholder {
+  color: @green;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  svg { width: 45%; height: 45%; opacity: 0.35; }
 }
 
-.me {
-  border-radius: 50%;
+.kit-tag {
+  position: absolute;
+  top: 8px; left: 8px;
+  z-index: 1;
+  letter-spacing: 2px;
+  background: rgba(7, 7, 9, 0.85);
+  color: rgba(0, 255, 136, 0.5);
+  border: 1px solid rgba(0, 255, 136, 0.15);
+  padding: 2px 6px;
 }
 
-@keyframes zoom-in-zoom-out {
-  0% { transform: rotate(5deg) scale(1); }
-  50% { transform: rotate(5deg) scale(1.5); }
-  100% { transform: rotate(5deg) scale(1); }
+.kit-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 255, 136, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s;
+
+  span {
+    letter-spacing: 3px;
+    color: @green;
+    border: 1px solid rgba(0, 255, 136, 0.4);
+    padding: 6px 12px;
+    background: rgba(7, 7, 9, 0.9);
+  }
+}
+
+.kit-info {
+  padding: 10px 12px;
+  border-top: 1px solid @bc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.kit-name { letter-spacing: 1px; color: @muted; }
+.kit-ext  { letter-spacing: 2px; color: rgba(0, 255, 136, 0.35); }
+
+.kit-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid @bc;
+}
+
+.kit-note {
+  color: @muted;
+  font-size: .87rem;
+  letter-spacing: 1px;
+}
+
+// ── MODAL ──────────────────────────────────────────────────
+.modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(7, 7, 9, 0.94);
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+
+  &.open { display: flex; }
+}
+
+.modal {
+  background: @bg2;
+  border: 1px solid @bc;
+  max-width: 680px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+
+  &-preview {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0a0a10;
+    overflow: hidden;
+    max-height: 65vh;
+    img { max-width: 100%; max-height: 100%; object-fit: contain; display: block; }
+  }
+
+  &-bar {
+    padding: 14px 20px;
+    border-top: 1px solid @bc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  &-meta { display: flex; flex-direction: column; gap: 3px; }
+  &-fname {  letter-spacing: 1px; color: @text; }
+  &-ftype {  letter-spacing: 3px; color: rgba(0, 255, 136, 0.4); }
+  &-acts  { display: flex; gap: 8px; }
+}
+
+.btn-esc {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  color: @muted;
+
+  letter-spacing: 3px;
+  padding: 8px 14px;
+  transition: all 0.15s;
+  &:hover { color: @text; border-color: rgba(255, 255, 255, 0.2); }
+}
+
+// ── CONTACT ────────────────────────────────────────────────
+.contact-box {
+  margin-top: 32px;
+  padding: 24px;
+  border: 1px solid @bc;
+  background: @bg2;
+  max-width: 460px;
+
+  line-height: 1.9;
+  color: @muted;
+  strong { color: @green; }
+}
+
+// ── FOOTER ─────────────────────────────────────────────────
+.site-footer {
+  padding: 24px 6%;
+  border-top: 1px solid @bc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.f-firma {
+  color: @green;
+  opacity: 0.18;
+  svg { width: 72px; height: auto; display: block; }
+}
+
+.f-copy {
+
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.12);
+}
+
+// ── PRINTING ───────────────────────────────────────────────
+@media print {
+  .hero canvas, .scan, .grid-bg, .bcplayer, .modal-backdrop { display: none; }
+  .hero { height: auto; padding: 40px 6%; }
+  .hero-inner { position: static; }
 }

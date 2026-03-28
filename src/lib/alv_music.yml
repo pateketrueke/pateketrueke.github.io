@@ -101,7 +101,8 @@
 - label: 2003 & DUALITIES (SINGLES)
   tracks:
     - name: THOUGHTS
-      info: 128 BPM / Bm A6 (vocals by <a href="https://open.spotify.com/track/66xH0ZJHR3GzjXdTWfpuCP?si=dbe3a818f1764081">Julia Kleijn</a>)
+      info: 128 BPM / Bm A6
+      extra: vocals by Julia Kleijn
       track: 2650887698
       album: 3446882242
     - name: PRAISES

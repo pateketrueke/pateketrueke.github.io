@@ -1,99 +1,158 @@
-//-
-  ---
-  $import: helpers.mjs
-  sets: !include alv_music.yml
-  ---
-
-extend layouts/blank
+extends layouts/blank
 
 block body
-  .document
-    .md-gap.md-flex.flex-center.flex-between
-      .text-center.logo
-        image(src='ALVADUB_VINYL_v2' alt='ALVADUB' width=260 height=260)
-      .bio
-        p Hi, I'm #[b ALVADUB] — self-taught musician, producer and live act based in Guadalajara, from San Lorenzo Acopilco, Mexico City.
-        p Dub as a system — Hip-Hop, Ambient, whatever the state calls for. Minimalism you feel before you understand it.
-        p: small.dimmed BTW, my fullname is #[b Alvaro Cabrera Durán] and I am !{new Date().getFullYear() - 1987} yo!
-        p: b The more you play it, the better it gets.
-        button(class='noprint' onclick='window.print()') Download as PDF
-    != yield
+  -
+    const zip = 'https://www.dropbox.com/scl/fo/l332yt76k5xbmv5mvmoq7/AGVmX8Z6umdW9muRGNTHhsM?rlkey=21z34293ao2zklj5ysysv4siw&st=zzhk3vhd&dl=1'
 
-    .noprint
-      - const featured = [].concat(...Object.values(sets).map(s => s.tracks || [])).filter(t => t.featured)
-      if featured.length
-        details(open)
-          summary.flex.flex-center.flex-between
-            span.flex.flex-center(style='gap:.5rem')
-              icon(src='#down' size=22)
-              | Start here
-            span.new.flex.flex-center
-              span On Spotify
-              icon(src='#flash' size=22)
-          ul.music-links.notype.reset
-            each track in featured
-              li.md-flex.flex-wrapped-
-                .flex-gap.flex-auto.flex-inline.flex-between.flex-center
-                  span #[b= track.name] &mdash; !{track.info}
-                  if track.track
-                    button.flex.player(data-track=track)
-                      icon(src='#speaker' size=24)
+  section.hero#scene
+    canvas#waveCanvas
+    .grid-bg
+    .scan
+    .hero-inner#layer-mid
+      div(style='color:red'): include ../resources/images/ALVADUB_LOGO.svg
+      .firma
+        span.firma-dot
+        span.firma-sep
+        span.firma-text PRESS-KIT & MEDIA
+      h1.hero-title
+        | ALVA
+        br
+        | DUB
+      p.hero-sub
+        | Dub como sistema — Hip-Hop, Ambient, lo que el estado pida.
+        br
+        | Minimalismo que se siente antes de entenderse.
+      .hero-ctas
+        a.btn.fill(href='/alvadub#trabajo') ESCUCHAR
+        a.btn(href='/alvadub#contacto') CONTACTO
+        a.btn(href='/alvadub#mediakit') ↓ MEDIA KIT
 
-      each set in sets
-        a(name=slug(set.label))
-        details
-          summary.flex.flex-center.flex-between
-            span.flex.flex-center(style='gap:.5rem')
-              icon(src='#down' size=22)
-              = set.label
-            if set.latest
-              span.new.flex.flex-center
-                span Latest release!
-                icon(src='#flash' size=22)
-          ul.music-links.notype.reset
-            each track in set.tracks
-              li.md-flex.flex-wrapped-
-                //- if NODE_ENV === 'production'
-                //-   a(href=track.wav_link) WAV #[icon(src='#download' size=16)]
-                //-   a(href=track.mp3_link) MP3 #[icon(src='#download' size=16)]
-                //- else
-                //-   a(href=track.wav) WAV #[icon(src='#download' size=16)]
-                //-   a(href=track.mp3) MP3 #[icon(src='#download' size=16)]
-                //-if track.zip
-                //  a(href=track.zip) ZIP #[icon(src='#download' size=16)]
-                .flex-gap.flex-auto.flex-inline.flex-between.flex-center
-                  span #[b= track.name] &mdash; !{track.info}
-                  if track.track
-                    button.flex.player(data-track=track)
-                      icon(src='#speaker' size=24)
+  section.section
+    p.sec-label 01 — HISTORIA
+    .prose
+      != yield
 
-      //- p #[b WAV] is high-quality audio file in stereo (between -11.0 and -10.0 LUFS), ideal for Sound System playback and vast majority of speakers/headphones with enough BASS support.
-      //- p #[b MP3] is the compressed version of original WAV audio files, with a high bitrate to keep a good quality level (around ~7MB each).
-      //-p #[b ZIP] contains the WAV audio files of the original track (stems) ready to be remixed in your DAW or multi-track player.
+  section.section
+    p.sec-label 02 — FORMATOS
+    .services
+      .srv
+        p.srv-n 01
+        p.srv-name DJ SET
+        p.srv-desc Reproducción digital. CDs o USB. Sin complicaciones.
+      .srv
+        p.srv-n 02
+        p.srv-name LIVE MIX
+        p.srv-desc Laptop y controlador. Ejecución en tiempo real.
+      .srv
+        p.srv-n 03
+        p.srv-name DIGITAL
+        p.srv-desc Mixer digital 8 canales con FX. Sin laptop.
+      .srv
+        p.srv-n 04
+        p.srv-name ANÁLOGO
+        p.srv-desc Cymatic LP-16, 16 canales, FX externos. Cadena completa.
+    br
+    p.accent
+      | No reproduzco tracks. Tomo decisiones en tiempo real.
 
-    hr.break
+  section.section#trabajo
+    p.sec-label 03 — DISCOGRAFÍA
+    .albums
+      each album in sets
+        .album
+          p.album-name
+            | #{album.label}
+            if album.latest
+              span.new LATEST
+          each track in album.tracks
+            .track
+              button.player(data-track=JSON.stringify({ track: track.track, album: track.album }))
+                svg(width='10' height='10' viewBox='0 0 10 10')
+                  polygon(points='2,1 9,5 2,9')
+              span.track-name= track.name
+              span.track-meta(title=track.extra || null)= track.info
 
-    .md-gap.md-flex.flex-center
+  section.section
+    p.sec-label 04 — PLATAFORMAS
+    .prose
+      p Lo publicado no es el destino. Es el registro de un proceso vivo.
+    .platforms
+      a.plat(href='https://youtube.com/@alvadub' target='_blank') YOUTUBE
+      a.plat(href='https://alvadub.bandcamp.com' target='_blank') BANDCAMP
+      a.plat(href='https://soundcloud.com/alvadub' target='_blank') SOUNDCLOUD
+      a.plat(href='https://open.spotify.com/artist/1XqTdkcjEEscsdcZCaqRuE' target='_blank') SPOTIFY
+      a.plat(href='https://www.amazon.com.mx/music/player/artists/B09527QRMC/alvadub' target='_blank') AMAZON
+
+  section.section#mediakit
+    p.sec-label 05 — MEDIA KIT
+    .prose
+      p Logos, fotos y recursos para prensa y flyers. Clic para previsualizar.
+    .kit-grid
+      each asset in media
+        .kit-item(data-name=asset.name data-ext=asset.ext data-src=asset.src)
+          .kit-preview
+            span.kit-tag= asset.ext
+            .kit-placeholder
+              if asset.ext === 'SVG'
+                svg(viewBox='0 0 80 80')
+                  circle(cx='40' cy='40' r='34' fill='none' stroke='currentColor' stroke-width='1.5')
+                  circle(cx='40' cy='40' r='5' fill='currentColor' opacity='.5')
+              else if asset.ext === 'PNG'
+                svg(viewBox='0 0 80 80')
+                  rect(x='8' y='8' width='26' height='26' rx='2' fill='none' stroke='currentColor' stroke-width='1.5')
+                  rect(x='14' y='14' width='14' height='14' rx='1' fill='currentColor' opacity='.4')
+                  rect(x='46' y='8' width='26' height='26' rx='2' fill='none' stroke='currentColor' stroke-width='1.5')
+                  rect(x='52' y='14' width='14' height='14' rx='1' fill='currentColor' opacity='.4')
+                  rect(x='8' y='46' width='26' height='26' rx='2' fill='none' stroke='currentColor' stroke-width='1.5')
+                  rect(x='14' y='52' width='14' height='14' rx='1' fill='currentColor' opacity='.4')
+                  rect(x='46' y='46' width='10' height='10' fill='currentColor' opacity='.35')
+                  rect(x='60' y='46' width='10' height='10' fill='currentColor' opacity='.35')
+                  rect(x='46' y='60' width='10' height='10' fill='currentColor' opacity='.35')
+                  rect(x='60' y='60' width='10' height='10' fill='currentColor' opacity='.35')
+              else
+                svg(viewBox='0 0 60 80' fill='currentColor')
+                  circle(cx='30' cy='20' r='14' opacity='.25')
+                  path(d='M0 80 Q0 50 30 50 Q60 50 60 80Z' opacity='.15')
+            .kit-overlay
+              span VER
+          .kit-info
+            span.kit-name= asset.name
+            span.kit-ext= asset.ext
+    .kit-footer
+      span.kit-note #{media.length} archivos · SVG · PNG · JPG
+      //a.btn.fill(href=zip) ↓ DESCARGAR TODO
+
+  section.section#contacto
+    p.sec-label 06 — CONTACTO
+    .contact-box
+      //div(style='width:96px;border:1px solid red'): include ../resources/images/ALVADUB_VINYL_V2.svg
+      //include ../resources/images/ALVADUB_LOGO.svg
+      //include ../resources/images/ALVADUB_VINYL_V2.svg
+      //image(src='../images/ALVADUB_VINYL_V2' alt='ALVADUB' width=260 height=260)
+      //image(src='ALVADUB_LOGO' alt='ALVADUB' width=260 height=260)
       p
-        image.float-left.onprint(src='SOYPACHECO_QR' alt='QR' width=150 height=150)
-        small.dimmed For now, I am using 12 channels or less and most tracks' length is ~3 min.
+        //| 12 canales o menos. Tracks ~3 min.
+        br
+        | Versiones personalizadas requieren tiempo y presupuesto.
         br
         br
-        small.dimmed.
-          Longer files and/or custom versions would require some time and money, just reach me
-          at #[a(href='mailto:yo@soypache.co') yo@soypache.co] with your request.
-        br
-        br
-        small.dimmed.
-          If you're looking for some pictures and logos for media usage just download the
-          following link: #[a.linky(href='https://www.dropbox.com/scl/fo/l332yt76k5xbmv5mvmoq7/AGVmX8Z6umdW9muRGNTHhsM?rlkey=21z34293ao2zklj5ysysv4siw&st=zzhk3vhd&dl=1') _MEDIA_KIT.zip #[icon(src='#download' size=16)]]
-        br
-        br
-        | Thank you!
+        strong yo@soypache.co
 
-      .text-center.noprint
-        image.me(src='sqme' alt="Alvaro Cabrera" width=260 height=260)
+  footer.site-footer
+    .f-firma
+      span(style='display:block;width:28px;height:28px;border-radius:50%;border:1px solid rgba(0,255,136,0.3);')
+    span.f-copy SAN LORENZO ACOPILCO · GDL · 2025
 
-  .noprint
-    .bcplayer.flex.flex-justified
-    import(from='music.js')
+  .bcplayer#bcplayer
+  .modal-backdrop#modal
+    .modal
+      .modal-preview#modal-preview
+      .modal-bar
+        .modal-meta
+          span.modal-fname#modal-name
+          span.modal-ftype#modal-type
+        .modal-acts
+          button.btn-esc#modal-close ESC
+          a.btn.fill#modal-dl(download) ↓ DESCARGAR
+
+  script(src='/scripts/music.js')
