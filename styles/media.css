@@ -264,6 +264,70 @@ a:hover {
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.32);
 }
+.section-intro {
+  letter-spacing: 4px;
+  color: #00FF88;
+  opacity: 0.5;
+  margin-bottom: 20px;
+  margin-top: -16px;
+}
+.featured-tracks {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 1px;
+  background: rgba(0, 255, 136, 0.07);
+  border: 1px solid rgba(0, 255, 136, 0.1);
+  margin-bottom: 48px;
+}
+.featured-track {
+  background: #0d0d12;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 12px;
+  transition: background 0.2s;
+}
+.featured-track:hover {
+  background: #16161f;
+}
+.featured-track .player {
+  flex-shrink: 0;
+  width: 28px !important;
+  height: 28px !important;
+  border: 1px solid rgba(0, 255, 136, 0.2) !important;
+  border-radius: 50% !important;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  color: #00FF88 !important;
+  transition: all 0.2s;
+}
+.featured-track .player:hover {
+  background: rgba(0, 255, 136, 0.07) !important;
+  border-color: #00FF88 !important;
+}
+.featured-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.featured-name {
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ece8df;
+}
+.featured-album {
+  letter-spacing: 2px;
+  color: rgba(0, 255, 136, 0.35);
+}
+.featured-meta {
+  color: rgba(255, 255, 255, 0.18);
+  font-size: 0.87rem;
+  flex-shrink: 0;
+}
 .albums {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -541,10 +605,12 @@ a:hover {
   background: #0a0a10;
   overflow: hidden;
   max-height: 65vh;
+  padding: 1rem;
 }
+.modal-preview svg,
 .modal-preview img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 33vw;
+  max-height: 33vh;
   -o-object-fit: contain;
      object-fit: contain;
   display: block;
