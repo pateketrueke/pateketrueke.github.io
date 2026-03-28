@@ -285,7 +285,6 @@ a:hover {
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 12px;
   transition: background 0.2s;
 }
 .featured-track:hover {
