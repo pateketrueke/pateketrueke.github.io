@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ALV — Identity</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #888780; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 20px; padding: 2rem; font-family: monospace; }
+  .card { padding: 28px 28px 24px; display: flex; flex-direction: column; gap: 20px; width: 340px; }
+  .card-dark  { background: #2c2c2a; }
+  .card-light { background: #f1efe8; }
+  .card-row { display: flex; align-items: flex-start; gap: 24px; }
+  .tagline  { font-size: 9px; letter-spacing: .12em; }
+  .subtexto { font-size: 9px; letter-spacing: .08em; margin-top: 4px; }
+  .theme    { font-size: 10px; letter-spacing: .08em; margin-top: 8px; }
+  .card-dark  .tagline  { color: #b4b2a9; }
+  .card-dark  .subtexto { color: #5f5e5a; }
+  .card-dark  .theme    { color: #5f5e5a; }
+  .card-light .tagline  { color: #5f5e5a; }
+  .card-light .subtexto { color: #b4b2a9; }
+  .card-light .theme    { color: #b4b2a9; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const C=14,G=3,S=C+G,LGAP=16;
+const W=5*S-G,H=8*S-G;
+
+// FONT curado — fuente de verdad: soypache.co/tools/px.html
+const A=[[0,0,1,1,1],[0,1,0,0,1],[1,0,0,0,1],[1,1,1,1,1],[1,0,0,0,1],[1,0,0,0,1],[1,0,0,0,1],[1,0,0,0,1]];
+const L=[[1,0,0,0,0],[1,0,0,0,0],[1,0,0,0,0],[1,0,0,0,0],[1,0,0,0,0],[1,0,0,0,0],[1,0,0,0,0],[1,1,1,1,1]];
+const V=[[1,0,0,0,1],[1,0,0,0,1],[1,0,0,0,1],[1,0,0,0,1],[0,1,0,0,1],[0,1,0,0,1],[0,0,1,0,1],[0,0,0,1,0]];
+const RABBIT=[[0,1,0,1,0],[0,1,0,1,0],[0,1,0,1,0],[0,1,0,1,0],[1,1,1,1,1],[1,0,0,0,1],[1,1,1,1,1],[1,1,1,1,1]];
+
+function wordSVG(letters,px){
+  const totalW=letters.length*W+(letters.length-1)*LGAP;
+  let c='';
+  letters.forEach((map,i)=>{
+    const ox=i*(W+LGAP);
+    map.forEach((row,r)=>row.forEach((v,col)=>{
+      if(v) c+=`<rect x="${ox+col*S}" y="${r*S}" width="${C}" height="${C}" fill="${px}"/>`;
+    }));
+  });
+  return `<svg width="${totalW}" height="${H}" viewBox="0 0 ${totalW} ${H}">${c}</svg>`;
+}
+
+function rabbitSVG(px){
+  let c='';
+  RABBIT.forEach((row,r)=>row.forEach((v,col)=>{
+    if(v) c+=`<rect x="${col*S}" y="${r*S}" width="${C}" height="${C}" fill="${px}"/>`;
+  }));
+  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${c}</svg>`;
+}
+
+function card(theme){
+  const isDark=theme==='dark';
+  const px=isDark?'#e8e6de':'#2c2c2a';
+  return `<div class="card card-${theme}">
+    <div class="card-row">${wordSVG([A,L,V],px)}${rabbitSVG(px)}</div>
+    <div>
+      <div class="tagline">ALV LIVE VOCABULARY</div>
+      <div class="subtexto">stem workflow cli</div>
+      <div class="theme">${theme}</div>
+    </div>
+  </div>`;
+}
+
+document.getElementById('root').innerHTML=card('dark')+card('light');
+</script>
+</body>
+</html>
