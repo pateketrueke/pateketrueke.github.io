@@ -1,0 +1,168 @@
+<hr>
+<p>title: &quot;Incident Report: lobbyfix-webapp Deployment Failure &amp; Automated Rollback&quot;
+date: 2026-03-08
+published: false
+tags: [aws, ecs, devops, incident]
+author: &quot;Alvaro Cabrera&quot;
+author_email: &quot;pateketrueke@gmail.com&quot;</p>
+<h2 id="author-url-https-github-com-pateketrueke">author_url: &quot;<a href="https://github.com/pateketrueke">https://github.com/pateketrueke</a>&quot;</h2>
+<blockquote><p>A failed ECS deployment on March 8, 2026 caused repeated task cycling for over 5 hours before a manual rollback restored service.</p>
+</blockquote><h2 id="summary">Summary</h2>
+<p>On March 8, 2026, a new deployment to the <code>lobbyfix-webapp</code> service on the <code>regiztra-2-prod</code> ECS cluster failed to pass ALB health checks. The new tasks started successfully but died within 18–24 seconds of boot — silently, with no error output. ECS cycled through task replacements approximately every 11 minutes for over 5 hours. Service was restored via a manual rollback to the previous stable image (<code>regiztra-2-webapp:251</code>), which has been running without issue since February 27.</p>
+<hr>
+<h2 id="timeline">Timeline</h2>
+<div class="has-table"><table><thead><tr>
+<th>Time (UTC-6)</th>
+<th>Event</th>
+</tr>
+</thead><tbody><tr>
+<td>~18:06, Mar 8</td>
+<td>Failed deployment begins; first new task starts and dies in ~20s</td>
+</tr>
+<tr>
+<td>18:06 – 23:19</td>
+<td>ECS cycles new tasks every ~11 minutes; all die in 18–24s</td>
+</tr>
+<tr>
+<td>~23:19</td>
+<td>ALB deregisters target; ECS begins rollback</td>
+</tr>
+<tr>
+<td>~23:20</td>
+<td>Failed deployment stopped manually (<code>stop-service-deployment</code>)</td>
+</tr>
+<tr>
+<td>~23:26</td>
+<td>Rollback to <code>:251</code> completes; service reaches steady state</td>
+</tr>
+<tr>
+<td>Mar 9 onward</td>
+<td>Service stable; steady state messages every 6h (normal ECS heartbeat)</td>
+</tr>
+</tbody></table></div><hr>
+<h2 id="root-cause">Root Cause</h2>
+<p><strong>The new image&#39;s process exited immediately after startup.</strong></p>
+<p>All 18+ tasks from the failed deployment followed an identical pattern:</p>
+<ol>
+<li>Container starts (~0s)</li>
+<li>App logs <code>Express server listening on port 4000</code> (~18–20s)</li>
+<li>Process exits — no error output, no further logs (~18–24s total lifetime)</li>
+</ol>
+<p>The app runs internally on <strong>port 4000</strong> but the container maps <strong>port 80</strong>. A reverse proxy (nginx) bridges the two. The new image almost certainly broke this bridge — either by removing nginx, misconfiguring the entrypoint, or attempting to bind Node.js directly to port 80 (which fails silently under a non-root user with <code>EACCES</code>).</p>
+<p>Because the task died before the ALB&#39;s first health check at 30s, every probe hit a dead endpoint and returned a timeout.</p>
+<hr>
+<h2 id="contributing-factors">Contributing Factors</h2>
+<h3 id="health-check-configuration-is-unforgiving">Health Check Configuration Is Unforgiving</h3>
+<p>The ALB target group is configured with very tight thresholds:</p>
+<div class="has-table"><table><thead><tr>
+<th>Parameter</th>
+<th>Value</th>
+<th>Impact</th>
+</tr>
+</thead><tbody><tr>
+<td>Interval</td>
+<td>30s</td>
+<td>First check at 30s — task already dead</td>
+</tr>
+<tr>
+<td>Timeout</td>
+<td>5s</td>
+<td>Too short for SSR cold start under load</td>
+</tr>
+<tr>
+<td>UnhealthyThreshold</td>
+<td><strong>2</strong></td>
+<td>Only 2 failures needed to mark unhealthy</td>
+</tr>
+<tr>
+<td>HealthyThreshold</td>
+<td><strong>5</strong></td>
+<td>150s of consecutive passes required to become healthy</td>
+</tr>
+</tbody></table></div><p>Even if the process had stayed alive, this configuration would make any slow-starting Node.js app fragile on deployment.</p>
+<h3 id="no-ecs-container-health-check-configured">No ECS Container Health Check Configured</h3>
+<p>There is no <code>healthCheck</code> defined in the task definition. A container-level health check with a <code>startPeriod</code> would:</p>
+<ul>
+<li>Provide a grace window during startup</li>
+<li>Give ECS direct signal that the process is alive</li>
+<li>Reduce false positives from ALB timing</li>
+</ul>
+<h3 id="no-startperiod-grace-window">No <code>startPeriod</code> Grace Window</h3>
+<p>ECS registers the task with the ALB immediately on start. Without a <code>startPeriod</code>, health checks begin before the app is ready.</p>
+<hr>
+<h2 id="findings">Findings</h2>
+<ul>
+<li><strong>18+ task restarts</strong> over ~5 hours on March 8</li>
+<li><strong>Every task</strong> from the failed deployment lived exactly 18–24 seconds (matching startup time)</li>
+<li><strong>Current stable task</strong> (<code>:251</code>) has been running continuously since Feb 27</li>
+<li>The failure was in the <strong>new image</strong>, not in ECS or ALB configuration</li>
+</ul>
+<hr>
+<h2 id="recommendations">Recommendations</h2>
+<h3 id="1-fix-the-new-image-%E2%80%94-port-80-binding">1. Fix the New Image — Port 80 Binding</h3>
+<p>Confirm the new image still ships nginx (or equivalent) configured to proxy <code>:80 → :4000</code>. If the image now attempts to bind Node directly to port 80, either:</p>
+<ul>
+<li>Run the container as root (not recommended), or</li>
+<li>Change the container port mapping to 4000 and update the ALB target group accordingly</li>
+</ul>
+<h3 id="2-tighten-the-feedback-loop-%E2%80%94-add-startup-logs">2. Tighten the Feedback Loop — Add Startup Logs</h3>
+<p>The process exits without any error output. Add an <code>uncaughtException</code> / <code>unhandledRejection</code> handler and make startup failures loud:</p>
+<pre class="hljs"><code class="lang-js">process.<span class="hljs-title function_">on</span>(<span class="hljs-string">&#x27;uncaughtException&#x27;</span>, <span class="hljs-function">(<span class="hljs-params">err</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(<span class="hljs-string">&#x27;FATAL uncaughtException:&#x27;</span>, err);
+  process.<span class="hljs-title function_">exit</span>(<span class="hljs-number">1</span>);
+});
+</code></pre>
+<h3 id="3-tune-health-check-thresholds">3. Tune Health Check Thresholds</h3>
+<p>Make the ALB health check more tolerant of cold starts:</p>
+<pre class="hljs"><code class="lang-bash">aws elbv2 modify-target-group \
+  --target-group-arn arn:aws:elasticloadbalancing:us-east-1:792433572809:targetgroup/regiztra-prod2-webapp/db234ad614ea13c6 \
+  --health-check-timeout-seconds 10 \
+  --unhealthy-threshold-count 3 \
+  --healthy-threshold-count 2
+</code></pre>
+<h3 id="4-add-a-container-health-check-with-startperiod">4. Add a Container Health Check with startPeriod</h3>
+<p>In the task definition, add:</p>
+<pre class="hljs"><code class="lang-json"><span class="hljs-attr">&quot;healthCheck&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;CMD-SHELL&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;curl -f http://localhost:4000/ || exit 1&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;interval&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;timeout&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;retries&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;startPeriod&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">60</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>This gives the app 60 seconds to start before health check failures count against it.</p>
+<h3 id="5-enable-ecs-deployment-circuit-breaker">5. Enable ECS Deployment Circuit Breaker</h3>
+<p>If not already enabled on the service, turn on the circuit breaker with automatic rollback:</p>
+<pre class="hljs"><code class="lang-bash">aws ecs update-service \
+  --cluster regiztra-2-prod \
+  --service lobbyfix-webapp \
+  --deployment-configuration <span class="hljs-string">&quot;deploymentCircuitBreaker={enable=true,rollback=true}&quot;</span>
+</code></pre>
+<p>This would have triggered the rollback automatically instead of requiring manual intervention after 5+ hours.</p>
+<hr>
+<h2 id="security-note">Security Note</h2>
+<p>The current task definition (<code>:251</code>) contains <code>AWS_ACCESS_KEY_ID</code> and <code>AWS_SECRET_ACCESS_KEY</code> as <strong>plain-text environment variables</strong>. These credentials are visible in any <code>describe-task-definition</code> API call, CloudTrail logs, and the AWS Console.</p>
+<p><strong>Action required:</strong> Rotate those keys and migrate to an IAM task role. This eliminates static credentials entirely and follows AWS least-privilege best practice.</p>
+<hr>
+<h2 id="current-status">Current Status</h2>
+<div class="has-table"><table><thead><tr>
+<th>Item</th>
+<th>Status</th>
+</tr>
+</thead><tbody><tr>
+<td>Service health</td>
+<td>Healthy (1/1 running)</td>
+</tr>
+<tr>
+<td>Active revision</td>
+<td><code>regiztra-2-webapp:251</code></td>
+</tr>
+<tr>
+<td>Target IP</td>
+<td><code>10.0.2.152:80</code></td>
+</tr>
+<tr>
+<td>Last steady state</td>
+<td>Mar 9, 2026 05:27 UTC-6</td>
+</tr>
+</tbody></table></div><p>The service is stable. The failed image has not been re-deployed.</p>

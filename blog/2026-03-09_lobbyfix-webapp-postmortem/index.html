@@ -1,0 +1,89 @@
+<hr>
+<p>title: &quot;Postmortem: lobbyfix-webapp Deployment Failure — March 8, 2026&quot;
+date: 2026-03-08
+published: false
+tags: [aws, ecs, incident, postmortem]
+author: &quot;Alvaro Cabrera&quot;
+author_email: &quot;pateketrueke@gmail.com&quot;</p>
+<h2 id="author-url-https-github-com-pateketrueke">author_url: &quot;<a href="https://github.com/pateketrueke">https://github.com/pateketrueke</a>&quot;</h2>
+<h1 id="postmortem-lobbyfix-webapp-deployment-failure">Postmortem: lobbyfix-webapp Deployment Failure</h1>
+<p><strong>Date:</strong> March 8–9, 2026
+<strong>Service:</strong> lobbyfix-webapp (regiztra-2-prod cluster)
+<strong>Severity:</strong> Deployment blocked; production service unaffected (automated rollback kept previous version live)
+<strong>Status:</strong> Resolved</p>
+<hr>
+<h2 id="summary">Summary</h2>
+<p>A deployment pushed on March 8 failed to start correctly and triggered an automated rollback. The root cause was a memory configuration mismatch: the application was configured to use 768 MB of memory, but the hosting container was limited to 512 MB. Every new deployment attempt was terminated by the system before it could pass health checks. The issue was resolved on March 9 by increasing the container memory limit to 1024 MB.</p>
+<hr>
+<h2 id="impact">Impact</h2>
+<div class="has-table"><table><thead><tr>
+<th>Area</th>
+<th>Impact</th>
+</tr>
+</thead><tbody><tr>
+<td>End users</td>
+<td>None — the previous stable version remained live throughout</td>
+</tr>
+<tr>
+<td>Deployments</td>
+<td>Blocked for ~5 hours on March 8</td>
+</tr>
+<tr>
+<td>New features</td>
+<td>Any changes in the failed deployment were not released until March 9</td>
+</tr>
+</tbody></table></div><hr>
+<h2 id="timeline">Timeline</h2>
+<div class="has-table"><table><thead><tr>
+<th>Time (UTC-6)</th>
+<th>Event</th>
+</tr>
+</thead><tbody><tr>
+<td>Mar 8 ~18:06</td>
+<td>New deployment initiated</td>
+</tr>
+<tr>
+<td>Mar 8 18:06–23:19</td>
+<td>Deployment cycles repeatedly; each attempt fails within ~20 seconds</td>
+</tr>
+<tr>
+<td>Mar 8 ~23:20</td>
+<td>Deployment manually stopped; automatic rollback to previous version completes</td>
+</tr>
+<tr>
+<td>Mar 8 ~23:26</td>
+<td>Service stable on previous version</td>
+</tr>
+<tr>
+<td>Mar 9</td>
+<td>Root cause identified: memory limit too low for Node.js heap configuration</td>
+</tr>
+<tr>
+<td>Mar 9 ~20:42</td>
+<td>Fixed deployment released; service running healthy on new version</td>
+</tr>
+</tbody></table></div><hr>
+<h2 id="root-cause">Root Cause</h2>
+<p>The application server is configured to reserve <strong>768 MB</strong> for its Node.js memory heap. The ECS task (the containerized unit that runs the app) had a hard memory ceiling of <strong>512 MB</strong> — less than what the application expected. When the new version started, the operating system terminated the process before it could fully initialize and serve traffic.</p>
+<p>The previous version was unaffected because it had been deployed before this constraint became a problem. The new image had a slightly larger memory footprint at startup, which pushed it over the limit.</p>
+<hr>
+<h2 id="resolution">Resolution</h2>
+<p>The container memory limit was raised from <strong>512 MB to 1024 MB</strong> in the task definition. The new deployment completed successfully:</p>
+<ul>
+<li>Startup time: <strong>~11 seconds</strong> (vs. ~20s on the failed attempts)</li>
+<li>Health check: <strong>passed</strong></li>
+<li>Status: <strong>Running and healthy</strong></li>
+</ul>
+<hr>
+<h2 id="prevention">Prevention</h2>
+<p>The following measures have been identified to prevent recurrence:</p>
+<ol>
+<li><p><strong>Memory headroom policy</strong> — container memory limits should always exceed the Node.js heap size by at least 256 MB to account for the OS, web server, and other processes running alongside the app.</p>
+</li>
+<li><p><strong>Pre-deployment local testing with resource constraints</strong> — running the Docker image with the same memory limits as production (<code>--memory=512m</code>) before deploying would have surfaced this issue immediately.</p>
+</li>
+<li><p><strong>Deployment circuit breaker</strong> — enabling ECS&#39;s automatic circuit breaker with rollback would have reduced the failure window from 5 hours to the first failed health check cycle (~2–3 minutes).</p>
+</li>
+</ol>
+<hr>
+<p><em>Prepared by the infrastructure team — March 9, 2026.</em></p>
