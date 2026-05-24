@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>soypache.co — Quick Talk</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f0ede6;
+    --acid: #c8f135;
+    --mid: #555;
+  }
+
+  html, body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Mono', monospace;
+    width: 100%; height: 100%;
+    overflow: hidden;
+  }
+
+  .deck {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px;
+    overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  /* ── CORNERS ── */
+  .corner {
+    position: absolute;
+    width: 32px; height: 32px;
+    border-color: var(--acid);
+    border-style: solid;
+    opacity: 0.4;
+  }
+  .corner-tl { top: 32px; left: 32px; border-width: 2px 0 0 2px; }
+  .corner-tr { top: 32px; right: 32px; border-width: 2px 2px 0 0; }
+  .corner-bl { bottom: 32px; left: 32px; border-width: 0 0 2px 2px; }
+  .corner-br { bottom: 32px; right: 32px; border-width: 0 2px 2px 0; }
+
+  /* ══════════════════════════════════
+     SLIDE 1 — APERTURA
+  ══════════════════════════════════ */
+  #slide-1 {
+    background: var(--black);
+  }
+
+  #slide-1 .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,241,53,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,241,53,0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  #slide-1 .scan-line {
+    position: absolute;
+    left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--acid), transparent);
+    animation: scan 5s linear infinite;
+    opacity: 0.25;
+  }
+  @keyframes scan { 0% { top: -2px; } 100% { top: 100%; } }
+
+  #slide-1 .content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .prompt {
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+    color: var(--acid);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.8;
+  }
+
+  .domain {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 15vw, 13rem);
+    line-height: 0.88;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    display: block;
+  }
+  .domain em { color: var(--acid); font-style: normal; }
+
+  .qr-area {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .qr-box {
+    border: 1.5px solid rgba(200,241,53,0.5);
+    padding: 6px;
+    line-height: 0;
+  }
+
+  .qr-box img {
+    width: 320px; height: 320px;
+    display: block;
+    image-rendering: pixelated;
+  }
+
+  .qr-label {
+    font-size: 0.6rem;
+    color: var(--acid);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    line-height: 2;
+    text-align: left;
+  }
+
+  /* ══════════════════════════════════
+     SLIDE 2 — CIERRE
+  ══════════════════════════════════ */
+  #slide-2 {
+    background: var(--black);
+  }
+
+  #slide-2 .wave {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 180px;
+    background: linear-gradient(180deg, transparent, rgba(200,241,53,0.04));
+    pointer-events: none;
+  }
+
+  #slide-2 .content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    max-width: 860px;
+  }
+
+  .eyebrow {
+    font-size: clamp(0.6rem, 1.2vw, 0.8rem);
+    color: var(--acid);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 28px;
+  }
+  .eyebrow em {
+    font-style: normal;
+    opacity: 1;
+    color: var(--white);
+  }
+
+  .handle {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.9;
+    color: var(--white);
+    letter-spacing: 0.02em;
+    display: block;
+  }
+  .handle em {
+    font-style: normal;
+  }
+  .handle .pate   { color: var(--acid); }
+  .handle .ke     { color: #666; }
+  .handle .trueke { color: var(--white); }
+
+  .handle-sub {
+    font-size: clamp(0.7rem, 1.5vw, 0.95rem);
+    color: var(--mid);
+    letter-spacing: 0.1em;
+    margin-top: 10px;
+    margin-bottom: 36px;
+  }
+  .handle-sub em { color: var(--acid); font-style: normal; opacity: 0.9; }
+
+  .divider {
+    width: 48px; height: 2px;
+    background: var(--acid);
+    margin: 0 auto 32px;
+    opacity: 0.5;
+  }
+
+  .networks {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  .net-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .net-platform {
+    font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--white);
+    opacity: 0.7;
+  }
+
+  .net-handle {
+    font-size: clamp(0.75rem, 1.4vw, 0.95rem);
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+
+  .qr-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .qr-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  #slide-2 .qr-box img {
+    width: 320px; height: 320px;
+  }
+
+  .qr-tag {
+    font-size: 0.52rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--acid);
+    opacity: 0.6;
+  }
+
+  /* ── NAV ── */
+  .nav-arrow {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: 1px solid rgba(200,241,53,0.2);
+    color: var(--acid);
+    font-family: 'DM Mono', monospace;
+    font-size: 1.1rem;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 200;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .nav-arrow:hover { background: rgba(200,241,53,0.08); border-color: var(--acid); }
+  .prev { left: 16px; }
+  .next { right: 16px; }
+
+  .dots {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 200;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--mid);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .dot.on { background: var(--acid); transform: scale(1.5); }
+
+  .counter {
+    position: fixed;
+    top: 20px; right: 28px;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: var(--mid);
+    z-index: 200;
+  }
+</style>
+</head>
+<body>
+
+<div class="deck">
+
+  <!-- ── SLIDE 1 ── -->
+  <div class="slide active" id="slide-1">
+    <div class="grid-bg"></div>
+    <div class="scan-line"></div>
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+    <div class="content">
+      <p class="prompt">$ whoami</p>
+      <span class="domain"><em>soy</em>pache.co</span>
+      <div class="qr-area">
+        <div class="qr-box">
+          <img id="qr1" alt="QR soypache.co" />
+        </div>
+        <div class="qr-label">escanea<br>y llega<br>directo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SLIDE 2 ── -->
+  <div class="slide" id="slide-2">
+    <div class="wave"></div>
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-tr"></div>
+    <div class="corner corner-bl"></div>
+    <div class="corner corner-br"></div>
+    <div class="content">
+      <p class="eyebrow">¡Nos vemos <em>a la vuelta</em>!</p>
+      <span class="handle">@<em class="pate">pate</em><em class="ke">ke</em><em class="trueke">trueke</em></span>
+
+      <div class="divider"></div>
+      <div class="networks">
+        <div class="net-item"><span class="net-platform">X</span></div>
+        <div class="net-item"><span class="net-platform">IG</span></div>
+        <div class="net-item"><span class="net-platform">GH</span></div>
+        <div class="net-item"><span class="net-platform">ALV</span></div>
+      </div>
+      <div class="qr-row">
+        <div class="qr-wrap">
+          <div class="qr-box">
+            <img id="qr2" alt="QR presskit" />
+          </div>
+          <span class="qr-tag">press-kit &amp; media</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Controls -->
+<span class="counter" id="ctr">01 / 02</span>
+<button class="nav-arrow prev" onclick="go(-1)">←</button>
+<button class="nav-arrow next" onclick="go(1)">→</button>
+<div class="dots">
+  <div class="dot on" onclick="set(0)"></div>
+  <div class="dot" onclick="set(1)"></div>
+</div>
+
+<script>
+  const QR = "https://api.qrserver.com/v1/create-qr-code/?size=400x400&color=f0ede6&bgcolor=0a0a0a&margin=6&data=";
+  document.getElementById('qr1').src = QR + encodeURIComponent('https://soypache.co');
+  document.getElementById('qr2').src = QR + encodeURIComponent('https://soypache.co/alvadub/');
+
+  const slides = document.querySelectorAll('.slide');
+  const dots   = document.querySelectorAll('.dot');
+  const ctr    = document.getElementById('ctr');
+  let cur = 0;
+
+  function set(n) {
+    slides[cur].classList.remove('active');
+    dots[cur].classList.remove('on');
+    cur = Math.max(0, Math.min(n, slides.length - 1));
+    slides[cur].classList.add('active');
+    dots[cur].classList.add('on');
+    ctr.textContent = String(cur+1).padStart(2,'0') + ' / ' + String(slides.length).padStart(2,'0');
+  }
+
+  function go(d) { set(cur + d); }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ') go(1);
+    if (e.key === 'ArrowLeft') go(-1);
+  });
+
+  let tx = 0;
+  document.addEventListener('touchstart', e => tx = e.touches[0].clientX);
+  document.addEventListener('touchend',   e => { const d = e.changedTouches[0].clientX - tx; if (Math.abs(d) > 50) go(d < 0 ? 1 : -1); });
+</script>
+</body>
+</html>
