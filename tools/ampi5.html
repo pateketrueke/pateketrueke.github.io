@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AMPi5 — 84×48 accurate PCD8544 sim</title>
+<style>
+  :root{
+    --pcb:#1b2a1a; --pcb-dark:#0e160d; --copper:#c17a44;
+    --silk:#e8e4d8; --silk-dim:#8a9182;
+    --amber:#ff9d3d; --amber-dim:#5a3a1a;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; min-height:100%;
+    background: radial-gradient(ellipse at 50% -10%, #1a231a 0%, #0b0e09 55%, #070805 100%);
+    color:var(--silk);
+    font-family: ui-monospace,"SF Mono","JetBrains Mono","Courier New",monospace;
+    display:flex; flex-direction:column; align-items:center;
+    padding:36px 14px;
+  }
+  .bench{ width:min(460px,94vw); display:flex; flex-direction:column; align-items:center; gap:16px; }
+  .eyebrow{ font-size:11px; letter-spacing:.2em; color:var(--silk-dim); text-transform:uppercase; text-align:center;}
+  .eyebrow b{color:var(--amber); font-weight:600;}
+
+  .module{
+    position:relative; width:100%;
+    background:linear-gradient(155deg,var(--pcb) 0%, var(--pcb-dark) 100%);
+    border-radius:14px; padding:20px 18px 16px;
+    box-shadow:0 0 0 1px #000, 0 30px 60px -20px rgba(0,0,0,.8), inset 0 1px 0 rgba(255,255,255,.03);
+  }
+  .hole{position:absolute; width:9px; height:9px; border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #3a4a35, #0a100a 70%); box-shadow:inset 0 0 0 1px #000;}
+  .hole.tl{top:10px;left:10px;} .hole.tr{top:10px;right:10px;}
+  .hole.bl{bottom:10px;left:10px;} .hole.br{bottom:10px;right:10px;}
+  .silk-label{font-size:9px; letter-spacing:.14em; color:var(--silk-dim); text-transform:uppercase; margin-bottom:12px; text-align:center;}
+
+  .bezel{position:relative; margin:0 auto; background:#12160d; border-radius:8px; padding:14px;
+    box-shadow:inset 0 0 0 1px #000, inset 0 2px 6px rgba(0,0,0,.6); width:fit-content;
+    display:flex; align-items:center; justify-content:center; min-height:80px;}
+  #lcd{display:block; border-radius:1px; image-rendering:pixelated; box-shadow:0 0 22px -3px rgba(168,201,126,.35);}
+
+  .scale-row{display:flex; align-items:center; gap:10px; margin-top:12px;}
+  .scale-row label{font-size:9px; color:var(--silk-dim); letter-spacing:.08em; text-transform:uppercase; white-space:nowrap;}
+  input[type=range]{-webkit-appearance:none; flex:1; height:4px; border-radius:2px; background:#2c3d24; outline:none;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:13px; height:13px; border-radius:50%;
+    background:var(--amber); box-shadow:0 0 0 1px #000; cursor:pointer;}
+  .scale-val{font-size:10px; color:var(--amber); min-width:64px; text-align:right;}
+
+  .mode-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:6px; margin-top:14px;}
+  .mode-btn{font-family:inherit; font-size:9px; letter-spacing:.03em; text-transform:uppercase;
+    color:var(--silk-dim); background:#161f13; border:1px solid #263320; border-radius:6px; padding:7px 2px; cursor:pointer;}
+  .mode-btn:hover{border-color:var(--copper); color:var(--silk);}
+  .mode-btn.active{background:linear-gradient(180deg,#3a4a2e,#232f1c); color:var(--amber); border-color:var(--amber-dim);}
+
+  .aux-row{display:flex; align-items:center; justify-content:space-between; margin-top:10px; gap:6px;}
+  .hint{font-size:10px; color:var(--silk-dim); min-height:14px;}
+  .btn{font-family:inherit; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--silk-dim); background:transparent; border:1px solid #263320; border-radius:14px; padding:5px 12px; cursor:pointer; white-space:nowrap;}
+  .btn.active{color:#0b0e09; background:var(--amber); border-color:var(--amber);}
+
+  .footnote{font-size:9.5px; color:var(--silk-dim); line-height:1.6; text-align:center;}
+
+  /* ---- pixel tuner (new, lives above the simulator) ---- */
+  .tunerWrap{ width:min(1000px,94vw); margin:0 auto 26px; display:flex; flex-direction:column; gap:14px; }
+  .tuner-h1{ font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--silk-dim); font-weight:600; margin:0; text-align:left;}
+  .tuner-h1 b{ color:var(--amber); }
+  .tpanel{ background:#12180f; border:1px solid #22301b; border-radius:12px; padding:14px 16px; }
+  .tpanel-title{ font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--silk-dim); margin-bottom:10px; }
+  .ttabs{ display:flex; gap:6px; flex-wrap:wrap; }
+  .ttab{ font-family:inherit; font-size:10.5px; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--silk-dim); background:#161f13; border:1px solid #263320; border-radius:7px; padding:7px 13px; cursor:pointer; }
+  .ttab:hover{ border-color:var(--copper); }
+  .ttab.active{ background:linear-gradient(180deg,#3a4a2e,#232f1c); color:var(--amber); border-color:var(--amber-dim); }
+  .tpicker{ display:flex; flex-wrap:wrap; gap:4px; max-height:130px; overflow-y:auto; padding:4px;
+    background:#0d1209; border-radius:8px; border:1px solid #1c2617; }
+  .tpickBtn{ font-family:inherit; font-size:11px; color:var(--silk-dim); background:#161f13; border:1px solid #263320;
+    border-radius:5px; padding:5px 8px; cursor:pointer; min-width:26px; text-align:center; }
+  .tpickBtn:hover{ border-color:var(--copper); color:var(--silk); }
+  .tpickBtn.active{ background:var(--amber); color:#0b0e09; border-color:var(--amber); }
+  .tpickBtn.touched::after{ content:'\25CF'; color:var(--amber); font-size:7px; margin-left:3px; vertical-align:middle; }
+  .ttierRow{ display:flex; gap:6px; align-items:center; margin-top:10px; }
+  .ttierRow label{ font-size:9px; color:var(--silk-dim); letter-spacing:.1em; text-transform:uppercase; margin-right:2px; }
+  .ttierBtn{ font-family:inherit; font-size:10.5px; color:var(--silk-dim); background:#161f13; border:1px solid #263320;
+    border-radius:6px; padding:6px 11px; cursor:pointer; }
+  .ttierBtn:hover{ border-color:var(--copper); }
+  .ttierBtn.active{ background:linear-gradient(180deg,#3a4a2e,#232f1c); color:var(--amber); border-color:var(--amber-dim); }
+  .ttierBtn.dirty{ box-shadow: inset 0 0 0 1.5px var(--amber); }
+  .tmain{ display:flex; gap:20px; align-items:flex-start; margin-top:4px; }
+  @media (max-width: 680px){
+    .tmain{ flex-direction:column; }
+    .teditSide, .tprevs{ min-width:0; width:100%; }
+  }
+  .teditSide{ flex:1; min-width:260px; }
+  .teditHint{ font-size:9.5px; color:var(--silk-dim); margin-bottom:8px; line-height:1.5; }
+  #editGrid{ display:block; cursor:crosshair; border-radius:4px; box-shadow:0 0 0 1px #000; touch-action:none; }
+  .tprevs{ display:flex; gap:14px; flex-wrap:wrap; min-width:280px; }
+  .tprevItem{ display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
+  .tprevItem span{ font-size:9px; color:var(--silk-dim); letter-spacing:.08em; text-transform:uppercase; }
+  .tprevItem canvas{ image-rendering:pixelated; border-radius:2px; box-shadow:0 0 10px -2px rgba(168,201,126,.3); background:#0d1209; }
+  .tdiffNote{ font-size:10px; color:var(--amber); min-height:14px; margin-top:6px; }
+  .trow{ display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:8px; }
+  .tunerWrap textarea{ width:100%; height:90px; resize:vertical; font-size:10px; line-height:1.4;
+    font-family:inherit; background:#1c2617; color:var(--silk); border:1px solid #2c3d24; border-radius:7px; padding:8px 12px; }
+  .tunerWrap button{ font-family:inherit; font-size:11px; letter-spacing:.04em; text-transform:uppercase;
+    color:var(--silk); background:#1c2617; border:1px solid #2c3d24; border-radius:7px; padding:8px 12px; cursor:pointer; }
+  .tunerWrap button:hover{ border-color:var(--copper); }
+  .tunerWrap button.primary{ background:linear-gradient(180deg,#3a4a2e,#232f1c); color:var(--amber); border-color:var(--amber-dim); }
+  .tuner-foot{ font-size:9.5px; color:var(--silk-dim); line-height:1.6; }
+  .live-badge{ font-size:9px; color:var(--amber); letter-spacing:.08em; text-transform:uppercase; }
+  .tsession-collapsed{ display:flex; align-items:center; gap:10px; }
+  .tsession-collapsed button{ font-family:inherit; font-size:9.5px; letter-spacing:.06em; text-transform:uppercase;
+    color:var(--silk-dim); background:transparent; border:1px solid #263320; border-radius:14px; padding:5px 12px; cursor:pointer; }
+  .tsession-collapsed button:hover{ border-color:var(--copper); color:var(--silk); }
+</style>
+</head>
+<body>
+
+<div class="tunerWrap">
+  <h1 class="tuner-h1">84×48 pixel LCD · <b>AMPi5</b> · pixel tuner <span class="live-badge">● live-wired to the sim below</span></h1>
+
+  <div class="tpanel">
+    <div class="tpanel-title">Category — every bitmap in the system</div>
+    <div class="ttabs" id="catTabs"></div>
+    <div class="tpicker" id="picker" style="margin-top:10px;"></div>
+    <div class="ttierRow" id="tierRow"></div>
+  </div>
+
+  <div class="tmain">
+    <div class="teditSide tpanel">
+      <div class="tpanel-title">Edit — click a pixel to toggle it</div>
+      <div class="teditHint" id="editHint"></div>
+      <div style="overflow-x:auto; max-width:100%;"><canvas id="editGrid"></canvas></div>
+      <div class="tdiffNote" id="diffNote"></div>
+    </div>
+    <div class="tprevs tpanel" id="previewPanel"></div>
+  </div>
+
+  <div class="tsession-collapsed" id="sessionCollapsed">
+    <button id="sessionToggle">Backup / restore session &darr;</button>
+    <span class="tdiffNote" id="sessionNote"></span>
+  </div>
+  <div class="tpanel" id="sessionPanel" style="display:none;">
+    <div class="tpanel-title">Save / restore session — not required, edits are already live below</div>
+    <div class="trow">
+      <button class="primary" id="exportBtn">Export session</button>
+      <button id="importBtn">Load pasted session →</button>
+      <button id="sessionCollapseBtn">Hide &uarr;</button>
+    </div>
+    <textarea id="exportOut" placeholder="Only needed to save your edits for later or hand them off — the simulator below already reflects every change live."></textarea>
+  </div>
+
+  <div class="tuner-foot">
+    1x is the real source for font/icon/glyph/switch bitmaps — editing it changes the actual asset, live, in the
+    simulator below. 2x/3x/4x start as a mechanical NxN scale-up and stay that way until you edit one, at which
+    point it promotes to an independently tunable bitmap (amber outline). Logo assets have no tier relationship
+    (each size is resampled straight from the vector source), so their four previews are just zoom levels.
+  </div>
+</div>
+
+<div class="bench">
+  <div class="eyebrow">84×48 pixel LCD · <b>AMPi5</b> · accurate PCD8544 sim</div>
+
+  <div class="module">
+    <div class="hole tl"></div><div class="hole tr"></div>
+    <div class="hole bl"></div><div class="hole br"></div>
+    <div class="silk-label" id="pipelineLabel">FRAMEBUFFER · 1-BIT · 504 BYTES</div>
+    <div class="bezel"><canvas id="lcd" width="84" height="48"></canvas></div>
+
+    <div class="scale-row">
+      <label>Scale</label>
+      <input type="range" id="scaleSlider" min="1" max="12" step="1" value="3">
+      <span class="scale-val" id="scaleVal">3× · 252×144px</span>
+    </div>
+
+    <div class="mode-grid" id="modeGrid"></div>
+    <div class="aux-row">
+      <div class="hint" id="hint">flip through screens</div>
+      <div style="display:flex; gap:6px;">
+        <button class="btn active" id="fbBtn">FB</button>
+        <button class="btn" id="srcBtn">Source</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    Every pixel is strictly on/off — apparent gray only exists where an ordered 4×4 Bayer matrix decides which
+    neighboring pixels turn on, never a gray pixel itself. Text is sampled live from a real 7×9 monospace bitmap
+    font sheet (yours) — no hand-drawn glyphs, no system font. Toggle Source to see the pre-quantization
+    grayscale the dithering was computed from — FB is what the chip would actually show.
+  </div>
+</div>
+
+<script>
+const W=84,H=48;
+const disp=document.getElementById('lcd');
+const dctx=disp.getContext('2d');
+dctx.imageSmoothingEnabled=false;
+
+function hexToRgb(h){const n=parseInt(h.slice(1),16); return [(n>>16)&255,(n>>8)&255,n&255];}
+const OFFc=hexToRgb('#a8c97e'), ONc=hexToRgb('#141d0d');
+
+let scale=3;
+function resizeDisp(){
+  disp.width=W*scale; disp.height=H*scale;
+  disp.style.width=(W*scale)+'px'; disp.style.height=(H*scale)+'px';
+}
+resizeDisp();
+
+/* ============ regular text font: real 7x9 sprite sheet, sampled not hand-drawn ============ */
+const FONT_SHEET_B64='iVBORw0KGgoAAAANSUhEUgAAAHAAAAA2AQAAAAA3miCXAAACeUlEQVR4nDWSQWgTCRiFv/lnbKI7Jj2U0krFEUSFspC1tqRSycT1sCwKIuzBLmI8RbCHlj2IgnRKe1QMiGAxODmJ4MVDd9mb6QpStGKQLRQ8mK7gBARNaWEncSa/h8bv/j14j4c+PFMOckGQU1VVAaIDh2hcbABYEF1tvbZrx4o/ecSCsXTvJDadv4FYILo2uQ/kVGnDbaN+VDqyZ9Zf/TirGlgUYnv99UitdiyGBqoa6X+zQU4j3fJRX7u0dOuZLOhu5+DBuYUkPe62WH99eB9cePzjxFTOde13VjhPB2KgM98uSEhwtjXT/pXlmxs/xwz6/vNcqjhuaqStLXGoxHUaNJHLJ7Yt1E07X4Bc/v3SgNC5QQPYhuoAzNvWgUzhzXw6UtUAvWXj4GbNuedBKi8L99e2im8uGeVfal/Dd/LnGbpUOhHS4CitGUDdXT1Io7RO4s7mCnhiIUwD2FkMF0HGumZMAZDT35PIAHSmbZz0clYGq4lUHtOySaSGstNWLvxDZXRqLaoDZr3a8xnpir8vNbb5hMCwAxy/UuthBHnJ3acQ0lsxAZmoZwBW1RUPhL4B6J961PGMKohRBkgC7iRYNJvn/j3bBz+EdWcOP1L1m5rzF0NVtTIA/6cptE1AMsnY2fSWcZzah/w/aHP3SsIom/5iuZ4aEnrXh68fZgwqu0B0GhJVQF34XuEQGFUBiyY13LXuOGivPdBbXB5Pja8UU/md56iq6tDmzkV30EISxDJuW0fT+8dnkhB41mh2Lfp0hMmNFxk+egIPHAiP89aLRxAwnwJGqQIgr0pA/9Tql3wlBJlotvFJPup49RQImOef7P2NviTANx9pGAEkbtZ/AAAAAElFTkSuQmCC';
+const fontImg=new Image();
+fontImg.src='data:image/png;base64,'+FONT_SHEET_B64;
+const FS_COLS=16, FS_CW=7, FS_CH=9, LETTER_GAP=1, CHAR_ADV=FS_CW+LETTER_GAP;
+let fontBits=null;
+fontImg.onload=()=>{
+  const c=document.createElement('canvas'); c.width=fontImg.width; c.height=fontImg.height;
+  const cx=c.getContext('2d'); cx.drawImage(fontImg,0,0);
+  const d=cx.getImageData(0,0,c.width,c.height).data;
+  fontBits=new Uint8Array(c.width*c.height);
+  for(let i=0;i<fontBits.length;i++) fontBits[i] = d[i*4] < 128 ? 1 : 0; // black glyph pixels = foreground
+};
+function plotChar(ch,x,y){
+  let code=ch.charCodeAt(0); if(code<32||code>126) code=32;
+  const a=ensureAssetSync('font',String.fromCharCode(code)); if(!a) return;
+  blitBits(a.native,a.w,a.h,x,y);
+}
+function plotText(str,x,y){ let cx=x; for(const ch of String(str)) { plotChar(ch,cx,y); cx+=CHAR_ADV; } return cx; }
+function plotCharScaled(ch,x,y,s){
+  let code=ch.charCodeAt(0); if(code<32||code>126) code=32;
+  const a=ensureAssetSync('font',String.fromCharCode(code)); if(!a) return;
+  const t=getTierBits(a,s);
+  blitBits(t.bits,t.w,t.h,x,y);
+}
+function plotTextScaled(str,x,y,s){ let cx=x; for(const ch of String(str)) { plotCharScaled(ch,cx,y,s); cx+=CHAR_ADV*s; } return cx; }
+
+/* ============ line grid: 48px / N slots, centers glyphs of any scale within `span` combined slots ============ */
+function slotY(startSlot,span,scale,n){
+  span=span||1; scale=scale||1; n=n||3;
+  const slotH=Math.floor(H/n);
+  const totalH=slotH*span, glyphH=FS_CH*scale;
+  return startSlot*slotH + Math.floor((totalH-glyphH)/2);
+}
+function centerX(str,scale){ scale=scale||1; return Math.round((W-((str.length-1)*CHAR_ADV+FS_CW)*scale)/2); }
+const GAP=2; // standard spacing between any two adjacent elements, used everywhere below
+function afterHeader(){ return slotY(0,1,1)+FS_CH+GAP; } // row right after the slot-0 header + gap
+function after(y,h){ return y+h+GAP; } // chain: next element's y, given the previous one's y and height
+
+/* ============ icon glyphs: real 7x9 sprite sheet, same sampling technique ============ */
+const ICON_SHEET_B64='iVBORw0KGgoAAAANSUhEUgAAAHAAAAAtAQAAAABei9LPAAACWklEQVR4nDXNTUiTcQDH8d/zd7qB4h4PgcTW5sldiuGlmTqXM6ioQ5AQBDIw8qKHaJWR2x4lCgncQTp1UAhDMFKJ7NDLHleJN5dhKklbTUqy2nzbnr09vy72vX1OX/CgODNxRoTq0NdVvbgQU9Iovhcxym9zhf09JIrAYaEBIe2MHCWRVutEHoQCvNYdhplTiqiABAXApF01v1KECRgwvUwDBj3mOSKcQJuxvBIuGYABB9vGcP5JnPp/rujmXAuzonhPa7kNgD9P+KIQ7jqts7V9e7JMVrTxr/g0ZfuxMLLjupBx/wnPCgtyYG/1IGVdkSE2JozS6ZGdoJQWgzCJq4wZHqs4O60vj5khojbTzLy/osMveUzvbKCRx0mu3KxudDEJxiPkdnK+jEEWKEQfPWul/N5+eW1jRkMgbI2/CCXnc7u/lnxZoaIUy3ssLrJt1a7gnHjU3Rvh31zDM19TVrJes8C75KHwTwzXfBDt8DpNKqQbNW6HehKBjtkWjWT53mdXIQlp3UgWsim/0U0VIPWmyFw2FdeDJKHTlratL688tb4JFCge1oe9VzC8sdRpb9YHxNp1o3XIC+iKnjWG0LP2vHtxFJBK0wAEII8BXf2a9GAaFPXnHQkAkLZHh3IDoudjQxrYgeSEQYTAgu4EbqGMm60kUiQTrSQjQY3EMbFqnlK64mEW+woUq5mjcz5bHpsoqoD4fjmXGtv6tngXWgJAosBQatTi+LL7u0+FqL7EZmylovYqefMOBcaNh2ruX5T6AdkDgcquptIUqmoBkwKQZDrELNkfIP8BL49Qk9jd3LAAAAAASUVORK5CYII=';
+const iconSheetImg=new Image();
+iconSheetImg.src='data:image/png;base64,'+ICON_SHEET_B64;
+const IS_COLS=16, IS_CW=7, IS_CH=9;
+let iconSheetBits=null;
+iconSheetImg.onload=()=>{
+  const c=document.createElement('canvas'); c.width=iconSheetImg.width; c.height=iconSheetImg.height;
+  const cx=c.getContext('2d'); cx.drawImage(iconSheetImg,0,0);
+  const d=cx.getImageData(0,0,c.width,c.height).data;
+  iconSheetBits=new Uint8Array(c.width*c.height);
+  for(let i=0;i<iconSheetBits.length;i++) iconSheetBits[i] = d[i*4] < 128 ? 1 : 0;
+};
+const ICON_INDEX={
+  play:[0,0],pause:[1,0],stop:[2,0],prev:[3,0],next:[4,0],record:[5,0],speaker:[6,0],mute:[7,0],
+  headphones:[8,0],mic:[9,0],waveform:[10,0],spectrum:[11,0],mixer:[12,0],vol_down:[13,0],vol_up:[14,0],loop:[15,0],
+  shuffle:[0,1],metronome:[1,1],fx:[2,1],reverb:[3,1],delay:[4,1],midi:[5,1],audio_in:[6,1],audio_out:[7,1],
+  cpu:[8,1],ram:[9,1],storage:[10,1],temperature:[11,1],fan:[12,1],power:[13,1],reboot:[14,1],shutdown:[15,1],
+  terminal:[0,2],service:[1,2],warning:[2,2],error:[3,2],ok:[4,2],info:[5,2],wifi_1:[6,2],wifi_2:[7,2],
+  wifi_3:[8,2],ethernet:[9,2],ssh:[10,2],vpn:[11,2],bluetooth:[12,2],internet:[13,2],upload:[14,2],download:[15,2],
+  connected:[0,3],disconnected:[1,3],clock:[2,3],timer:[3,3],calendar:[4,3],folder:[5,3],file:[6,3],settings:[7,3],
+  lock:[8,3],unlock:[9,3],refresh:[10,3],search:[11,3],home:[12,3],back:[13,3],forward:[14,3],menu:[15,3],
+  usb:[0,4],gpio:[1,4],i2c:[2,4],spi:[3,4],uart:[4,4],display:[5,4],keyboard:[6,4],controller:[7,4],
+  activity:[8,4],idle:[9,4],busy_0:[10,4],busy_1:[11,4],arrow_up:[12,4],arrow_down:[13,4],plus:[14,4],minus:[15,4],
+};
+function plotIcon(name,x,y){
+  const a=ensureAssetSync('icon',name); if(!a) return;
+  blitBits(a.native,a.w,a.h,x,y);
+}
+function plotIconScaled(name,x,y,s){
+  const a=ensureAssetSync('icon',name); if(!a) return;
+  const t=getTierBits(a,s);
+  blitBits(t.bits,t.w,t.h,x,y);
+}
+
+/* ============ crisp (1-bit, no AA) layer ============ */
+let crisp;
+function setCrisp(x,y){ x|=0; y|=0; if(x>=0&&x<W&&y>=0&&y<H) crisp[y*W+x]=1; }
+function line(x0,y0,x1,y1){
+  x0|=0;y0|=0;x1|=0;y1|=0;
+  const dx=Math.abs(x1-x0), sx=x0<x1?1:-1;
+  const dy=-Math.abs(y1-y0), sy=y0<y1?1:-1;
+  let err=dx+dy;
+  while(true){ setCrisp(x0,y0); if(x0===x1&&y0===y1) break; const e2=2*err; if(e2>=dy){err+=dy;x0+=sx;} if(e2<=dx){err+=dx;y0+=sy;} }
+}
+function rectOutline(x,y,w,h){ line(x,y,x+w-1,y); line(x,y+h-1,x+w-1,y+h-1); line(x,y,x,y+h-1); line(x+w-1,y,x+w-1,y+h-1); }
+function fillRectCrisp(x,y,w,h){ for(let j=0;j<h;j++) for(let i=0;i<w;i++) setCrisp(x+i,y+j); }
+function fillTriangleCrisp(p0,p1,p2){
+  const pts=[p0,p1,p2].slice().sort((a,b)=>a[1]-b[1]);
+  const [a,b,c]=pts;
+  function edgeX(y,pA,pB){ if(pB[1]===pA[1]) return pA[0]; return pA[0]+(pB[0]-pA[0])*(y-pA[1])/(pB[1]-pA[1]); }
+  for(let y=Math.ceil(a[1]); y<=Math.floor(c[1]); y++){
+    const x1=edgeX(y,a,c);
+    const x2 = y<b[1] ? edgeX(y,a,b) : edgeX(y,b,c);
+    const xs=Math.round(Math.min(x1,x2)), xe=Math.round(Math.max(x1,x2));
+    for(let x=xs;x<=xe;x++) setCrisp(x,y);
+  }
+}
+function fillCircleCrisp(cx,cy,r){
+  for(let dy=-r;dy<=r;dy++) for(let dx=-r;dx<=r;dx++) if(dx*dx+dy*dy<=r*r+1) setCrisp(cx+dx,cy+dy);
+}
+
+/* ============ dithered (source→luminance→Bayer) layer ============ */
+const srcCanvas=document.createElement('canvas'); srcCanvas.width=W; srcCanvas.height=H;
+const sctx=srcCanvas.getContext('2d');
+const BAYER4=[[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
+
+let fb; // authoritative 1-bit framebuffer, Uint8Array(W*H)
+let pendingInverts;
+function resetFrame(){
+  crisp=new Uint8Array(W*H);
+  pendingInverts=[];
+  sctx.clearRect(0,0,W,H);
+  sctx.fillStyle='#000'; sctx.fillRect(0,0,W,H);
+  sctx.fillStyle='#fff';
+}
+function markInvert(x,y,w,h){ pendingInverts.push([x,y,w,h]); }
+function composite(){
+  const img=sctx.getImageData(0,0,W,H).data;
+  fb=new Uint8Array(W*H);
+  for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+    const i=y*W+x;
+    const lum=img[i*4]/255;
+    const thresh=(BAYER4[y%4][x%4]+0.5)/16;
+    fb[i]=crisp[i] || (lum>=thresh?1:0);
+  }
+  pendingInverts.forEach(([rx,ry,rw,rh])=>{
+    for(let j=0;j<rh;j++) for(let i=0;i<rw;i++){
+      const px=rx+i, py=ry+j;
+      if(px>=0&&px<W&&py>=0&&py<H){ const idx=py*W+px; fb[idx]=fb[idx]?0:1; }
+    }
+  });
+}
+// real PCD8544 memory layout: 6 banks of 8 vertical px x 84 columns = 504 bytes (kept for authenticity, not displayed by default)
+function packFramebuffer(){
+  const bytes=new Uint8Array(504);
+  let p=0;
+  for(let bank=0;bank<6;bank++){
+    for(let x=0;x<W;x++){
+      let b=0;
+      for(let bit=0;bit<8;bit++){
+        const y=bank*8+bit;
+        if(y<H && fb[y*W+x]) b |= (1<<bit);
+      }
+      bytes[p++]=b;
+    }
+  }
+  return bytes;
+}
+
+/* ============ display: nearest-neighbor only, strict on/off ============ */
+let showSource=false;
+function render(){
+  const gap=scale>=3?1:0;
+  if(showSource){
+    const img=sctx.getImageData(0,0,W,H).data;
+    for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+      const i=y*W+x;
+      const t = crisp[i] ? 1 : img[i*4]/255;
+      const r=OFFc[0]+(ONc[0]-OFFc[0])*t, g=OFFc[1]+(ONc[1]-OFFc[1])*t, b=OFFc[2]+(ONc[2]-OFFc[2])*t;
+      dctx.fillStyle=`rgb(${r|0},${g|0},${b|0})`;
+      dctx.fillRect(x*scale+gap*0.5,y*scale+gap*0.5,scale-gap,scale-gap);
+    }
+  } else {
+    const onFill=`rgb(${ONc[0]},${ONc[1]},${ONc[2]})`, offFill=`rgb(${OFFc[0]},${OFFc[1]},${OFFc[2]})`;
+    for(let y=0;y<H;y++) for(let x=0;x<W;x++){
+      dctx.fillStyle = fb[y*W+x] ? onFill : offFill;
+      dctx.fillRect(x*scale+gap*0.5,y*scale+gap*0.5,scale-gap,scale-gap);
+    }
+  }
+  
+  const vg=dctx.createRadialGradient(disp.width/2,disp.height/2,Math.min(disp.width,disp.height)*0.15,
+                                      disp.width/2,disp.height/2,Math.max(disp.width,disp.height)*0.75);
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,0.16)');
+  dctx.fillStyle=vg; dctx.fillRect(0,0,disp.width,disp.height);
+}
+
+const scaleSlider=document.getElementById('scaleSlider');
+const scaleVal=document.getElementById('scaleVal');
+scaleSlider.oninput=()=>{
+  scale=parseInt(scaleSlider.value,10);
+  resizeDisp();
+  scaleVal.textContent=scale+'× · '+(W*scale)+'×'+(H*scale)+'px';
+};
+const fbBtn=document.getElementById('fbBtn'), srcBtn=document.getElementById('srcBtn');
+const pipelineLabel=document.getElementById('pipelineLabel');
+fbBtn.onclick=()=>{ showSource=false; fbBtn.classList.add('active'); srcBtn.classList.remove('active'); pipelineLabel.textContent='FRAMEBUFFER · 1-BIT · 504 BYTES'; };
+srcBtn.onclick=()=>{ showSource=true; srcBtn.classList.add('active'); fbBtn.classList.remove('active'); pipelineLabel.textContent='SOURCE · PRE-QUANTIZATION · NOT REAL'; };
+
+/* ============ logo assets, thresholded once to real 1-bit bitmaps ============ */
+const ICON_B64='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';
+const COMBO_B64='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';
+const WORD_B64='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';
+const iconImg=new Image(), comboImg=new Image(), wordImg=new Image();
+iconImg.src='data:image/png;base64,'+ICON_B64;
+comboImg.src='data:image/png;base64,'+COMBO_B64;
+wordImg.src='data:image/png;base64,'+WORD_B64;
+let iconBits=null, iconBitsSmall=null, iconBitsLarge=null;
+let comboBits=null, comboBitsSmall=null, comboBitsLarge=null;
+let wordBits=null, wordBitsBig=null;
+
+/* ============ shared live asset store — tuner UI (above) edits this directly; every draw call below
+   reads from it fresh, so a pixel edit shows up on the very next animation frame, no export step ============ */
+const LOGO_DIMS={
+  iconSmall:[16,13], iconMedium:[26,21], iconLarge:[40,32],
+  comboSmall:[30,25], comboMedium:[40,34], comboLarge:[54,46],
+  wordFit:[80,14], wordBig:[150,26],
+};
+function logoImgFor(id){ return id.startsWith('icon') ? iconImg : id.startsWith('combo') ? comboImg : wordImg; }
+function naiveUpscale(native,w,h,scale){
+  const nw=w*scale, nh=h*scale, out=new Uint8Array(nw*nh);
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+    if(!native[y*w+x]) continue;
+    for(let dy=0;dy<scale;dy++) for(let dx=0;dx<scale;dx++) out[(y*scale+dy)*nw+(x*scale+dx)]=1;
+  }
+  return out;
+}
+function rowsToBits(rows){
+  const h=rows.length, w=rows[0].length, out=new Uint8Array(w*h);
+  for(let y=0;y<h;y++) for(let x=0;x<w;x++) out[y*w+x]= rows[y][x]==='1' ? 1 : 0;
+  return out;
+}
+function sampleCell(sheet,sheetW,col,row,cw,ch){
+  const out=new Uint8Array(cw*ch);
+  for(let y=0;y<ch;y++) for(let x=0;x<cw;x++) out[y*cw+x]=sheet[(row*ch+y)*sheetW+col*cw+x];
+  return out;
+}
+function thresholdImgSync(img,tw,th){
+  const c=document.createElement('canvas'); c.width=tw; c.height=th;
+  const cx=c.getContext('2d'); cx.drawImage(img,0,0,tw,th);
+  const d=cx.getImageData(0,0,tw,th).data;
+  const bits=new Uint8Array(tw*th);
+  for(let i=0;i<tw*th;i++) bits[i] = d[i*4] > 110 ? 1 : 0;
+  return bits;
+}
+const store={font:{},icon:{},glyph:{},switch:{},logo:{}};
+function ensureAssetSync(cat,id){
+  if(store[cat][id]) return store[cat][id];
+  let native,w,h;
+  if(cat==='font'){
+    if(!fontBits) return null;
+    const idx=id.charCodeAt(0)-32, col=idx%FS_COLS, row=Math.floor(idx/FS_COLS);
+    native=sampleCell(fontBits,FS_COLS*FS_CW,col,row,FS_CW,FS_CH); w=FS_CW; h=FS_CH;
+  } else if(cat==='icon'){
+    if(!iconSheetBits) return null;
+    const pos=ICON_INDEX[id]; if(!pos) return null;
+    native=sampleCell(iconSheetBits,IS_COLS*IS_CW,pos[0],pos[1],IS_CW,IS_CH); w=IS_CW; h=IS_CH;
+  } else if(cat==='glyph'){
+    native=rowsToBits(CUSTOM_GLYPHS[id]); w=7; h=9;
+  } else if(cat==='switch'){
+    native=rowsToBits(SWITCH_OUTLINE); w=22; h=9;
+  } else if(cat==='logo'){
+    const dims=LOGO_DIMS[id], img=logoImgFor(id);
+    if(!img.complete || img.naturalWidth===0) return null;
+    w=dims[0]; h=dims[1]; native=thresholdImgSync(img,w,h);
+  } else return null;
+  const asset={native,w,h,overrides:{},touched:new Set()};
+  store[cat][id]=asset;
+  return asset;
+}
+function getTierBits(asset,tier){
+  if(tier===1) return {bits:asset.native,w:asset.w,h:asset.h};
+  if(asset.overrides[tier]) return {bits:asset.overrides[tier],w:asset.w*tier,h:asset.h*tier};
+  return {bits:naiveUpscale(asset.native,asset.w,asset.h,tier),w:asset.w*tier,h:asset.h*tier};
+}
+function blitBits(bits,w,h,x,y){
+  for(let ly=0;ly<h;ly++) for(let lx=0;lx<w;lx++) if(bits[ly*w+lx]) setCrisp(x+lx,y+ly);
+}
+function logoBitsFor(id){ const a=ensureAssetSync('logo',id); return a ? {w:a.w,h:a.h,data:a.native} : null; }
+function syncLogoVars(){
+  iconBits=logoBitsFor('iconMedium'); iconBitsSmall=logoBitsFor('iconSmall'); iconBitsLarge=logoBitsFor('iconLarge');
+  comboBits=logoBitsFor('comboMedium'); comboBitsSmall=logoBitsFor('comboSmall'); comboBitsLarge=logoBitsFor('comboLarge');
+  wordBits=logoBitsFor('wordFit'); wordBitsBig=logoBitsFor('wordBig');
+}
+function plotBits(bits,x,y,revealW){
+  if(!bits) return;
+  const rw = revealW==null ? bits.w : Math.max(0,Math.min(bits.w,revealW));
+  for(let j=0;j<bits.h;j++) for(let i=0;i<rw;i++) if(bits.data[j*bits.w+i]) setCrisp(x+i,y+j);
+}
+// Scrolling window for bitmaps too wide to fit — same double-draw wraparound trick as text marquees,
+// clipped to [clipX, clipX+clipW).
+function plotBitsMarquee(bits,clipX,clipW,y,offset){
+  if(!bits) return;
+  const gap=10, total=bits.w+gap;
+  const o=((offset%total)+total)%total;
+  for(let k=0;k<2;k++){
+    const startX=clipX-o+k*total;
+    for(let j=0;j<bits.h;j++) for(let i=0;i<bits.w;i++){
+      if(!bits.data[j*bits.w+i]) continue;
+      const px=startX+i;
+      if(px>=clipX && px<clipX+clipW) setCrisp(px,y+j);
+    }
+  }
+}
+
+/* ============ GUI toolkit: widgets built on the GAP/slot conventions above ============ */
+// A 4-row menu, one call per row — reuses the same N=4 grid the Lines screen validated.
+function wMenuRow(i,opts){
+  opts=opts||{};
+  const rowH=Math.floor(H/4), rowY=i*rowH, textY=slotY(i,1,1,4);
+  let x=2;
+  if(opts.icon){ plotIcon(opts.icon,x,textY); x+=IS_CW+GAP; }
+  if(opts.label) plotText(opts.label,x,textY);
+  if(opts.value!==undefined){
+    const vs=String(opts.value), vw=vs.length?(vs.length-1)*CHAR_ADV+FS_CW:0;
+    plotText(vs, W-2-vw, textY);
+  }
+  if(opts.selected) markInvert(0,rowY,W,rowH);
+}
+// Bordered, centered-label button. Optional selected = inverted fill.
+function wButton(x,y,w,h,label,opts){
+  opts=opts||{};
+  rectOutline(x,y,w,h);
+  const lw=(label.length-1)*CHAR_ADV+FS_CW;
+  plotText(label, x+Math.round((w-lw)/2), y+Math.round((h-FS_CH)/2));
+  if(opts.selected) markInvert(x,y,w,h);
+}
+// Dithered-fill level bar with a sharp tick at the exact level — same pattern Meter validated.
+function wBar(x,y,w,h,level){
+  const grad=sctx.createLinearGradient(x,0,x+w*level,0);
+  grad.addColorStop(0,'rgba(255,255,255,1)'); grad.addColorStop(1,'rgba(255,255,255,0.15)');
+  sctx.fillStyle=grad; sctx.fillRect(x,y,w*level,h);
+  rectOutline(x-1,y-1,w+2,h+2);
+  const tx=Math.round(x+w*level);
+  line(tx,y-1,tx,y+h);
+}
+// Centered modal box: title + message, sized to content.
+function wDialog(title,message){
+  const w=76,h=24, x=Math.round((W-w)/2), y=Math.round((H-h)/2);
+  rectOutline(x,y,w,h);
+  const tw=(title.length-1)*CHAR_ADV+FS_CW;
+  plotText(title, x+Math.round((w-tw)/2), y+2);
+  const mw=(message.length-1)*CHAR_ADV+FS_CW;
+  plotText(message, x+Math.round((w-mw)/2), after(y+2,FS_CH));
+}
+// Checkbox / radio — full self-contained glyphs (box outline / filled box, circle outline / filled circle),
+// not a bracket+mark composition. One cell each, saves width and reads as a real widget, not punctuation.
+const CUSTOM_GLYPHS={
+  checkboxOff:['0000000','1111111','1000001','1000001','1000001','1000001','1000001','1111111','0000000'],
+  checkboxOn: ['0000000','1111111','1000011','1000101','1101001','1010001','1000001','1111111','0000000'],
+  radioOff:   ['0000000','0011100','0100010','1000001','1000001','1000001','0100010','0011100','0000000'],
+  radioOn:    ['0000000','0011100','0111110','1111111','1111111','1111111','0111110','0011100','0000000'],
+};
+function plotGlyph(name,x,y){
+  const a=ensureAssetSync('glyph',name); if(!a) return;
+  blitBits(a.native,a.w,a.h,x,y);
+}
+function wCheckbox(x,y,label,checked){
+  plotGlyph(checked?'checkboxOn':'checkboxOff', x, y);
+  plotText(label, x+FS_CW+GAP, y);
+}
+function wRadio(x,y,label,selected){
+  plotGlyph(selected?'radioOn':'radioOff', x, y);
+  plotText(label, x+FS_CW+GAP, y);
+}
+// Sliding switch — track fills solid past the midpoint, thumb inverts (reads light-on-dark) once it does.
+// frac is 0..1 and meant to be animated smoothly, not snapped between two states.
+// Switch geometry extracted directly from the reference image (thresholded, downsampled, split into
+// a thumb-free outline and an isolated thumb blob) — not approximated with trig.
+const SWITCH_OUTLINE=[
+'0001111111111111111000','0010000000000000000100','0100000000000000000010',
+'1000000000000000000001','1000000000000000000001','1000000000000000000001',
+'0100000000000000000010','0010000000000000000100',
+'0001111111111111111000'];
+function wSwitch(x,y,frac){
+  const a=ensureAssetSync('switch','outline');
+  if(a) blitBits(a.native,a.w,a.h,x,y);
+  const r=2, cy=y+4;
+  fillCircleCrisp(x+5+Math.round(11*frac), cy, r);
+}
+// Rotary dial — chamfered square body (works better here than a circle approximation), pointer + hub.
+function wDial(cx,cy,r,angleFrac){
+  const size=r*2, x=cx-r, y=cy-r, c=Math.max(1,Math.round(size*0.15)), w=size, h=size;
+  line(x+c,y,x+w-1-c,y); line(x+c,y+h-1,x+w-1-c,y+h-1);
+  line(x,y+c,x,y+h-1-c); line(x+w-1,y+c,x+w-1,y+h-1-c);
+  line(x,y+c,x+c,y); line(x+w-1-c,y,x+w-1,y+c);
+  line(x,y+h-1-c,x+c,y+h-1); line(x+w-1-c,y+h-1,x+w-1,y+h-1-c);
+  const ang=Math.PI*0.75+Math.PI*1.5*angleFrac;
+  line(cx,cy,Math.round(cx+Math.cos(ang)*r),Math.round(cy+Math.sin(ang)*r));
+  fillRectCrisp(cx-1,cy-1,2,2);
+}
+// Spinner — chasing-dot activity indicator around a ring, continuous motion.
+function wSpinner(cx,cy,r,frame){
+  for(let i=0;i<8;i++){
+    const ang=(i/8)*Math.PI*2-Math.PI/2;
+    const px=Math.round(cx+Math.cos(ang)*r), py=Math.round(cy+Math.sin(ang)*r);
+    if((i-frame+8)%8<3) fillRectCrisp(px-1,py-1,2,2);
+  }
+}
+// Stepper — bordered [-] value [+] box.
+function wStepper(x,y,w,h,value){
+  rectOutline(x,y,w,h);
+  const ty=y+Math.round((h-FS_CH)/2);
+  plotText('-', x+3, ty);
+  const div1X=x+3+FS_CW+GAP;
+  line(div1X,y+1,div1X,y+h-2);
+  const plusX=x+w-3-FS_CW;
+  plotText('+', plusX, ty);
+  const div2X=plusX-1-GAP;
+  line(div2X,y+1,div2X,y+h-2);
+  const vs=String(value), vw=(vs.length-1)*CHAR_ADV+FS_CW;
+  const areaStart=div1X+1+GAP, areaEnd=div2X-1-GAP;
+  plotText(vs, areaStart+Math.round(((areaEnd-areaStart)-vw)/2), ty);
+}
+// Solid two-tone bar (crisp fill, not dithered — this is a binary on/off track, not a gradient).
+function wSolidBar(x,y,w,h,level){
+  fillRectCrisp(x,y,Math.round(w*level),h);
+  rectOutline(x-1,y-1,w+2,h+2);
+}
+// Discrete LED-style segments, classic VU/CPU meter look.
+function wSegmentBar(x,y,segCount,segW,segH,gap,level){
+  const filled=Math.round(segCount*level);
+  for(let i=0;i<segCount;i++){
+    const sx=x+i*(segW+gap);
+    if(i<filled) fillRectCrisp(sx,y,segW,segH); else rectOutline(sx,y,segW,segH);
+  }
+}
+// Slider: thin track + a filled handle at the level position.
+function wSlider(x,y,w,level){
+  const cy=y+3;
+  line(x,cy,x+w-1,cy);
+  const hx=Math.round(x+w*level);
+  fillRectCrisp(Math.max(x,hx-1),y,3,7);
+}
+// Tab bar: bordered box, dividers between items, selected tab inverted (border stays visible).
+function wTabs(x,y,w,h,items,selectedIdx){
+  rectOutline(x,y,w,h);
+  const tw=Math.floor(w/items.length);
+  items.forEach((label,i)=>{
+    const tx=x+i*tw;
+    if(i>0) line(tx,y,tx,y+h-1);
+    const lw=(label.length-1)*CHAR_ADV+FS_CW;
+    plotText(label, tx+Math.round((tw-lw)/2), y+Math.round((h-FS_CH)/2));
+    if(i===selectedIdx) markInvert(tx+1,y+1,tw-1,h-2);
+  });
+}
+// Text input field: blinking cursor, or a real inverted selection highlight over a character range.
+function wTextField(x,y,w,h,text,opts){
+  opts=opts||{};
+  rectOutline(x,y,w,h);
+  const textY=y+Math.round((h-FS_CH)/2);
+  plotText(text, x+2, textY);
+  if(opts.selStart!=null && opts.selEnd>opts.selStart){
+    const selX=x+2+opts.selStart*CHAR_ADV, selW=(opts.selEnd-opts.selStart)*CHAR_ADV;
+    markInvert(selX, textY-1, selW, FS_CH+2);
+  } else if(opts.cursor){
+    const tw=(text.length-1)*CHAR_ADV+FS_CW;
+    fillRectCrisp(x+2+tw+2, y+2, 2, h-4);
+  }
+}
+// Scrollbar: track line + filled thumb sized/positioned by fraction.
+function wScrollbar(x,y,h,thumbFrac,thumbPos){
+  line(x,y,x,y+h-1);
+  const th=Math.max(3,Math.round(h*thumbFrac));
+  const ty=y+Math.round((h-th)*thumbPos);
+  fillRectCrisp(x-1,ty,3,th);
+}
+// List box: bordered, '>' marks selection (matches the reference, not a full invert), optional scrollbar.
+function wList(x,y,w,h,items,selectedIdx,scrollFrac,scrollPos){
+  rectOutline(x,y,w,h);
+  const rowH=Math.floor((h-2)/items.length);
+  items.forEach((label,i)=>{
+    const ry=y+1+i*rowH;
+    plotText((i===selectedIdx?'>':' ')+label, x+2, ry+1);
+  });
+  if(scrollFrac!=null) wScrollbar(x+w-4, y+2, h-4, scrollFrac, scrollPos||0);
+}
+// Alert dialog: icon + two message lines, divider, inverted OK button — matches the reference's TEMP/HIGH box.
+function wAlert(iconName,line1,line2,btnLabel,blinkIcon){
+  const w=76,h=40, x=Math.round((W-w)/2), y=Math.round((H-h)/2);
+  rectOutline(x,y,w,h);
+  let tx=x+3;
+  if(iconName){
+    if(!blinkIcon || tick%20<14) plotIcon(iconName,tx,y+2);
+    tx+=IS_CW+GAP;
+  }
+  plotText(line1,tx,y+2);
+  const line2Y=after(y+2,FS_CH);
+  plotText(line2,x+3,line2Y);
+  const btnY=after(line2Y,FS_CH), btnH=13;
+  const lw=(btnLabel.length-1)*CHAR_ADV+FS_CW;
+  plotText(btnLabel, x+Math.round((w-lw)/2), btnY+Math.round((btnH-FS_CH)/2));
+  markInvert(x+1, btnY, w-2, btnH);
+}
+
+// Status bar: icon + right-aligned time, thin separator below. First widget meant to sit as persistent chrome.
+function wStatusBar(y){
+  plotIcon('wifi_3',1,y);
+  const d=new Date(), hh=String(d.getHours()).padStart(2,'0'), mm=String(d.getMinutes()).padStart(2,'0');
+  const t=hh+':'+mm, tw=(t.length-1)*CHAR_ADV+FS_CW;
+  plotText(t, W-1-tw, y);
+  const lineY=y+FS_CH+1;
+  line(0,lineY,W-1,lineY);
+  return lineY+1+GAP;
+}
+// Peak-hold meter: level bar + a thin marker that jumps to new peaks and holds/decays independently —
+// real VU behavior, not just a level bar.
+function wPeakBar(x,y,w,h,level,peak){
+  wSolidBar(x,y,w,h,level);
+  const px=Math.round(x+w*peak);
+  line(px,y-2,px,y+h+1);
+}
+// Toast: bordered box sliding up from off-screen, holds, slides back out. Caller drives slideFrac (0..1).
+function wToast(msg,slideFrac){
+  const h=13, tw=(msg.length-1)*CHAR_ADV+FS_CW, w=tw+8;
+  const x=Math.round((W-w)/2), yShown=H-h-2;
+  const f=Math.min(1,Math.max(0,slideFrac)), y=Math.round(H+(yShown-H)*f);
+  if(y<H){ rectOutline(x,y,w,h); plotText(msg,x+4,y+Math.round((h-FS_CH)/2)); }
+}
+// Step dots: filled = current step, hollow = others. Wizard/pagination indicator.
+function wStepDots(x,y,count,current){
+  for(let i=0;i<count;i++){
+    const dx=x+i*7;
+    if(i===current) fillRectCrisp(dx,y,3,3); else rectOutline(dx,y,3,3);
+  }
+}
+// Braille-inspired dot cell: 2 cols x 4 rows, fills bottom-up (both dots per row) for a 0-8 level —
+// structural idea borrowed from Unicode braille density, not literal braille codepoints (our font
+// only covers ASCII, and we already draw raw pixels, so there's no resolution to reclaim here — just
+// a denser, more textured look than a solid bar).
+function plotBrailleCell(x,y,level,rows){
+  rows=rows||4;
+  const filled=Math.min(rows*2,level);
+  let n=0;
+  for(let r=rows-1;r>=0 && n<filled;r--){
+    setCrisp(x,y+r*2); n++;
+    if(n<filled){ setCrisp(x+2,y+r*2); n++; }
+  }
+}
+function wSparkline(x,y,values,rows){
+  values.forEach((v,i)=> plotBrailleCell(x+i*4,y,v,rows));
+}
+// Mini piano: 1 octave, correct black-key gaps (none after E or B). activeIdx (0-6, white keys) inverts
+// to show a played note.
+function wPiano(x,y,activeIdx){
+  const whiteW=10, whiteH=22, blackW=6, blackH=14, pitch=11;
+  const hasBlack=[true,true,false,true,true,true,false];
+  for(let i=0;i<7;i++){
+    rectOutline(x+i*pitch,y,whiteW,whiteH);
+    if(i===activeIdx) markInvert(x+i*pitch+1,y+1,whiteW-2,whiteH-2);
+  }
+  for(let i=0;i<7;i++){
+    if(hasBlack[i]) fillRectCrisp(x+i*pitch+pitch-Math.floor(blackW/2),y,blackW,blackH);
+  }
+}
+function wWeekStrip(x,y,todayIdx){
+  const days=['S','M','T','W','T','F','S'];
+  days.forEach((d,i)=>{
+    const dx=x+i*11;
+    plotText(d,dx,y);
+    if(i===todayIdx) markInvert(dx-1,y-1,FS_CW+2,FS_CH+2);
+  });
+}
+
+// CHROME — status bar as real persistent header, with content composed underneath it
+function drawChrome(){
+  const y2=wStatusBar(1);
+  plotIcon('audio_out',2,y2);
+  plotText('READY',13,y2);
+  const y3=after(y2,FS_CH);
+  plotIcon('cpu',2,y3);
+  const cpu=40+Math.round(20*Math.abs(Math.sin(tick*0.03)));
+  plotText('CPU '+cpu+'%',13,y3);
+}
+
+// PEAK — two channels, independent fluctuating level + real peak-hold decay (jumps up, decays slowly)
+let peakHoldL=0, peakHoldR=0;
+function drawPeak(){
+  const lvlL=0.3+0.3*Math.abs(Math.sin(tick*0.06));
+  const lvlR=0.3+0.3*Math.abs(Math.sin(tick*0.05+1.5));
+  peakHoldL=Math.max(lvlL,peakHoldL-0.01);
+  peakHoldR=Math.max(lvlR,peakHoldR-0.01);
+  plotText('L',2,slotY(0,1,1,3));
+  wPeakBar(16,slotY(0,1,1,3),64,7,lvlL,peakHoldL);
+  plotText('R',2,slotY(1,1,1,3));
+  wPeakBar(16,slotY(1,1,1,3),64,7,lvlR,peakHoldR);
+}
+
+// TOAST — notification slides up from off-screen, holds, slides back out, cycles messages
+const toastMsgs=['SAVED','ONLINE','ERROR'];
+let toastIdx=0, toastT=0;
+function drawToast(){
+  toastT++;
+  const phase=toastT%90;
+  if(phase===0) toastIdx=(toastIdx+1)%toastMsgs.length;
+  let frac;
+  if(phase<15) frac=phase/15;
+  else if(phase<65) frac=1;
+  else if(phase<80) frac=1-(phase-65)/15;
+  else frac=0;
+  plotText('AMPI5',2,slotY(0,1,1,3));
+  plotText('IDLE',2,slotY(1,1,1,3));
+  wToast(toastMsgs[toastIdx],frac);
+}
+
+// SETUP — step-dots wizard flow
+const setupSteps=['WIFI','NAME','DONE'];
+let setupIdx=0, setupTimer=0;
+function drawSetup(){
+  setupTimer++; if(setupTimer>50){ setupTimer=0; setupIdx=(setupIdx+1)%setupSteps.length; }
+  plotText('STEP '+(setupIdx+1)+'/'+setupSteps.length,2,1);
+  const stepName=setupSteps[setupIdx];
+  const y2=after(1,FS_CH);
+  plotTextScaled(stepName,centerX(stepName,2),y2,2);
+  const dotsY=after(y2,FS_CH*2);
+  const dotsW=(setupSteps.length-1)*7+3;
+  wStepDots(Math.round((W-dotsW)/2),dotsY,setupSteps.length,setupIdx);
+}
+
+// PIANO — 1 octave, simple arpeggio lighting each key in turn
+const pianoSeq=[0,2,4,6,4,2];
+let pianoStep=0, pianoTimer=0;
+function drawPiano(){
+  pianoTimer++; if(pianoTimer>15){ pianoTimer=0; pianoStep=(pianoStep+1)%pianoSeq.length; }
+  plotText('MINI PIANO',2,1);
+  wPiano(4, after(1,FS_CH), pianoSeq[pianoStep]);
+}
+
+// CROSSFADE — DJ-style blend slider: center detent tick, not just a plain handle
+function wCrossfader(x,y,w,level){
+  const cy=y+3;
+  line(x,cy,x+w-1,cy);
+  const midX=x+Math.round(w/2);
+  line(midX,y,midX,y+6);
+  const hx=Math.round(x+w*level);
+  fillRectCrisp(Math.max(x,Math.min(x+w-3,hx-1)),y,3,7);
+}
+function drawCrossfade(){
+  plotText('CROSSFADE',2,1);
+  const t=(Math.sin(tick*0.025)+1)/2;
+  const y2=after(1,FS_CH);
+  plotText('A',2,y2);
+  wCrossfader(12,y2+1,58,t);
+  plotText('B',72,y2);
+  const pct=Math.round(t*100);
+  plotText('A'+(100-pct)+' B'+pct, 2, after(y2,9));
+}
+
+// HISTORY — live-scrolling sparkline, braille-density dots instead of a solid bar
+let historyData=[];
+function drawHistory(){
+  if(tick%3===0){
+    historyData.push(Math.round(8+6*Math.abs(Math.sin(tick*0.05))));
+    if(historyData.length>20) historyData.shift();
+  }
+  plotText('CPU HISTORY',2,1);
+  wSparkline(2, after(1,FS_CH), historyData, 8);
+}
+
+// CALENDAR — week strip (today marked) + big date, month name below. A full month grid doesn't fit
+// (7x6 cells would be smaller than our own font glyph), so this is the honest version for 84x48.
+function drawCalendar(){
+  const d=new Date();
+  wWeekStrip(2, 2, d.getDay());
+  const dateStr=String(d.getDate());
+  const y2=after(2,FS_CH);
+  plotTextScaled(dateStr, centerX(dateStr,2), y2, 2);
+  const months=['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'];
+  const m=months[d.getMonth()];
+  plotText(m, centerX(m), after(y2,FS_CH*2));
+}
+
+// SHOWCASE — pure logo art, no on-screen labels at all (name goes to the surrounding UI's hint text
+// instead, so the simulated screen itself stays completely clean for judging the mark on its own).
+const showcaseSteps=[
+  {name:'Icon — small',draw:()=>{ if(iconBitsSmall) plotBits(iconBitsSmall,Math.round(W/2-iconBitsSmall.w/2),Math.round(H/2-iconBitsSmall.h/2)); }},
+  {name:'Icon — medium',draw:()=>{ if(iconBits) plotBits(iconBits,Math.round(W/2-iconBits.w/2),Math.round(H/2-iconBits.h/2)); }},
+  {name:'Icon — large',draw:()=>{ if(iconBitsLarge) plotBits(iconBitsLarge,Math.round(W/2-iconBitsLarge.w/2),Math.round(H/2-iconBitsLarge.h/2)); }},
+  {name:'Combo — small',draw:()=>{ if(comboBitsSmall) plotBits(comboBitsSmall,Math.round(W/2-comboBitsSmall.w/2),Math.round(H/2-comboBitsSmall.h/2)); }},
+  {name:'Combo — medium',draw:()=>{ if(comboBits) plotBits(comboBits,Math.round(W/2-comboBits.w/2),Math.round(H/2-comboBits.h/2)); }},
+  {name:'Combo — large',draw:()=>{ if(comboBitsLarge) plotBits(comboBitsLarge,Math.round(W/2-comboBitsLarge.w/2),Math.round(H/2-comboBitsLarge.h/2)); }},
+  {name:'Wordmark — fit to screen',draw:()=>{ if(wordBits) plotBits(wordBits,Math.round(W/2-wordBits.w/2),Math.round(H/2-wordBits.h/2)); }},
+  {name:'Wordmark — large, scrolling',draw:(t)=>{ plotBitsMarquee(wordBitsBig,1,W-2,11,t*1.5); }},
+];
+let showcaseIdx=0, showcaseTimer=0;
+function drawShowcase(){
+  showcaseTimer++;
+  if(showcaseTimer===1) document.getElementById('hint').textContent=showcaseSteps[showcaseIdx].name;
+  if(showcaseTimer>45){ showcaseTimer=0; showcaseIdx=(showcaseIdx+1)%showcaseSteps.length; }
+  showcaseSteps[showcaseIdx].draw(tick);
+}
+
+/* ============ screens ============ */
+let tick=0;
+
+// SPLASH — wipe reveal, no fades (true 1-bit can't fade)
+function drawSplash(){
+  const t=tick%80;
+  if(comboBits) plotBits(comboBits, Math.round(W/2-comboBits.w/2), 2, Math.floor(t*1.3));
+  if(t>50) plotText('V1',W-16,slotY(2,1,1));
+}
+
+// LOGO — thresholded silhouette variants, no dithering (sharp mark)
+const logoModes=['ICON','WORD','COMBO','SCROLL'];
+let logoIdx=0, logoTimer=0;
+function drawLogo(){
+  logoTimer++; if(logoTimer>40){ logoTimer=0; logoIdx=(logoIdx+1)%logoModes.length; }
+  const m=logoModes[logoIdx];
+  if(m==='ICON') plotBits(iconBits, Math.round(W/2-(iconBits?iconBits.w:0)/2), 13);
+  else if(m==='WORD') plotBits(wordBits, Math.round(W/2-(wordBits?wordBits.w:0)/2), 17);
+  else if(m==='COMBO') plotBits(comboBitsSmall, Math.round(W/2-(comboBitsSmall?comboBitsSmall.w:0)/2), 1);
+  else if(m==='SCROLL') plotBitsMarquee(wordBitsBig, 1, W-2, 7, tick*1.5);
+  plotText(m,1,slotY(2,1,1));
+}
+
+// ROOT — idle terminal, one dominant readout
+let uptime=0;
+function drawRoot(){
+  uptime++;
+  const s=Math.floor(uptime/10);
+  const hh=String(Math.floor(s/3600)).padStart(2,'0'), mm=String(Math.floor(s/60)%60).padStart(2,'0');
+  plotText('UPTIME',4,slotY(0,1,1));
+  const heroStr=hh+':'+mm;
+  plotTextScaled(heroStr, centerX(heroStr,2), afterHeader(), 2);
+  rectOutline(1,1,W-2,H-2);
+}
+
+// JACK — real jackd port graph, straight lines only
+function drawJack(){
+  plotText('JACKD',1,slotY(0,1,1));
+  const boxY=afterHeader(), bw=29, bx=Math.round((W-bw)/2), bh=15;
+  const boxMidY=boxY+Math.floor(bh/2);
+  rectOutline(bx,boxY,bw,bh);
+  plotText('ECA',bx+3,boxY+3);
+  const dot1Y=boxY, label1Y=after(dot1Y,2), dot2Y=after(label1Y,9), label2Y=after(dot2Y,2);
+  fillRectCrisp(1,dot1Y,2,2); line(3,dot1Y+1,bx,boxMidY); plotText('1',1,label1Y);
+  fillRectCrisp(1,dot2Y,2,2); line(3,dot2Y+1,bx,boxMidY); plotText('2',1,label2Y);
+  fillRectCrisp(W-3,dot1Y,2,2); line(bx+bw,boxMidY,W-3,dot1Y+1); plotText('1',W-8,label1Y);
+  fillRectCrisp(W-3,dot2Y,2,2); line(bx+bw,boxMidY,W-3,dot2Y+1); plotText('2',W-8,label2Y);
+}
+
+// METER — dithered shaded bar + sharp level tick
+function drawMeter(){
+  plotText('CPU',1,slotY(0,1,1));
+  plotIcon('cpu',26,slotY(0,1,1));
+  const level=0.35+0.32*Math.abs(Math.sin(tick*0.045));
+  const pct=Math.round(level*100)+'%';
+  const heroY=afterHeader();
+  plotTextScaled(pct, 1, heroY, 2);
+  const bx=2, bw=W-4, bh=6;
+  const by=after(heroY,FS_CH*2)+1;
+  wBar(bx,by,bw,bh,level);
+}
+
+// SPECTRUM — CAVA-style, dithered falloff + sharp peak caps
+const specVals=new Array(12).fill(0);
+function drawSpectrum(){
+  const barW=6, gap=1, startX=1, base=46;
+  for(let i=0;i<12;i++){
+    const target=Math.max(0.06,Math.abs(Math.sin(tick*0.08+i*0.7)))*(0.6+0.4*Math.random());
+    specVals[i]+=(target-specVals[i])*0.4;
+    const x=startX+i*(barW+gap);
+    const h=Math.round(specVals[i]*37);
+    if(h>0){
+      const grad=sctx.createLinearGradient(0,base,0,base-h);
+      grad.addColorStop(0,'rgba(255,255,255,1)'); grad.addColorStop(1,'rgba(255,255,255,0.18)');
+      sctx.fillStyle=grad; sctx.fillRect(x,base-h,barW,h);
+    }
+    line(x,base-h,x+barW-1,base-h);
+  }
+  line(0,base,W-1,base);
+}
+
+// WIRE — perspective grid + dithered sky, crisp mountain silhouette
+function drawWire(){
+  const horizon=20;
+  const grad=sctx.createLinearGradient(0,0,0,horizon);
+  grad.addColorStop(0,'rgba(255,255,255,0.04)'); grad.addColorStop(1,'rgba(255,255,255,0.5)');
+  sctx.fillStyle=grad; sctx.fillRect(0,0,W,horizon);
+  line(0,horizon,W-1,horizon);
+  const vpx=W/2;
+  for(let i=-4;i<=4;i++) line(vpx,horizon,vpx+i*15,H-1);
+  for(let j=1;j<=3;j++){ const y=horizon+j*j*3; if(y<H) line(2,y,W-3,y); }
+  fillTriangleCrisp([8,horizon],[19,horizon-9],[30,horizon]);
+  fillTriangleCrisp([50,horizon],[63,horizon-13],[76,horizon]);
+}
+
+// DITHER — required demo screen
+function drawDitherTest(){
+  plotText('DITHER',1,slotY(0,1,1));
+  const bandY=afterHeader(), bandH=12;
+  const bandW=Math.floor((W-2)/5);
+  const levels=[0,0.25,0.5,0.75,1.0];
+  for(let i=0;i<5;i++){
+    const x=1+i*bandW;
+    sctx.fillStyle=`rgba(255,255,255,${levels[i]})`;
+    sctx.fillRect(x,bandY,bandW-1,bandH);
+  }
+  const boxY=after(bandY,bandH), boxH=14;
+  const grad=sctx.createLinearGradient(0,0,W,0);
+  grad.addColorStop(0,'rgba(255,255,255,0)'); grad.addColorStop(1,'rgba(255,255,255,1)');
+  sctx.fillStyle=grad; sctx.fillRect(1,boxY,W-2,boxH);
+  rectOutline(1,boxY,W-2,boxH);
+  const midY=boxY+Math.floor(boxH/2);
+  line(1,boxY,W-2,boxY+boxH-1); line(1,boxY+boxH-1,W-2,boxY); line(1,midY,W-2,midY);
+}
+
+// ICONS — catalog browser, cycles the full sprite sheet
+const iconNames=Object.keys(ICON_INDEX);
+let iconBrowseIdx=0, iconBrowseTimer=0;
+function drawIcons(){
+  iconBrowseTimer++; if(iconBrowseTimer>25){ iconBrowseTimer=0; iconBrowseIdx=(iconBrowseIdx+1)%iconNames.length; }
+  const name=iconNames[iconBrowseIdx];
+  const iconY=slotY(0,1,1);
+  plotIconScaled(name,32,iconY,3);
+  const label=name.toUpperCase().slice(0,10);
+  const labelY=after(iconY,IS_CH*3);
+  plotText(label, centerX(label), labelY);
+  plotText((iconBrowseIdx+1)+'/'+iconNames.length,1,iconY);
+}
+
+// TRANSPORT — media control row, ties back to the whole premise
+function drawTransport(){
+  plotText('TRANSPORT',1,slotY(0,1,1));
+  const iconY=afterHeader();
+  const icons=['prev','play','pause','stop','next'];
+  const n=icons.length, cellW=Math.floor((W-2)/n);
+  icons.forEach((name,i)=>{
+    const x=1+i*cellW+Math.floor((cellW-IS_CW)/2);
+    plotIcon(name,x,iconY);
+  });
+  const barY=after(iconY,IS_CH), barH=6;
+  const prog=(tick%60)/60;
+  rectOutline(1,barY,W-2,barH);
+  fillRectCrisp(2,barY+1,Math.round((W-4)*prog),barH-2);
+  const labelY=after(barY,barH);
+  plotText('02:14',1,labelY);
+}
+
+// LINES — sweeps the N-slot grid (2/3/4/6) to visually catch where native glyphs stop fitting
+const gridNs=[2,3,4,6];
+let gridIdx=0, gridTimer=0;
+function drawLines(){
+  gridTimer++; if(gridTimer>45){ gridTimer=0; gridIdx=(gridIdx+1)%gridNs.length; }
+  const n=gridNs[gridIdx];
+  const slotH=Math.floor(H/n);
+  for(let i=0;i<=n;i++){ const y=i*slotH; if(y<H) fillRectCrisp(0,y,2,1); }
+  for(let i=0;i<n;i++){ plotText('L'+i, 4, slotY(i,1,1,n)); }
+  plotText('N'+n,W-16,0);
+}
+
+// SCALE — sweeps 1x-4x with a computed bounding box drawn around the actual text extent
+const scaleTests=[{s:1,str:'AMPI5 TEST'},{s:2,str:'54%'},{s:3,str:'12H'},{s:4,str:'5'}];
+let scaleIdx=0, scaleTimer=0;
+function drawScaleTest(){
+  scaleTimer++; if(scaleTimer>45){ scaleTimer=0; scaleIdx=(scaleIdx+1)%scaleTests.length; }
+  const t=scaleTests[scaleIdx];
+  const w=(t.str.length-1)*CHAR_ADV*t.s + FS_CW*t.s, h=FS_CH*t.s;
+  const x=centerX(t.str,t.s), y=Math.round((H-h)/2);
+  plotTextScaled(t.str,x,y,t.s);
+  rectOutline(x-1,y-1,w+2,h+2);
+  plotText('x'+t.s,1,1);
+}
+
+// CHARS — full printable ASCII set (32-126), paged, catches any broken/misindexed glyph
+let charsetPage=0, charsetTimer=0;
+function drawCharset(){
+  charsetTimer++; if(charsetTimer>50){ charsetTimer=0; charsetPage=(charsetPage+1)%3; }
+  const cols=10, rows=4, per=cols*rows;
+  const startCode=32+charsetPage*per;
+  for(let i=0;i<per;i++){
+    const code=startCode+i;
+    if(code>126) break;
+    const col=i%cols, row=Math.floor(i/cols);
+    plotChar(String.fromCharCode(code), 1+col*8, 1+row*10);
+  }
+}
+
+// CTRL-BTNS — OK/RUN buttons, a checkbox, a radio. Reference's top-left quadrant, stacked for our width.
+function drawCtrlBtns(){
+  wButton(2, 1, 34, 13, 'OK', {});
+  wButton(40, 1, 34, 13, 'RUN', {selected:true});
+  const flip=Math.floor(tick/40)%2===0;
+  wCheckbox(2, slotY(1,1,1,3), 'ON', flip);
+  wRadio(2, slotY(2,1,1,3), 'SW', flip);
+}
+
+// CTRL-BARS — LOAD (solid), VOL (slider), CPU (segmented). Reference's meter row.
+function drawCtrlBars(){
+  const barX=38, barW=40;
+  const loadLevel=0.35+0.35*Math.abs(Math.sin(tick*0.035));
+  const volLevel=0.3+0.35*Math.abs(Math.sin(tick*0.05+1));
+  const cpuLevel=0.25+0.45*Math.abs(Math.sin(tick*0.025+2));
+  plotText('LOAD',2,slotY(0,1,1,3));
+  wSolidBar(barX, slotY(0,1,1,3), barW, 7, loadLevel);
+  plotText('VOL',2,slotY(1,1,1,3));
+  wSlider(barX, slotY(1,1,1,3), barW, volLevel);
+  plotText('CPU',2,slotY(2,1,1,3));
+  wSegmentBar(barX, slotY(2,1,1,3), 8, 3, 7, 1, cpuLevel);
+}
+
+// CTRL-TABS — tab bar + text input field. Reference's SYS/AUD/NET + /dev/i2c row.
+function drawCtrlTabs(){
+  wTabs(2, 2, 80, 13, ['SYS','AUD','NET'], 0);
+  const fieldY=after(2,13), text='/DEV/I2C';
+  if(Math.floor(tick/30)%2===0) wTextField(2, fieldY, 80, 13, text, {cursor: tick%10<5});
+  else wTextField(2, fieldY, 80, 13, text, {selStart:1, selEnd:4});
+}
+
+// CTRL-LIST — selectable list with scrollbar. Reference's JACK/SSH/VPN box.
+const listAllItems=['JACK','SSH','VPN','WIFI','USB','GPIO'];
+let listSel=0, listTimer=0;
+function drawCtrlList(){
+  listTimer++; if(listTimer>28){ listTimer=0; listSel=(listSel+1)%listAllItems.length; }
+  const visible=3;
+  const winStart=Math.max(0, Math.min(listSel-1, listAllItems.length-visible));
+  const items=listAllItems.slice(winStart, winStart+visible);
+  const scrollFrac=visible/listAllItems.length;
+  const scrollPos=winStart/(listAllItems.length-visible);
+  wList(2,2,60,44,items,listSel-winStart,scrollFrac,scrollPos);
+}
+
+// CTRL-ALERT — warning dialog. Reference's TEMP/HIGH/OK box.
+function drawCtrlAlert(){
+  wAlert('warning','TEMP','HIGH','OK',true);
+}
+
+// SWITCH — two switches, eased sliding (not snapping), staggered so they don't move in lockstep
+let sw1On=false, sw1Anim=0, sw1Timer=0;
+let sw2On=true, sw2Anim=1, sw2Timer=15;
+function drawSwitches(){
+  sw1Timer++; if(sw1Timer>45){ sw1Timer=0; sw1On=!sw1On; }
+  sw2Timer++; if(sw2Timer>45){ sw2Timer=0; sw2On=!sw2On; }
+  sw1Anim+=((sw1On?1:0)-sw1Anim)*0.18;
+  sw2Anim+=((sw2On?1:0)-sw2Anim)*0.18;
+  plotText('WIFI',2,slotY(0,1,1,3));
+  wSwitch(44,slotY(0,1,1,3),sw1Anim);
+  plotText('BT',2,slotY(1,1,1,3));
+  wSwitch(44,slotY(1,1,1,3),sw2Anim);
+}
+
+// KNOB — continuous rotary sweep, numeric readout tracks the angle live
+function drawKnob(){
+  const params=[
+    {label:'GAI',speed:0.030,phase:0},
+    {label:'TON',speed:0.022,phase:2.1},
+    {label:'MIX',speed:0.018,phase:4.2},
+  ];
+  params.forEach((p,i)=>{
+    const rowTop=i*16, cy=rowTop+8;
+    const frac=(Math.sin(tick*p.speed+p.phase)+1)/2;
+    wDial(9,cy,6,frac);
+    const pct=Math.min(99,Math.round(frac*100));
+    plotText(p.label+' '+pct+'%', 20, slotY(i,1,1,3));
+  });
+}
+
+// STEPPER — value counts smoothly toward a randomly-changing target (odometer-style), spinner shows activity
+let stepVal=50, stepTarget=50, stepTimer=0;
+function drawStepper(){
+  stepTimer++; if(stepTimer>40){ stepTimer=0; stepTarget=Math.max(0,Math.min(99,stepTarget+(Math.random()<0.5?-10:10))); }
+  if(stepVal!==stepTarget) stepVal+=Math.sign(stepTarget-stepVal);
+  plotText('BPM',2,slotY(0,1,1,3));
+  wStepper(30,slotY(0,1,1,3)-2,48,13,stepVal);
+  plotText('SYNC',2,slotY(1,1,1,3)+2);
+  wSpinner(60,slotY(1,1,1,3)+6,8,Math.floor(tick/3)%8);
+}
+let statusUptime=0;
+function drawStatus(){
+  statusUptime++;
+  const cpu=Math.round(45+15*Math.sin(tick*0.03));
+  const temp=Math.round(48+6*Math.sin(tick*0.02+1));
+  const hrs=Math.floor(statusUptime/600);
+  plotText('NET OK',2,slotY(0,1,1,4));
+  plotText('CPU '+cpu+'%',2,slotY(1,1,1,4));
+  plotText('TEMP '+temp+'C',2,slotY(2,1,1,4));
+  plotText('UP '+hrs+'H',2,slotY(3,1,1,4));
+}
+
+// MENU — real selectable menu built from wMenuRow, auto-cycling selection with true inverted highlight
+const menuItems=[
+  {icon:'settings',label:'SET',value:'EPM8'},
+  {icon:'audio_out',label:'OUT',value:'8CH'},
+  {icon:'wifi_2',label:'NET',value:'OK'},
+  {icon:'power',label:'PWR',value:'>'},
+];
+let menuSel=0, menuTimer=0;
+function drawMenu(){
+  menuTimer++; if(menuTimer>35){ menuTimer=0; menuSel=(menuSel+1)%menuItems.length; }
+  menuItems.forEach((item,i)=> wMenuRow(i,{icon:item.icon,label:item.label,value:item.value,selected:i===menuSel}));
+}
+
+// DIALOG — modal built from wDialog
+function drawDialog(){
+  wDialog('REBOOT?','HOLD 3S');
+}
+
+// TOGGLES — checkbox panel built from wCheckbox (text-based, fixes the earlier box-widget spacing bug) + wButton
+const toggleItems=[{label:'WIFI',on:true},{label:'SSH',on:true},{label:'VPN',on:false}];
+function drawToggles(){
+  let y=1;
+  toggleItems.forEach(t=>{ wCheckbox(2,y,t.label,t.on); y=after(y,FS_CH); });
+  wButton(22,y,40,13,'SAVE',{});
+}
+
+/* ============ registry + ui ============ */
+const modes=[
+  {id:'splash',label:'Splash',draw:drawSplash,hint:"wipe-reveal, no fades — true 1-bit can't dim"},
+  {id:'logo',label:'Logo',draw:drawLogo,hint:'thresholded silhouette, no dither'},
+  {id:'showcase',label:'Showcase',draw:drawShowcase,hint:'cycling — no on-screen labels'},
+  {id:'root',label:'Root',draw:drawRoot,hint:'idle terminal, one readout'},
+  {id:'status',label:'Status',draw:drawStatus,hint:'4-line grid: 12px/slot, all native text'},
+  {id:'jack',label:'Jack',draw:drawJack,hint:'jackd port graph, straight lines'},
+  {id:'meter',label:'Meter',draw:drawMeter,hint:'dithered shaded bar + sharp tick'},
+  {id:'spectrum',label:'Spectrum',draw:drawSpectrum,hint:'CAVA-style, dithered falloff'},
+  {id:'wire',label:'Wire',draw:drawWire,hint:'wireframe scene, dithered sky'},
+  {id:'dither',label:'Dither',draw:drawDitherTest,hint:'0/25/50/75/100% + gradient + sharp crossing'},
+  {id:'icons',label:'Icons',draw:drawIcons,hint:'catalog browser, 80 sprite glyphs'},
+  {id:'transport',label:'Transport',draw:drawTransport,hint:'play/pause/stop/prev/next row'},
+  {id:'lines',label:'Lines',draw:drawLines,hint:'sweeps N=2/3/4/6 slot grids — watch N6'},
+  {id:'scale',label:'Scale',draw:drawScaleTest,hint:'sweeps 1x-4x, box shows computed extent'},
+  {id:'chars',label:'Chars',draw:drawCharset,hint:'full charset 32-126, 3 pages'},
+  {id:'menu',label:'Menu',draw:drawMenu,hint:'wMenuRow widget, real inverted selection'},
+  {id:'dialog',label:'Dialog',draw:drawDialog,hint:'wDialog widget, centered modal'},
+  {id:'toggles',label:'Toggles',draw:drawToggles,hint:'wCheckbox (text-based) + wButton'},
+  {id:'ctrlbtns',label:'Buttons',draw:drawCtrlBtns,hint:'wButton, wCheckbox, wRadio'},
+  {id:'ctrlbars',label:'Bars',draw:drawCtrlBars,hint:'wSolidBar, wSlider, wSegmentBar'},
+  {id:'ctrltabs',label:'Tabs',draw:drawCtrlTabs,hint:'wTabs + wTextField'},
+  {id:'ctrllist',label:'List',draw:drawCtrlList,hint:'wList + wScrollbar'},
+  {id:'ctrlalert',label:'Alert',draw:drawCtrlAlert,hint:'wAlert — icon, divider, inverted OK'},
+  {id:'switches',label:'Switch',draw:drawSwitches,hint:'eased sliding, not snapping'},
+  {id:'knob',label:'Knob',draw:drawKnob,hint:'270° rotary sweep, live readout'},
+  {id:'stepper',label:'Stepper',draw:drawStepper,hint:'value counts smoothly + spinner'},
+  {id:'chrome',label:'Chrome',draw:drawChrome,hint:'status bar as real persistent header'},
+  {id:'peak',label:'Peak',draw:drawPeak,hint:'peak-hold: jumps up, decays slowly'},
+  {id:'toast',label:'Toast',draw:drawToast,hint:'slides in, holds, slides out'},
+  {id:'setup',label:'Setup',draw:drawSetup,hint:'step-dots wizard flow'},
+  {id:'history',label:'History',draw:drawHistory,hint:'sparkline: braille-density dots, not a bar'},
+  {id:'calendar',label:'Calendar',draw:drawCalendar,hint:'week strip + date — a month grid does not fit'},
+  {id:'piano',label:'Piano',draw:drawPiano,hint:'1 octave, correct black-key gaps'},
+  {id:'crossfade',label:'Crossfade',draw:drawCrossfade,hint:'DJ-style blend, center detent'},
+];
+let mode='splash';
+const grid=document.getElementById('modeGrid');
+modes.forEach(m=>{
+  const b=document.createElement('button');
+  b.className='mode-btn'+(m.id===mode?' active':'');
+  b.textContent=m.label; b.dataset.id=m.id;
+  b.onclick=()=>setMode(m.id);
+  grid.appendChild(b);
+});
+function setMode(id){
+  mode=id; tick=0;
+  [...grid.children].forEach(b=>b.classList.toggle('active',b.dataset.id===id));
+  document.getElementById('hint').textContent=modes.find(m=>m.id===id).hint;
+}
+setMode('splash');
+
+function step(){
+  tick++;
+  syncLogoVars();
+  resetFrame();
+  modes.find(m=>m.id===mode).draw();
+  composite();
+  render();
+}
+setInterval(step,100);
+step();
+
+/* ============ pixel tuner UI — reads/writes the exact same `store` the simulator draws from ============ */
+const CATS=[
+  {id:'font',  label:'Font',   mode:'tiered'},
+  {id:'icon',  label:'Icons',  mode:'tiered'},
+  {id:'glyph', label:'Glyphs', mode:'tiered'},
+  {id:'switch',label:'Switch', mode:'tiered'},
+  {id:'logo',  label:'Logo',   mode:'single'},
+];
+const FONT_CHARS=[]; for(let c=32;c<=126;c++) FONT_CHARS.push(String.fromCharCode(c));
+const ICON_NAMES=Object.keys(ICON_INDEX);
+const GLYPH_NAMES=['checkboxOff','checkboxOn','radioOff','radioOn'];
+const SWITCH_NAMES=['outline'];
+const LOGO_NAMES=Object.keys(LOGO_DIMS);
+function namesFor(cat){
+  if(cat==='font') return FONT_CHARS;
+  if(cat==='icon') return ICON_NAMES;
+  if(cat==='glyph') return GLYPH_NAMES;
+  if(cat==='switch') return SWITCH_NAMES;
+  return LOGO_NAMES;
+}
+function isDirty(asset,tier){
+  if(tier===1) return asset.touched.has(1);
+  return !!asset.overrides[tier];
+}
+
+let activeCat='font', activeId='A', activeTier=1;
+
+const catTabsEl=document.getElementById('catTabs');
+CATS.forEach(c=>{
+  const b=document.createElement('button'); b.className='ttab'+(c.id===activeCat?' active':'');
+  b.textContent=c.label; b.dataset.cat=c.id;
+  b.onclick=()=>{ activeCat=c.id; activeId=namesFor(c.id)[0]; activeTier=1; renderAll(); };
+  catTabsEl.appendChild(b);
+});
+
+function renderPicker(){
+  const pickerEl=document.getElementById('picker');
+  pickerEl.innerHTML='';
+  namesFor(activeCat).forEach(name=>{
+    const b=document.createElement('button');
+    b.className='tpickBtn'+(name===activeId?' active':'')+(assetTouched(activeCat,name)?' touched':'');
+    b.textContent = activeCat==='font' ? (name===' '?'\u2423':name) : name;
+    b.onclick=()=>{ activeId=name; activeTier=1; renderAll(); };
+    pickerEl.appendChild(b);
+  });
+}
+function assetTouched(cat,id){
+  const a=store[cat][id];
+  if(!a) return false;
+  return a.touched.has(1) || Object.keys(a.overrides).length>0;
+}
+
+function renderTierRow(){
+  const tierRowEl=document.getElementById('tierRow');
+  const catMode=CATS.find(c=>c.id===activeCat).mode;
+  if(catMode==='single'){ tierRowEl.innerHTML=''; return; }
+  tierRowEl.innerHTML='<label>Editing tier</label>';
+  const a=store[activeCat][activeId];
+  [1,2,3,4].forEach(t=>{
+    const b=document.createElement('button');
+    const dirty=a && isDirty(a,t);
+    b.className='ttierBtn'+(t===activeTier?' active':'')+(dirty?' dirty':'');
+    b.textContent=t+'x'+(t===1?' \u00b7 native':'');
+    b.onclick=()=>{ activeTier=t; renderAll(); };
+    tierRowEl.appendChild(b);
+  });
+}
+
+const TUNER_ZOOM=6;
+const editCanvas=document.getElementById('editGrid');
+const ectx=editCanvas.getContext('2d');
+let curW=0,curH=0,curBits=null,curOriginal=null;
+
+function selectAsset(cat,id,tier){
+  const asset=ensureAssetSync(cat,id);
+  if(!asset) return; // sources still loading — next tick's renderAll retry (via asset-load listeners) will populate
+  const t=getTierBits(asset,tier);
+  curW=t.w; curH=t.h; curBits=t.bits;
+  curOriginal = tier===1 ? null : (asset.overrides[tier] ? null : naiveUpscale(asset.native,asset.w,asset.h,tier));
+  renderEditGrid(); renderPreviews(); renderDiff();
+}
+
+function renderEditGrid(){
+  editCanvas.width=curW*TUNER_ZOOM; editCanvas.height=curH*TUNER_ZOOM;
+  ectx.fillStyle='#0a0f08'; ectx.fillRect(0,0,editCanvas.width,editCanvas.height);
+  for(let y=0;y<curH;y++) for(let x=0;x<curW;x++){
+    const on=curBits[y*curW+x];
+    ectx.fillStyle= on ? '#f2efe6' : '#33422b';
+    ectx.fillRect(x*TUNER_ZOOM+1,y*TUNER_ZOOM+1,TUNER_ZOOM-2,TUNER_ZOOM-2);
+  }
+}
+function toggleAt(clientX,clientY){
+  const rect=editCanvas.getBoundingClientRect();
+  const x=Math.floor((clientX-rect.left)/TUNER_ZOOM), y=Math.floor((clientY-rect.top)/TUNER_ZOOM);
+  if(x<0||x>=curW||y<0||y>=curH) return;
+  const asset=store[activeCat][activeId];
+  if(!asset) return;
+  const idx=y*curW+x;
+  if(activeTier===1){
+    asset.native[idx]^=1; asset.touched.add(1);
+  } else {
+    if(!asset.overrides[activeTier]) asset.overrides[activeTier]=naiveUpscale(asset.native,asset.w,asset.h,activeTier).slice();
+    asset.overrides[activeTier][idx]^=1;
+  }
+  selectAsset(activeCat,activeId,activeTier); // the simulator below picks this up automatically on its next tick
+  renderPicker(); renderTierRow();
+  autosave();
+}
+editCanvas.addEventListener('click',e=>toggleAt(e.clientX,e.clientY));
+editCanvas.addEventListener('touchstart',e=>{ e.preventDefault(); const t=e.touches[0]; toggleAt(t.clientX,t.clientY); });
+
+function renderDiff(){
+  const note=document.getElementById('diffNote');
+  if(!curOriginal){ note.textContent=''; return; }
+  let n=0; for(let i=0;i<curBits.length;i++) if(curBits[i]!==curOriginal[i]) n++;
+  note.textContent = n>0 ? n+' pixel'+(n===1?'':'s')+' different from the computed baseline' : '';
+}
+
+function renderPreviews(){
+  const panel=document.getElementById('previewPanel');
+  panel.innerHTML='<div class="tpanel-title" style="flex-basis:100%;">Preview \u2014 1x / 2x / 3x / 4x</div>';
+  const catMode=CATS.find(c=>c.id===activeCat).mode;
+  const asset=store[activeCat][activeId];
+  if(!asset) return;
+  [1,2,3,4].forEach(z=>{
+    let bits,w,h,label,zoom;
+    if(catMode==='tiered'){
+      const t=getTierBits(asset,z); bits=t.bits; w=t.w; h=t.h; label=z+'x tier'; zoom=3;
+    } else {
+      bits=asset.native; w=asset.w; h=asset.h; label=z+'x zoom'; zoom=z;
+    }
+    const item=document.createElement('div'); item.className='tprevItem';
+    const span=document.createElement('span'); span.textContent=label; item.appendChild(span);
+    const cv=document.createElement('canvas');
+    cv.width=w*zoom; cv.height=h*zoom;
+    const pctx=cv.getContext('2d');
+    for(let y=0;y<h;y++) for(let x=0;x<w;x++){
+      const on=bits[y*w+x], c=on?ONc:OFFc;
+      pctx.fillStyle=`rgb(${c[0]},${c[1]},${c[2]})`;
+      pctx.fillRect(x*zoom,y*zoom,zoom,zoom);
+    }
+    item.appendChild(cv);
+    panel.appendChild(item);
+  });
+}
+
+function renderTunerHint(){
+  const hints={
+    font:'1x edits change the real glyph used everywhere — check the simulator below right now. 2x/3x/4x are what plotTextScaled renders at that size.',
+    icon:'Same deal as font \u2014 1x is the actual sprite cell, larger tiers are the scaled-render versions.',
+    glyph:'Checkbox/radio marks. Small shapes \u2014 worth checking whether the mark reads at each tier.',
+    switch:'The pill outline only \u2014 the thumb is drawn as a live circle, not a stored bitmap.',
+    logo:'Each size is independently resampled from the vector source, not a scale of another \u2014 no tier relationship, previews are just zoom levels.',
+  };
+  document.getElementById('editHint').textContent=hints[activeCat];
+}
+
+function renderAll(){
+  document.querySelectorAll('.ttab').forEach(b=> b.classList.toggle('active', b.dataset.cat===activeCat));
+  renderPicker(); renderTierRow(); renderTunerHint();
+  selectAsset(activeCat,activeId,activeTier);
+}
+
+function bitsToRows(bits,w,h){
+  const rows=[];
+  for(let y=0;y<h;y++){ let r=''; for(let x=0;x<w;x++) r+=bits[y*w+x]?'1':'0'; rows.push(r); }
+  return rows;
+}
+document.getElementById('sessionToggle').addEventListener('click',()=>{
+  document.getElementById('sessionPanel').style.display='block';
+  document.getElementById('sessionCollapsed').style.display='none';
+});
+document.getElementById('sessionCollapseBtn').addEventListener('click',()=>{
+  document.getElementById('sessionPanel').style.display='none';
+  document.getElementById('sessionCollapsed').style.display='flex';
+});
+const LS_KEY='ampi5-tuner-session-v1';
+const SESSION_FORMAT='ampi5-pixel-tuner-session';
+const SESSION_VERSION=1;
+const SESSION_DESCRIPTION='1-bit bitmap edits for an 84x48 PCD8544-style LCD. Each bitmap is an array of row strings; each character is "1" (foreground/lit pixel) or "0" (background), read top-to-bottom, left-to-right — row length = w, row count = h. Categories: font (ASCII 32-126 glyphs, keyed by the literal character), icon (named sprites), glyph (checkbox/radio marks), switch (toggle outline), logo (icon/wordmark/combo lockups, fixed sizes, no tier concept). For font/icon/glyph/switch: "native" is the true 1x source bitmap — editing it changes the actual asset. Keys "2"/"3"/"4" are independently hand-tuned render sizes for that asset (NOT a mathematical scale-up of native — each was separately edited pixel-by-pixel for legibility at that size). A category/id pair with no "native" key was left at its computed default and only has hand-tuned tier overrides.';
+function serializeSession(){
+  const assets={};
+  CATS.forEach(cat=>{
+    const entries=store[cat.id];
+    Object.keys(entries).forEach(id=>{
+      const a=entries[id];
+      const dirtyTiers=Object.keys(a.overrides);
+      if(!a.touched.has(1) && dirtyTiers.length===0) return;
+      assets[cat.id]=assets[cat.id]||{};
+      const rec={};
+      if(a.touched.has(1)) rec.native={w:a.w,h:a.h,rows:bitsToRows(a.native,a.w,a.h)};
+      dirtyTiers.forEach(t=>{ rec[t]={w:a.w*t,h:a.h*t,rows:bitsToRows(a.overrides[t],a.w*t,a.h*t)}; });
+      assets[cat.id][id]=rec;
+    });
+  });
+  return {format:SESSION_FORMAT, version:SESSION_VERSION, description:SESSION_DESCRIPTION, assets};
+}
+function applySession(data){
+  const assets = data.assets ? data.assets : data; // tolerate the older bare-object shape too
+  Object.keys(assets).forEach(cat=>{
+    Object.keys(assets[cat]).forEach(id=>{
+      const asset=ensureAssetSync(cat,id);
+      if(!asset) return;
+      const rec=assets[cat][id];
+      if(rec.native){ asset.native=rowsToBits(rec.native.rows); asset.w=rec.native.w; asset.h=rec.native.h; asset.touched.add(1); }
+      [2,3,4].forEach(t=>{ if(rec[t]) asset.overrides[t]=rowsToBits(rec[t].rows); });
+    });
+  });
+}
+function assetCountIn(data){
+  const assets = data.assets ? data.assets : data;
+  return Object.values(assets).reduce((sum,c)=>sum+Object.keys(c).length,0);
+}
+function autosave(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(serializeSession())); }catch(e){ /* storage unavailable — silently skip, export still works */ }
+}
+function autoload(){
+  try{
+    const raw=localStorage.getItem(LS_KEY);
+    if(raw){
+      const data=JSON.parse(raw);
+      applySession(data);
+      const n=assetCountIn(data);
+      if(n>0) document.getElementById('sessionNote').textContent=n+' asset(s) restored from your last session';
+    }
+  }catch(e){ /* corrupt or unavailable — start clean */ }
+}
+
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  const out=serializeSession();
+  document.getElementById('exportOut').value = JSON.stringify(out,null,1);
+  document.getElementById('sessionNote').textContent = assetCountIn(out)+' asset(s) exported';
+});
+document.getElementById('importBtn').addEventListener('click',()=>{
+  try{
+    applySession(JSON.parse(document.getElementById('exportOut').value));
+    renderPicker(); renderTierRow();
+    if(store[activeCat] && store[activeCat][activeId]) selectAsset(activeCat,activeId,activeTier);
+    document.getElementById('sessionNote').textContent='Session loaded \u2014 live in the simulator below';
+    autosave();
+  }catch(err){ alert('Could not parse pasted session JSON.'); }
+});
+
+renderAll();
+// Sources (font/icon sheets, logo images) load async. Rather than trust a single load-event firing at the
+// right moment, poll and re-render until the first real asset actually resolves — same resilience pattern
+// the simulator's own tick loop already uses (it just keeps retrying every 100ms regardless of readiness).
+// Autosaved edits are restored here too, once assets are actually ready to receive them.
+const tunerReadyPoll=setInterval(()=>{
+  if(ensureAssetSync('font','A')){
+    autoload();
+    renderAll();
+    clearInterval(tunerReadyPoll);
+  }
+}, 100);
+</script>
+</body>
+</html>
