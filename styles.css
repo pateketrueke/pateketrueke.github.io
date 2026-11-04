@@ -935,16 +935,24 @@ body {
   position: relative;
   padding-top: 12px;
 }
-body::before,
-body::after {
+.papel-picado {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 36px;
+  overflow: hidden;
+  z-index: 10;
+  pointer-events: none;
+}
+.papel-picado::before,
+.papel-picado::after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 28px;
-  z-index: 10;
-  pointer-events: none;
   -webkit-animation: flutter 7s ease-in-out infinite;
           animation: flutter 7s ease-in-out infinite;
   -webkit-mask: radial-gradient(circle 6px at 50% 100%, transparent 95%, #000) 0 0px 100% repeat-x, radial-gradient(circle 2.5px at 50% 45%, transparent 95%, #000) 0 0px 100% repeat-x;
@@ -954,10 +962,10 @@ body::after {
           mask-composite: intersect;
   opacity: 0.85;
 }
-body::before {
+.papel-picado::before {
   background: repeating-linear-gradient(90deg, #FF3E9A 0 44px, transparent 44px 96px, #8E44FF 96px 140px, transparent 140px 192px);
 }
-body::after {
+.papel-picado::after {
   background: repeating-linear-gradient(90deg, transparent 0 48px, #FF9F1C 48px 92px, transparent 92px 144px, #2EC4B6 144px 188px, transparent 188px 192px);
   -webkit-animation-delay: -3.5s;
           animation-delay: -3.5s;
@@ -1001,8 +1009,8 @@ body::after {
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  body::before,
-  body::after {
+  .papel-picado::before,
+  .papel-picado::after {
     -webkit-animation: none;
             animation: none;
   }
@@ -1015,8 +1023,7 @@ body::after {
   body {
     padding-top: 0;
   }
-  body::before,
-  body::after {
+  .papel-picado {
     display: none;
   }
 }
