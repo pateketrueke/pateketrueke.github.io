@@ -936,11 +936,11 @@ body {
   padding-top: 12px;
 }
 .papel-picado {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 36px;
+  height: 32px;
   overflow: hidden;
   z-index: 10;
   pointer-events: none;
@@ -949,15 +949,19 @@ body {
 .papel-picado::after {
   content: '';
   position: absolute;
-  top: 0;
+  top: -10px;
   left: 0;
   right: 0;
-  height: 28px;
+  height: 34px;
   -webkit-animation: flutter 7s ease-in-out infinite;
           animation: flutter 7s ease-in-out infinite;
-  -webkit-mask: radial-gradient(circle 6px at 50% 100%, transparent 95%, #000) 0 0px 100% repeat-x, radial-gradient(circle 2.5px at 50% 45%, transparent 95%, #000) 0 0px 100% repeat-x;
+  -webkit-mask-image: radial-gradient(circle 6px at 50% 100%, transparent 95%, #000), radial-gradient(circle 2.5px at 50% 60%, transparent 95%, #000);
+  -webkit-mask-size: 12px 100%;
+  -webkit-mask-repeat: repeat-x;
   -webkit-mask-composite: source-in;
-  mask: radial-gradient(circle 6px at 50% 100%, transparent 95%, #000) 0 0px 100% repeat-x, radial-gradient(circle 2.5px at 50% 45%, transparent 95%, #000) 0 0px 100% repeat-x;
+  mask-image: radial-gradient(circle 6px at 50% 100%, transparent 95%, #000), radial-gradient(circle 2.5px at 50% 60%, transparent 95%, #000);
+  mask-size: 12px 100%;
+  mask-repeat: repeat-x;
   -webkit-mask-composite: intersect;
           mask-composite: intersect;
   opacity: 0.85;
