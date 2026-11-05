@@ -31,7 +31,7 @@ dev: deps ## Lift dev environment for this service
 dist: deps ## Build artifact for production
 	@(git worktree remove $(src) --force > /dev/null 2>&1) || true
 	@git worktree add $(src) $(target)
-	@NODE_ENV=production npm run dist
+	@NODE_ENV=production BLOG_PUBLISH=true npm run dist
 
 clean: ## Remove all generated sources
 	@$(call iif,rm -r $(src),Built artifacts were deleted,Artifacts already deleted)
