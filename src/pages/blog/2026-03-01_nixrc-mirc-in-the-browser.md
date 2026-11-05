@@ -4,9 +4,12 @@ title: "nixrc: Bringing mIRC Scripts Back to Life in the Browser"
 description: "I spent two sessions building a full mIRC script runtime, transpiler, and live playground — from scratch. Here's what it took and why it was worth it."
 date: 2026-03-01
 icon: bullhorn
+tags: "mirc, nixrc, transpiler, runtime, playground, browser"
+author: "Alvaro Cabrera"
+author_email: "pateketrueke@gmail.com"
+author_url: "https://github.com/pateketrueke"
+published: false
 ---
-
-# nixrc: Bringing mIRC Scripts Back to Life in the Browser
 
 > I spent two sessions building a full mIRC script runtime, transpiler, and live playground — from scratch. Here's what it took and why it was worth it.
 

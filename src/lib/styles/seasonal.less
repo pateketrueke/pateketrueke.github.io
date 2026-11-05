@@ -1,0 +1,92 @@
+// ─── Día de Muertos ──────────────────────────────────────────────────────────
+// Seasonal overrides: drop the import in index.less to switch them off.
+@flag-a: @theme-accent-hover;
+@flag-b: @theme-accent;
+@flag-c: #8E44FF;
+@flag-d: #2EC4B6;
+@flag-w: 44px;
+@flag-gap: 4px;
+
+// LESS variables resolve lazily, so this replaces the sidebar bullet too
+@item-symbol: '✿ ';
+
+body {
+  position: relative;
+  padding-top: 12px;
+}
+
+// papel picado: colored flags with a scalloped edge and punched holes,
+// split across two layers of alternating flags that sway out of phase;
+// the flags start above the box so their top edge is always clipped, and
+// the box is tall enough for the full sway; it stays pinned while scrolling
+.papel-picado {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  overflow: hidden;
+  z-index: 10;
+  pointer-events: none;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    right: 0;
+    height: 34px;
+    animation: flutter 7s ease-in-out infinite;
+    // longhands on purpose: LESS reads the shorthand's `0 0 / 12px` as a division
+    -webkit-mask-image:
+      radial-gradient(circle 6px at 50% 100%, transparent 95%, #000),
+      radial-gradient(circle 2.5px at 50% 60%, transparent 95%, #000);
+    -webkit-mask-size: 12px 100%;
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-composite: source-in;
+    mask-image:
+      radial-gradient(circle 6px at 50% 100%, transparent 95%, #000),
+      radial-gradient(circle 2.5px at 50% 60%, transparent 95%, #000);
+    mask-size: 12px 100%;
+    mask-repeat: repeat-x;
+    mask-composite: intersect;
+    opacity: .85;
+  }
+
+  &::before {
+    background: repeating-linear-gradient(90deg,
+      @flag-a 0 @flag-w, transparent @flag-w (@flag-w * 2 + @flag-gap * 2),
+      @flag-c (@flag-w * 2 + @flag-gap * 2) (@flag-w * 3 + @flag-gap * 2), transparent (@flag-w * 3 + @flag-gap * 2) (@flag-w * 4 + @flag-gap * 4));
+  }
+
+  &::after {
+    background: repeating-linear-gradient(90deg,
+      transparent 0 (@flag-w + @flag-gap),
+      @flag-b (@flag-w + @flag-gap) (@flag-w * 2 + @flag-gap), transparent (@flag-w * 2 + @flag-gap) (@flag-w * 3 + @flag-gap * 3),
+      @flag-d (@flag-w * 3 + @flag-gap * 3) (@flag-w * 4 + @flag-gap * 3), transparent (@flag-w * 4 + @flag-gap * 3) (@flag-w * 4 + @flag-gap * 4));
+    animation-delay: -3.5s;
+  }
+}
+
+@keyframes flutter {
+  0%, 100% { transform: translateY(0) skewX(0); }
+  25% { transform: translateY(3px) skewX(.6deg); }
+  50% { transform: translateY(5px) skewX(0); }
+  75% { transform: translateY(2px) skewX(-.6deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .papel-picado::before,
+  .papel-picado::after { animation: none; }
+}
+
+.auto-format ul li::marker {
+  content: '✿ ';
+  color: var(--color-accent);
+}
+
+@media print {
+  body { padding-top: 0; }
+  .papel-picado { display: none; }
+}

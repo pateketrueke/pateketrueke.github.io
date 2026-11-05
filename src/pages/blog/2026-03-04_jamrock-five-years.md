@@ -4,9 +4,12 @@ title: "Five Years, Six Runtimes: Building Jamrock"
 description: "I've been building a JavaScript SSR framework across five squashed revisions, nine runtimes, and one very stubborn GTK4 async bug. This is how it started and where it's going."
 date: 2026-02-18
 icon: bullhorn
+tags: "jamrock, ssr, runtimes, javascript, web-framework, gtk4"
+author: "Alvaro Cabrera"
+author_email: "pateketrueke@gmail.com"
+author_url: "https://github.com/pateketrueke"
+published: false
 ---
-
-# Five Years, Six Runtimes: Building Jamrock
 
 > I've been building a JavaScript SSR framework across five squashed revisions, nine runtimes, and one very stubborn GTK4 async bug. This is the beginning of a series on what I've been learning.
 

@@ -4,9 +4,12 @@ title: "Turning a MIDI Toy into a DUB Machine: The Mixer"
 description: "DUB music is the mixer. The engineer riding the faders and delay sends between sections *is* the instrument. So why did MIDI on SCOOPS ship without one?"
 date: 2026-03-04
 icon: bullhorn
+tags: "midi, dub, audio, mixer, web-audio, music"
+author: "Alvaro Cabrera"
+author_email: "pateketrueke@gmail.com"
+author_url: "https://github.com/pateketrueke"
+published: false
 ---
-
-# Turning a MIDI Toy into a DUB Machine: The Mixer
 
 > DUB music is the mixer. The engineer riding the faders and delay sends between sections *is* the instrument. So why did MIDI on SCOOPS ship without one?
 

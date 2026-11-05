@@ -4,9 +4,12 @@ title: "X Thread: Five Years, Six Runtimes — Jamrock"
 description: "I've been building a JS SSR framework for 5 years."
 date: 2026-03-04
 icon: bullhorn
+tags: "jamrock, ssr, runtimes, javascript, web-framework, thread"
+author: "Alvaro Cabrera"
+author_email: "pateketrueke@gmail.com"
+author_url: "https://github.com/pateketrueke"
+published: false
 ---
-
-# X Thread: Five Years, Six Runtimes — Jamrock
 
 ---
 

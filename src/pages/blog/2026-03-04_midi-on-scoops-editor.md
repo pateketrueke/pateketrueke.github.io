@@ -4,9 +4,12 @@ title: "Building a Live-Coding Editor for a Text-Based Music Language"
 description: "How a plain textarea became a full syntax-highlighted, tooltip-rich, scrub-to-edit live-coding environment — without CodeMirror, without a framework, and without breaking undo."
 date: 2026-03-04
 icon: bullhorn
+tags: "midi, live-coding, music, editor, javascript, tooling"
+author: "Alvaro Cabrera"
+author_email: "pateketrueke@gmail.com"
+author_url: "https://github.com/pateketrueke"
+published: false
 ---
-
-# Building a Live-Coding Editor for a Text-Based Music Language
 
 > How a plain textarea became a full syntax-highlighted, tooltip-rich, scrub-to-edit live-coding environment — without CodeMirror, without a framework, and without breaking undo.
 

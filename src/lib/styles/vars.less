@@ -1,16 +1,16 @@
 // ─── Theme seeds ─────────────────────────────────────────────────────────────
 // Edit these to retheme — LESS compiles them into every derived value below.
-@theme-accent:       #22D878;
-@theme-accent-hover: #4EE898;
+@theme-accent:       #FF9F1C; // cempasúchil marigold
+@theme-accent-hover: #FF3E9A; // rosa mexicano
 
 // ─── Callout / blockquote semantic colors ────────────────────────────────────
-@callout-default-tint: #1f2a24;
+@callout-default-tint: #2a1a33;
 
 @callout-note:       #66b3ff;
 @callout-note-tint:  #102238;
 
 @callout-tip:        @theme-accent;
-@callout-tip-tint:   #0e2d21;
+@callout-tip-tint:   #3a2410;
 
 @callout-warning:    #ffcc66;
 @callout-warning-tint: #3a2a12;
@@ -34,16 +34,16 @@
 
 // ─── CSS custom properties ───────────────────────────────────────────────────
 :root {
-  --color-bg: #111614;
-  --color-bg-alt: #1C201E;
-  --color-bg-elevated: #262B28;
-  --color-text: #8EA494;
-  --color-text-muted: #E4EDE7;
-  --color-text-light: #637A6D;
+  --color-bg: #140E1A;
+  --color-bg-alt: #1E1527;
+  --color-bg-elevated: #2A1E36;
+  --color-text: #B8A6C4;
+  --color-text-muted: #F4E9DC;
+  --color-text-light: #7E6A8C;
   --color-link: @theme-accent;
   --color-accent: @theme-accent;
   --color-accent-hover: @theme-accent-hover;
-  --color-border: #2E3832;
+  --color-border: #3A2948;
 
   --spacing-xs: 4px;
   --spacing-sm: 10px;
@@ -73,13 +73,13 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --color-bg: #EBEEEC;
-    --color-bg-alt: #F7F7F7;
+    --color-bg: #FBF1E4;
+    --color-bg-alt: #FFF8EE;
     --color-bg-elevated: #FFFFFF;
-    --color-text: #303F3F;
-    --color-text-muted: #7C7D89;
-    --color-text-light: #AFACAB;
-    --color-link: #524B59;
+    --color-text: #3A2340;
+    --color-text-muted: #7A5C80;
+    --color-text-light: #B9A4AE;
+    --color-link: #C2185B;
     --color-border: rgba(0, 0, 0, 0.1);
   }
 }
