@@ -1,14 +1,14 @@
 :root {
-  --color-bg: #111614;
-  --color-bg-alt: #1C201E;
-  --color-bg-elevated: #262B28;
-  --color-text: #8EA494;
-  --color-text-muted: #E4EDE7;
-  --color-text-light: #637A6D;
-  --color-link: #22D878;
-  --color-accent: #22D878;
-  --color-accent-hover: #4EE898;
-  --color-border: #2E3832;
+  --color-bg: #140E1A;
+  --color-bg-alt: #1E1527;
+  --color-bg-elevated: #2A1E36;
+  --color-text: #B8A6C4;
+  --color-text-muted: #F4E9DC;
+  --color-text-light: #7E6A8C;
+  --color-link: #FF9F1C;
+  --color-accent: #FF9F1C;
+  --color-accent-hover: #FF3E9A;
+  --color-border: #3A2948;
   --spacing-xs: 4px;
   --spacing-sm: 10px;
   --spacing-md: 20px;
@@ -31,13 +31,13 @@
 }
 @media (prefers-color-scheme: light) {
   :root {
-    --color-bg: #EBEEEC;
-    --color-bg-alt: #F7F7F7;
+    --color-bg: #FBF1E4;
+    --color-bg-alt: #FFF8EE;
     --color-bg-elevated: #FFFFFF;
-    --color-text: #303F3F;
-    --color-text-muted: #7C7D89;
-    --color-text-light: #AFACAB;
-    --color-link: #524B59;
+    --color-text: #3A2340;
+    --color-text-muted: #7A5C80;
+    --color-text-light: #B9A4AE;
+    --color-link: #C2185B;
     --color-border: rgba(0, 0, 0, 0.1);
   }
 }
@@ -118,7 +118,7 @@ code {
 }
 p code,
 li code {
-  color: #4EE898;
+  color: #FF3E9A;
 }
 p b,
 p strong,
@@ -130,7 +130,7 @@ blockquote {
   margin: var(--spacing-md) 0;
   padding: var(--spacing-sm) var(--spacing-md);
   padding-left: calc(var(--spacing-lg) + 4px);
-  background-color: color-mix(in srgb, var(--color-bg-alt) 82%, #1f2a24);
+  background-color: color-mix(in srgb, var(--color-bg-alt) 82%, #2a1a33);
   border-left: 4px solid var(--color-accent);
   border-radius: 0 var(--radius-md) var(--radius-md) 0;
   position: relative;
@@ -166,12 +166,12 @@ blockquote.is-note::before {
   color: #66b3ff;
 }
 blockquote.is-tip {
-  border-left-color: #22D878;
-  background-color: color-mix(in srgb, var(--color-bg-alt) 80%, #0e2d21);
+  border-left-color: #FF9F1C;
+  background-color: color-mix(in srgb, var(--color-bg-alt) 80%, #3a2410);
 }
 blockquote.is-tip::before {
   content: '✓';
-  color: #22D878;
+  color: #FF9F1C;
 }
 blockquote.is-warning {
   border-left-color: #ffcc66;
@@ -507,7 +507,7 @@ li {
           animation-duration: 4s;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
-  background-color: rgba(34, 216, 120, 0.15);
+  background-color: rgba(255, 159, 28, 0.15);
   position: absolute;
   content: ' ';
   left: 0;
@@ -532,7 +532,7 @@ li {
   color: var(--color-accent-hover);
 }
 #nav nav li:before {
-  content: '▶ ';
+  content: '✿ ';
   color: var(--color-accent);
 }
 @-webkit-keyframes floating {
@@ -706,7 +706,7 @@ li {
   margin: 0;
   font-size: 3rem;
   line-height: 1.15;
-  background: linear-gradient(135deg, #22D878, #4EE898, #22D878);
+  background: linear-gradient(135deg, #FF9F1C, #FF3E9A, #FF9F1C);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -758,7 +758,7 @@ li {
 .auto-format h1:first-child {
   font-size: 3rem;
   margin-top: 0;
-  background: linear-gradient(135deg, #22D878, #4EE898, #22D878);
+  background: linear-gradient(135deg, #FF9F1C, #FF3E9A, #FF9F1C);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -928,6 +928,106 @@ li {
     display: none;
   }
   .auto-format ul + hr + p {
+    display: none;
+  }
+}
+body {
+  position: relative;
+  padding-top: 12px;
+}
+.papel-picado {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 32px;
+  overflow: hidden;
+  z-index: 10;
+  pointer-events: none;
+}
+.papel-picado::before,
+.papel-picado::after {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 0;
+  right: 0;
+  height: 34px;
+  -webkit-animation: flutter 7s ease-in-out infinite;
+          animation: flutter 7s ease-in-out infinite;
+  -webkit-mask-image: radial-gradient(circle 6px at 50% 100%, transparent 95%, #000), radial-gradient(circle 2.5px at 50% 60%, transparent 95%, #000);
+  -webkit-mask-size: 12px 100%;
+  -webkit-mask-repeat: repeat-x;
+  -webkit-mask-composite: source-in;
+  mask-image: radial-gradient(circle 6px at 50% 100%, transparent 95%, #000), radial-gradient(circle 2.5px at 50% 60%, transparent 95%, #000);
+  mask-size: 12px 100%;
+  mask-repeat: repeat-x;
+  -webkit-mask-composite: intersect;
+          mask-composite: intersect;
+  opacity: 0.85;
+}
+.papel-picado::before {
+  background: repeating-linear-gradient(90deg, #FF3E9A 0 44px, transparent 44px 96px, #8E44FF 96px 140px, transparent 140px 192px);
+}
+.papel-picado::after {
+  background: repeating-linear-gradient(90deg, transparent 0 48px, #FF9F1C 48px 92px, transparent 92px 144px, #2EC4B6 144px 188px, transparent 188px 192px);
+  -webkit-animation-delay: -3.5s;
+          animation-delay: -3.5s;
+}
+@-webkit-keyframes flutter {
+  0%,
+  100% {
+    -webkit-transform: translateY(0) skewX(0);
+            transform: translateY(0) skewX(0);
+  }
+  25% {
+    -webkit-transform: translateY(3px) skewX(0.6deg);
+            transform: translateY(3px) skewX(0.6deg);
+  }
+  50% {
+    -webkit-transform: translateY(5px) skewX(0);
+            transform: translateY(5px) skewX(0);
+  }
+  75% {
+    -webkit-transform: translateY(2px) skewX(-0.6deg);
+            transform: translateY(2px) skewX(-0.6deg);
+  }
+}
+@keyframes flutter {
+  0%,
+  100% {
+    -webkit-transform: translateY(0) skewX(0);
+            transform: translateY(0) skewX(0);
+  }
+  25% {
+    -webkit-transform: translateY(3px) skewX(0.6deg);
+            transform: translateY(3px) skewX(0.6deg);
+  }
+  50% {
+    -webkit-transform: translateY(5px) skewX(0);
+            transform: translateY(5px) skewX(0);
+  }
+  75% {
+    -webkit-transform: translateY(2px) skewX(-0.6deg);
+            transform: translateY(2px) skewX(-0.6deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .papel-picado::before,
+  .papel-picado::after {
+    -webkit-animation: none;
+            animation: none;
+  }
+}
+.auto-format ul li::marker {
+  content: '✿ ';
+  color: var(--color-accent);
+}
+@media print {
+  body {
+    padding-top: 0;
+  }
+  .papel-picado {
     display: none;
   }
 }
