@@ -40,6 +40,14 @@ i[class^="icon-"], i[class*=" icon-"] {
   width: 64px; height: 64px;
   background-image: url(images/youtube_social_square_dark.png);
 }
+.icon-soypache-og {
+  width: 1200px; height: 630px;
+  background-image: url(images/soypache-og.jpg);
+}
+.icon-alvadub-og {
+  width: 1200px; height: 630px;
+  background-image: url(images/alvadub-og.jpg);
+}
 
 
 
