@@ -1,6 +1,10 @@
 ---
 $render: ../lib/press_kit.pug
 title: ALVADUB's Press-kit & Media
+og_url: https://soypache.co/alvadub/
+og_image: images/alvadub-og.jpg
+og_image_alt: ALVADUB — DUB maker from Guadalajara
+og_description: Dub como sistema — Hip-Hop, Ambient, lo que el estado pida.
 sets: !include ../lib/alv_music.yml
 media: !include ../lib/alv_media.yml
 ---

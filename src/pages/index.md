@@ -2,6 +2,8 @@
 $render: ../lib/gh_pages.pug
 title: Developer & DUB maker
 icon: bullhorn
+og_image: images/soypache-og.jpg
+og_image_alt: Alvaro Cabrera — Developer & DUB maker
 ---
 
 # Hey, I'm Alvaro (PATE)

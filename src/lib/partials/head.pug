@@ -17,21 +17,39 @@ script(src='//html5shim.googlecode.com/svn/trunk/html5.js')
 script(src='//css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js')
 <![endif]-->
 
+-
+  const siteUrl = 'https://soypache.co'
+  const pageDescription = typeof og_description !== 'undefined' ? og_description : pkg.description
+  const pageImage = typeof og_image !== 'undefined' ? og_image : 'images/soypache-og.jpg'
+  const pageImageUrl = /^https?:\/\//.test(pageImage) ? pageImage : `${siteUrl}/${String(pageImage).replace(/^\/+/, '')}`
+  const pageUrl = typeof og_url !== 'undefined' ? og_url : pkg.author.url
+  const pageImageAlt = typeof og_image_alt !== 'undefined' ? og_image_alt : pageDescription
+
 meta(property='og:type' content='profile')
+meta(property='og:site_name' content=pkg.name)
 meta(property='og:profile:first_name' content=pkg.author.name.split(' ')[0])
 meta(property='og:profile:last_name' content=pkg.author.name.split(' ')[1])
 meta(property='og:profile:username' content=pkg.author.email.split('@')[0])
 meta(property='og:profile:gender' content='male')
-meta(property='og:description' content=pkg.description)
-meta(property='og:url' content=pkg.author.url)
-meta(property='og:image' content='https://soypache.co/images/ALVADUB_VINYL_v2.svg')
+meta(property='og:description' content=pageDescription)
+meta(property='og:url' content=pageUrl)
+meta(property='og:image' content=pageImageUrl)
+meta(property='og:image:type' content='image/jpeg')
+meta(property='og:image:width' content='1200')
+meta(property='og:image:height' content='630')
+meta(property='og:image:alt' content=pageImageAlt)
+meta(name='twitter:card' content='summary_large_image')
+meta(name='twitter:image' content=pageImageUrl)
+meta(name='twitter:image:alt' content=pageImageAlt)
+meta(name='twitter:description' content=pageDescription)
 
 block styles
   link(rel='stylesheet' type='text/css' href='styles.css')
 
 block meta
   if title
-    meta(name='og:title' content=title)
+    meta(property='og:title' content=title)
+    meta(name='twitter:title' content=title)
 
 block head
   if title
