@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://soypache.co/schemas/bit1.schema.json",
+  "title": "BIT-1 configuration",
+  "description": "Optional configuration for the BIT-1 Bitwig controller. Unknown top-level keys remain valid so a missing or newer setting safely falls back to the controller defaults.",
+  "type": "object",
+  "additionalProperties": true,
+  "properties": {
+    "controller": {
+      "description": "Legacy P0 controller metadata retained for compatible configuration files.",
+      "default": {},
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "name": { "description": "Controller display name.", "default": "BIT-1 P0", "type": "string" },
+        "shift": { "description": "Legacy shift-button name.", "default": "glo", "type": "string" },
+        "start": { "description": "Legacy initial page name.", "default": "mixer", "type": "string" }
+      }
+    },
+    "pages": {
+      "description": "Legacy P0 page declarations.",
+      "default": {},
+      "type": "object",
+      "additionalProperties": { "description": "A legacy page definition.", "default": {}, "type": "object", "additionalProperties": true }
+    },
+    "dub": {
+      "description": "Legacy echo-return mapping and sensitivity settings.",
+      "default": {},
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "echo": {
+          "description": "Echo return track and remote-control indexes.",
+          "default": { "track": "Delay+", "algorithm": 0, "presets": 1 },
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "track": { "description": "Case-insensitive echo-return track prefix.", "default": "Delay+", "type": "string" },
+            "algorithm": { "description": "Echo algorithm remote-control index.", "default": 0, "type": "number" },
+            "presets": { "description": "Echo presets remote-control index.", "default": 1, "type": "number" }
+          }
+        },
+        "sensitivity": {
+          "description": "Legacy per-control sensitivity multipliers.",
+          "default": { "k": 1, "algorithm": 0.5, "presets": 0.5 },
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "k": { "description": "Legacy K encoder sensitivity.", "default": 1, "type": "number" },
+            "algorithm": { "description": "Legacy algorithm encoder sensitivity.", "default": 0.5, "type": "number" },
+            "presets": { "description": "Legacy presets encoder sensitivity.", "default": 0.5, "type": "number" }
+          }
+        }
+      }
+    },
+    "groupSends": {
+      "description": "Maps a group name to the child-track name fragments whose sends move with that group.",
+      "default": {},
+      "type": "object",
+      "additionalProperties": { "description": "Child-track name fragments for one group.", "default": [], "type": "array", "items": { "description": "A case-insensitive child-track name fragment.", "default": "", "type": "string" } }
+    },
+    "holdMs": {
+      "description": "Shared button-hold threshold in milliseconds; the controller clamps it to this range.",
+      "default": 420,
+      "type": "number",
+      "minimum": 150,
+      "maximum": 3000
+    },
+    "knobs": {
+      "description": "Encoder acceleration and detent settings.",
+      "default": { "fastMs": 15, "slowMs": 120, "selectDetents": 2, "stepDetents": 2, "k": { "perDetent": 0.01, "max": 8 }, "fx": { "perDetent": 0.007, "max": 5 } },
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "fastMs": { "description": "Elapsed time at or below which an encoder uses its fast multiplier.", "default": 15, "type": "number" },
+        "slowMs": { "description": "Elapsed time at or above which an encoder returns to its fine increment.", "default": 120, "type": "number" },
+        "selectDetents": { "description": "SELECT encoder detents per selection movement.", "default": 2, "type": "integer", "minimum": 1, "maximum": 4 },
+        "stepDetents": { "description": "Detents per stepped-parameter movement.", "default": 2, "type": "integer", "minimum": 1, "maximum": 4 },
+        "k": {
+          "description": "Fine increment and fast multiplier for K encoders.",
+          "default": { "perDetent": 0.01, "max": 8 },
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "perDetent": { "description": "Normalized K-encoder change for one fine detent.", "default": 0.01, "type": "number" },
+            "max": { "description": "Maximum K-encoder acceleration multiplier.", "default": 8, "type": "number" }
+          }
+        },
+        "fx": {
+          "description": "Fine increment and fast multiplier for FX encoders.",
+          "default": { "perDetent": 0.007, "max": 5 },
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "perDetent": { "description": "Normalized FX-encoder change for one fine detent.", "default": 0.007, "type": "number" },
+            "max": { "description": "Maximum FX-encoder acceleration multiplier.", "default": 5, "type": "number" }
+          }
+        }
+      }
+    },
+    "resetSendsOnLoad": { "description": "Reset sends to their defaults when a song loads.", "default": true, "type": "boolean" },
+    "sensitivity": { "description": "Multiplier applied to continuous K and FX adjustments.", "default": 1, "type": "number" },
+    "unmuteOnLoad": { "description": "Unmute all tracks when a song loads.", "default": true, "type": "boolean" },
+    "sendSlots": {
+      "description": "Named HOME-send slots, resolved against effect-track names in order.",
+      "default": [],
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "description": "One named send slot.",
+        "default": { "id": "", "match": [] },
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["id", "match"],
+        "properties": {
+          "id": { "description": "Stable slot identifier.", "default": "", "type": "string" },
+          "label": { "description": "Optional display label, truncated by the controller to five characters.", "default": "", "type": "string" },
+          "match": { "description": "Case-insensitive effect-track name fragments.", "default": [], "type": "array", "items": { "description": "One effect-track name fragment.", "default": "", "type": "string" } }
+        }
+      }
+    },
+    "sendPolicy": {
+      "description": "Per-track eligibility rules for named send slots.",
+      "default": { "unknown": "all", "categories": [] },
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "unknown": { "description": "Eligibility for tracks that match no category.", "default": "all", "type": "string", "enum": ["all", "none"] },
+        "categories": {
+          "description": "First-match-wins track categories and their allowed slot IDs.",
+          "default": [],
+          "type": "array",
+          "items": {
+            "description": "One track category.",
+            "default": { "id": "", "match": [], "allow": [] },
+            "type": "object",
+            "additionalProperties": true,
+            "required": ["id", "match", "allow"],
+            "properties": {
+              "id": { "description": "Stable category identifier.", "default": "", "type": "string" },
+              "match": { "description": "Case-insensitive track-name fragments that select this category.", "default": [], "type": "array", "items": { "description": "One track-name fragment.", "default": "", "type": "string" } },
+              "allow": { "description": "Named send-slot IDs allowed for matching tracks.", "default": [], "type": "array", "items": { "description": "One allowed send-slot ID.", "default": "", "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "trackLayout": { "description": "Track-list layout on the controller.", "default": "rows", "type": "string", "enum": ["rows", "columns"] },
+    "trackColumns": { "description": "Visible track count when trackLayout is columns.", "default": 12, "type": "integer", "enum": [8, 12, 16] }
+  }
+}
