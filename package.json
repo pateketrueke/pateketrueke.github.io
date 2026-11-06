@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "npm run build -- -wdp 3001",
     "dist": "npm run build -- -fq",
-    "build": "mortero -I.gitignore --platform browser",
+    "build": "mortero -I.gitignore --platform browser -cschemas:schemas",
     "music:list": "node scripts/update-music-metadata.js list",
     "music:add": "node scripts/update-music-metadata.js add",
     "dub": "node scripts/dub-generator.js"
